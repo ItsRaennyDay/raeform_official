@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services RAEFORM — Creative & Branding Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="services">
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="index.html" aria-label="RAEFORM Home">
+    <img src="logo.svg" alt="RAEFORM">
+  </a>
+  <div class="nav-links">
+    <a class="nl" id="n-home" href="index.html">Home</a>
+    <a class="nl" id="n-about" href="about.html">About</a>
+    <a class="nl" id="n-services" href="services.html">Services</a>
+    <a class="nl" id="n-contact" href="contact.html">Contact</a>
+    <button class="nav-btn" type="button" onclick="openPop('consult-pop')">Work With Us</button>
+  </div>
+  <button class="hbg" id="hbg" onclick="toggleMob()" aria-label="Menu" type="button">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a class="nl" href="index.html">Home</a>
+  <a class="nl" href="about.html">About</a>
+  <a class="nl" href="services.html">Services</a>
+  <a class="nl" href="contact.html">Contact</a>
+  <button class="nav-btn" type="button" onclick="openPop('consult-pop');toggleMob()">Work With Us</button>
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<main>
+  <section class="svc-hero">
+    <div class="hero-grid"></div>
+    <div class="orb o1"></div><div class="orb o3"></div>
+    <div style="position:relative;z-index:2">
+      <div class="s-tag">Services</div>
+      <h1 class="ct-h1">Focused services for<br><em>serious brands</em></h1>
+      <p class="svc-lead">Each service opens into an interactive popup, so the page stays clean while visitors can inspect the details without leaving the experience.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="svc-page-head rv">
+      <div>
+        <div class="s-tag">Choose the build</div>
+        <h2 class="s-h2">Strategy, identity,<br>digital, and <em>systems</em></h2>
+      </div>
+      <p class="s-p">Click any service card to open scope, deliverables, and next-step details inside a modal. This keeps the interaction feeling like your original site instead of sending users through heavy pages.</p>
+    </div>
+
+    <div class="svc-detail-grid rv delay-1">
+      <article class="svc-card" onclick="openSvcPop('Brand Strategy','Foundation before visuals','We clarify positioning, audience, offers, differentiation, and the role your brand needs to play before design begins. This is for businesses that need sharper direction before investing in identity or digital work.',['Brand audit and diagnosis','Audience and competitor mapping','Positioning statement','Messaging pillars','Strategic recommendations'])">
+        <span class="svc-card-num">01</span><h3>Brand Strategy</h3><p>Foundation work for brands that need clarity before aesthetics.</p><span>Open details &rarr;</span>
+      </article>
+      <article class="svc-card" onclick="openSvcPop('Visual Identity','A recognizable brand system','We build the visible language of the brand: logo, color, type, layout logic, iconography, and art direction. The goal is not decoration. The goal is recognition.',['Logo system','Color and typography system','Visual direction','Brand assets','Identity application samples'])">
+        <span class="svc-card-num">02</span><h3>Visual Identity</h3><p>Logo and design systems built to be remembered and reused.</p><span>Open details &rarr;</span>
+      </article>
+      <article class="svc-card" onclick="openSvcPop('Digital Design','Web presence with intent','We design websites and digital experiences that make the brand feel credible, clear, and easy to act on. Design decisions are based on flow, hierarchy, and conversion.',['Website direction','Landing page structure','Responsive UI concepts','Conversion flow recommendations','Developer-ready design guidance'])">
+        <span class="svc-card-num">03</span><h3>Digital Design</h3><p>Web and interface design that supports the business, not just the moodboard.</p><span>Open details &rarr;</span>
+      </article>
+      <article class="svc-card" onclick="openSvcPop('Brand Messaging','Words that sound like you','We define how the brand speaks: tone, headlines, taglines, value propositions, and the language system your team can keep using consistently.',['Tone of voice','Tagline directions','Homepage messaging','Offer descriptions','Copy framework'])">
+        <span class="svc-card-num">04</span><h3>Brand Messaging</h3><p>Clear language for brands tired of sounding like everyone else.</p><span>Open details &rarr;</span>
+      </article>
+      <article class="svc-card" onclick="openSvcPop('Brand Guidelines','Consistency without confusion','We turn the identity into a practical operating manual, so your team can apply the brand without guessing every time something needs to be made.',['Logo usage rules','Color and typography rules','Layout principles','Voice guidance','Usage examples'])">
+        <span class="svc-card-num">05</span><h3>Brand Guidelines</h3><p>A practical system your team can follow without breaking the brand.</p><span>Open details &rarr;</span>
+      </article>
+      <article class="svc-card" onclick="openSvcPop('Brand Refresh','Evolution without erasure','We help established brands move forward without losing the equity they already have. This is for brands that feel outdated, inconsistent, or misaligned with where the business is now.',['Existing brand audit','Refresh direction','Updated identity system','Messaging refinement','Rollout guidance'])">
+        <span class="svc-card-num">06</span><h3>Brand Refresh</h3><p>For brands that have grown past their original look and language.</p><span>Open details &rarr;</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta-strip">
+    <div class="s-tag rv" style="justify-content:center;margin-bottom:2rem">Next step</div>
+    <h2 class="rv" style="font-family:var(--font-d);font-size:clamp(2.5rem,6vw,5rem);font-weight:300;font-style:italic;color:var(--off-white);margin-bottom:1.5rem">Start with the problem.</h2>
+    <p class="rv" style="font-size:.9rem;color:var(--muted);max-width:460px;margin:0 auto 3rem">You do not need to know the exact service yet. The first conversation should define what actually needs fixing.</p>
+    <button class="btn-p rv" onclick="go('contact')">Start a project &rarr;</button>
+  </section>
+<footer>
+    <div class="ft-top">
+      <div>
+        <a class="ft-logo" href="index.html" aria-label="RAEFORM Home">
+          <img src="logo.svg" alt="RAEFORM">
+        </a>
+        <div class="ft-tag">Creative &amp; Branding Agency. Taguig City, Philippines. We do fewer projects and do them right.</div>
+      </div>
+      <div>
+        <div class="ft-col-h">Explore</div>
+        <div class="ft-links">
+          <a class="ft-lnk" href="index.html">Home</a>
+          <a class="ft-lnk" href="about.html">About Us</a>
+          <a class="ft-lnk" href="services.html">Services</a>
+          <a class="ft-lnk" href="contact.html">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-h">Contact</div>
+        <div class="ft-links">
+          <span class="ft-lnk no-click">hello@raeform.com</span>
+          <span class="ft-lnk no-click">+63 917 000 0000</span>
+          <span class="ft-lnk no-click">Taguig City, Metro Manila</span>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">&copy; 2025 RAEFORM Creative Agency. All rights reserved.</div>
+      <div class="ft-soc">
+        <a class="soc-b" href="https://www.linkedin.com/company/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path>
+          </svg>
+        </a>
+        <a class="soc-b" href="https://www.instagram.com/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect class="icon-stroke" x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+            <circle class="icon-stroke" cx="12" cy="12" r="4"></circle>
+            <circle class="icon-fill" cx="17.5" cy="6.5" r="1.2"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</main>
+<!-- POPUPS -->
+<div class="overlay" id="service-pop">
+  <div class="pop svc-pop">
+    <button class="pop-x" onclick="closePop('service-pop')" type="button">&times;</button>
+    <div class="pop-tag">Service Details</div>
+    <h3 class="pop-h" id="sp-title"></h3>
+    <div class="pop-svc" id="sp-tag"></div>
+    <p class="pop-p" id="sp-desc"></p>
+    <ul class="pop-list" id="sp-list"></ul>
+    <button class="btn-p btn-sm" onclick="closePop('service-pop');go('contact')" type="button">Ask about this service &rarr;</button>
+  </div>
+</div>
+
+<div class="overlay" id="work-pop">
+  <div class="pop">
+    <button class="pop-x" onclick="closePop('work-pop')">&times;</button>
+    <div class="pop-tag">Selected Work</div>
+    <h3 class="pop-h" id="wp-title"></h3>
+    <div class="pop-svc" id="wp-svc"></div>
+    <p class="pop-p" id="wp-desc"></p>
+    <button class="btn-p btn-sm" onclick="closePop('work-pop');go('contact')">Start a similar project &rarr;</button>
+  </div>
+</div>
+
+<div class="overlay" id="team-pop">
+  <div class="pop">
+    <button class="pop-x" onclick="closePop('team-pop')">&times;</button>
+    <div class="pop-tag">Our Team</div>
+    <h3 class="pop-h" id="tp-name"></h3>
+    <div class="pop-svc" id="tp-role"></div>
+    <p class="pop-p" id="tp-bio"></p>
+    <button class="btn-g btn-sm" onclick="closePop('team-pop');go('contact')">Work with us &rarr;</button>
+  </div>
+</div>
+
+<div class="overlay" id="consult-pop">
+  <div class="pop">
+    <button class="pop-x" onclick="closePop('consult-pop')">&times;</button>
+    <div class="pop-tag">Work With Us</div>
+    <h3 class="pop-h">A quick intro call</h3>
+    <p class="pop-p">30 minutes. No pressure, no pitch. We'll hear about your brand, share an honest perspective, and figure out if we're the right fit for each other.</p>
+    <div class="f-grp"><label class="f-lbl">Your name</label><input class="f-inp" type="text" placeholder="Maria Santos" id="cq1"></div>
+    <div class="f-grp"><label class="f-lbl">Email</label><input class="f-inp" type="email" placeholder="maria@company.com" id="cq2"></div>
+    <div class="f-grp mb-0"><label class="f-lbl">Company</label><input class="f-inp" type="text" placeholder="Lumina Group" id="cq3"></div>
+    <button class="f-sub" onclick="submitConsult()">Request a Call &rarr;</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
+
+<script>
+/* CURSOR */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-r');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+if (cur && ring) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top = my + 'px';
+  });
+
+  (function tick() {
+    rx += (mx - rx) * .12;
+    ry += (my - ry) * .12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+}
+
+document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-btn,.t-dot,.soc-b,.ft-lnk,.overlay').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+/* NAV */
+const pageLinks = {
+  home: 'index.html',
+  about: 'about.html',
+  services: 'services.html',
+  contact: 'contact.html'
+};
+
+function go(name) {
+  window.location.href = pageLinks[name] || pageLinks.home;
+}
+
+function setActiveNav() {
+  const current = document.body.dataset.page || 'home';
+  ['home', 'about', 'services', 'contact'].forEach(name => {
+    const el = document.getElementById('n-' + name);
+    if (el) el.classList.toggle('act', name === current);
+  });
+}
+setActiveNav();
+
+let mobOpen = false;
+function toggleMob() {
+  mobOpen = !mobOpen;
+  const mob = document.getElementById('mob');
+  if (mob) mob.classList.toggle('open', mobOpen);
+
+  const s = document.querySelectorAll('.hbg span');
+  if (mobOpen) {
+    s[0].style.transform = 'rotate(45deg) translate(4px,5px)';
+    s[1].style.opacity = '0';
+    s[2].style.transform = 'rotate(-45deg) translate(4px,-5px)';
+  } else {
+    s.forEach(x => {
+      x.style.transform = '';
+      x.style.opacity = '';
+    });
+  }
+}
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (nav) nav.classList.toggle('sc', window.scrollY > 40);
+  reveal();
+});
+
+/* REVEAL */
+function reveal() {
+  document.querySelectorAll('.rv:not(.vis)').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * .92) el.classList.add('vis');
+  });
+}
+setTimeout(reveal, 200);
+
+/* MARQUEE */
+const words = ['Brand Strategy', 'Visual Identity', 'Digital Design', 'Brand Messaging', 'Brand Guidelines', 'Brand Refresh', 'Creative Direction', 'Positioning'];
+const mi = document.getElementById('marq-inner');
+if (mi) {
+  [...words, ...words].forEach((t, i) => {
+    const d = document.createElement('div');
+    d.className = 'mq-item';
+    d.innerHTML = t + (i < words.length * 2 - 1 ? '<span>✦</span>' : '');
+    mi.appendChild(d);
+  });
+}
+
+/* SERVICES */
+function toggleSvc(el) {
+  document.querySelectorAll('.svc-item').forEach(i => i.classList.remove('open'));
+  el.classList.add('open');
+}
+
+/* TESTIMONIALS */
+let cs = 0;
+function goSlide(i) {
+  const slides = document.getElementById('ts-slides');
+  if (!slides) return;
+  cs = i;
+  slides.style.transform = `translateX(-${i * 100}%)`;
+  document.querySelectorAll('.t-dot').forEach((d, j) => d.classList.toggle('on', j === i));
+}
+function slide(d) {
+  goSlide((cs + d + 3) % 3);
+}
+if (document.getElementById('ts-slides')) {
+  setInterval(() => slide(1), 6000);
+}
+
+/* POPUPS */
+function openPop(id) {
+  const pop = document.getElementById(id);
+  if (pop) pop.classList.add('on');
+}
+function closePop(id) {
+  const pop = document.getElementById(id);
+  if (pop) pop.classList.remove('on');
+}
+document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => {
+  if (e.target === o) o.classList.remove('on');
+}));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on'));
+});
+
+function openWPop(title, svc, desc) {
+  document.getElementById('wp-title').textContent = title;
+  document.getElementById('wp-svc').textContent = svc;
+  document.getElementById('wp-desc').textContent = desc;
+  openPop('work-pop');
+}
+function openTPop(name, role, bio) {
+  const n = document.getElementById('tp-name');
+  const r = document.getElementById('tp-role');
+  const b = document.getElementById('tp-bio');
+  if (!n || !r || !b) return;
+  n.textContent = name;
+  r.textContent = role;
+  b.textContent = bio;
+  openPop('team-pop');
+}
+
+function openSvcPop(title, tag, desc, includes) {
+  const titleEl = document.getElementById('sp-title');
+  const tagEl = document.getElementById('sp-tag');
+  const descEl = document.getElementById('sp-desc');
+  const listEl = document.getElementById('sp-list');
+  if (!titleEl || !tagEl || !descEl || !listEl) return;
+  titleEl.textContent = title;
+  tagEl.textContent = tag;
+  descEl.textContent = desc;
+  listEl.innerHTML = '';
+  includes.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    listEl.appendChild(li);
+  });
+  openPop('service-pop');
+}
+
+/* TOAST */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  const msgBox = document.getElementById('t-msg');
+  if (!t || !msgBox) return;
+  msgBox.textContent = msg;
+  t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 4500);
+}
+
+/* FORMS */
+function submitForm() {
+  if (!document.getElementById('f1').value.trim() || !document.getElementById('f3').value.trim() || !document.getElementById('f6').value.trim()) {
+    toast('Please fill in all required fields.');
+    return;
+  }
+  ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f5').selectedIndex = 0;
+  toast('Message sent. You\'ll hear from us within one business day.');
+}
+function submitConsult() {
+  if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
+    toast('Please enter your name and email.');
+    return;
+  }
+  closePop('consult-pop');
+  ['cq1', 'cq2', 'cq3'].forEach(id => document.getElementById(id).value = '');
+  toast('Call request received. We\'ll reach out within one business day.');
+}
+</script>
+</body>
+</html>
