@@ -180,7 +180,7 @@ nav.sc{background:rgba(5,9,26,.97)}
 .ph-items{display:flex;flex-direction:column;gap:2rem}
 .ph-item-h{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.45rem}
 .ph-item-b{font-size:.88rem;color:var(--muted);line-height:1.88}
-.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;position:relative;z-index:2}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:2}
 
 @media(max-width:960px){
   .phil-grid{grid-template-columns:1fr;gap:4rem}
@@ -364,6 +364,7 @@ footer{background:var(--navy);border-top:1px solid rgba(37,99,200,.07);padding:5
   .nav-links{display:none}.hbg{display:flex}
   .svc-wrap{grid-template-columns:1fr;gap:3rem}.svc-sticky{position:static}
   .work-grid{grid-template-columns:repeat(2,1fr)}
+  .phil-grid{grid-template-columns:1fr;gap:4rem}
   .story-grid{grid-template-columns:1fr;gap:3rem}.story-l{position:static}
   .vals-grid{grid-template-columns:repeat(2,1fr)}
   .team-grid{grid-template-columns:repeat(2,1fr)}
