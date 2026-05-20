@@ -70,30 +70,56 @@
       <div class="val-card rv delay-24"><div class="val-num">04</div><div class="val-name">Long-term thinking</div><div class="val-desc">We design for where you're going, not just where you are. A brand that feels slightly ahead of the business today should fit perfectly in two years. That's the goal, every time.</div></div>
     </div>
   </section>
-<section style="background:var(--navy2);padding:8rem 5vw">
-  <div class="mv-grid">
-    <div class="rv" style="position:relative;overflow:hidden">
-      <img
-        src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80"
-        alt="People collaborating"
-        style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block"
-      >
-      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,9,26,.5) 0%,transparent 60%);pointer-events:none"></div>
-    </div>
-    <div class="rv delay-1">
-      <div class="s-tag">What we're here for</div>
-      <h2 class="s-h2" style="margin-bottom:3rem">Our mission<br>&amp; <em>vision</em></h2>
-      <div style="margin-bottom:2.5rem">
-        <div style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem">Mission</div>
-        <p style="font-size:.92rem;color:var(--muted);line-height:1.95">To give nonprofits, small businesses, and purpose-driven organizations the operational, creative, and strategic support they need to do their best work — without having to figure it all out alone.</p>
+  
+    <section style="background:var(--navy2);padding:0;overflow:hidden;position:relative">
+      <div style="display:grid;grid-template-columns:30fr 70fr;min-height:520px">
+    
+        <!-- LEFT 30 — parallax image -->
+        <div style="position:relative;overflow:hidden;min-height:520px">
+          <div id="mv-parallax" style="position:absolute;inset:-15% 0;will-change:transform">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80"
+              alt="People collaborating"
+              style="width:100%;height:100%;object-fit:cover;display:block"
+            >
+            <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(8,14,36,.6) 0%,rgba(8,14,36,.1) 50%,transparent 100%);pointer-events:none"></div>
+          </div>
+        </div>
+    
+        <!-- RIGHT 70 — text -->
+        <div class="rv" style="padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;border-left:1px solid rgba(37,99,200,.1);position:relative;z-index:2">
+          <div class="s-tag" style="margin-bottom:2rem">What we're here for</div>
+          <h2 class="s-h2" style="margin-bottom:3rem">Our<br>mission<br>&amp; <em>vision</em></h2>
+          <div style="margin-bottom:2.5rem">
+            <div style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem">Mission</div>
+            <p style="font-size:.82rem;color:var(--muted);line-height:1.95">To give nonprofits, small businesses, and purpose-driven organizations the operational, creative, and strategic support they need to do their best work — without having to figure it all out alone.</p>
+          </div>
+          <div style="padding-top:2rem;border-top:1px solid rgba(37,99,200,.1)">
+            <div style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem">Vision</div>
+            <p style="font-size:.82rem;color:var(--muted);line-height:1.95">A world where the size of an organization doesn't determine the quality of support it has access to — where the businesses doing the most meaningful work are also the best equipped to grow.</p>
+          </div>
+        </div>
+    
       </div>
-      <div style="padding-top:2.5rem;border-top:1px solid rgba(37,99,200,.1)">
-        <div style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem">Vision</div>
-        <p style="font-size:.92rem;color:var(--muted);line-height:1.95">A world where the size of an organization doesn't determine the quality of support it has access to — where the businesses doing the most meaningful work are also the best equipped to grow.</p>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+    
+    <script>
+    (function(){
+      const el = document.getElementById('mv-parallax');
+      if (!el) return;
+      function onScroll(){
+        const section = el.closest('section');
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.bottom < 0 || rect.top > vh) return;
+        const progress = (vh - rect.top) / (vh + rect.height);
+        const shift = (progress - 0.5) * 120;
+        el.style.transform = 'translateY(' + shift + 'px)';
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+    </script>
   
 <section class="team-sec">
   <div class="rv">
