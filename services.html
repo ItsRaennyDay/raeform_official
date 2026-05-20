@@ -197,14 +197,6 @@ if (cur && ring) {
     cur.style.left = mx + 'px';
     cur.style.top = my + 'px';
   });
-
-  (function tick() {
-    rx += (mx - rx) * 1;
-    ry += (my - ry) * 1;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(tick);
-  })();
 }
 
 document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-btn,.t-dot,.soc-b,.ft-lnk,.overlay').forEach(el => {
