@@ -364,7 +364,6 @@ footer{background:var(--navy);border-top:1px solid rgba(37,99,200,.07);padding:5
   .nav-links{display:none}.hbg{display:flex}
   .svc-wrap{grid-template-columns:1fr;gap:3rem}.svc-sticky{position:static}
   .work-grid{grid-template-columns:repeat(2,1fr)}
-  .phil-grid{grid-template-columns:1fr;gap:4rem}
   .story-grid{grid-template-columns:1fr;gap:3rem}.story-l{position:static}
   .vals-grid{grid-template-columns:repeat(2,1fr)}
   .team-grid{grid-template-columns:repeat(2,1fr)}
