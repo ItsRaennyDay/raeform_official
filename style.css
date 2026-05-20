@@ -180,7 +180,11 @@ nav.sc{background:rgba(5,9,26,.97)}
 .ph-items{display:flex;flex-direction:column;gap:2rem}
 .ph-item-h{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.45rem}
 .ph-item-b{font-size:.88rem;color:var(--muted);line-height:1.88}
+.phil-grid{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;position:relative;z-index:2}
 
+@media(max-width:960px){
+  .phil-grid{grid-template-columns:1fr;gap:4rem}
+}
 /* TESTIMONIALS */
 .testi{background:var(--navy2);padding:8rem 5vw}
 .ts-track{overflow:hidden;margin-top:5rem}
