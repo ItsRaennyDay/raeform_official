@@ -116,7 +116,7 @@ nav.sc{background:rgba(5,9,26,.97)}
 .s-tag::before{content:'';width:26px;height:1px;background:var(--blue-glow);display:inline-block;flex-shrink:0}
 .s-h2{font-family:var(--font-d);font-size:clamp(2.2rem,5vw,4.5rem);font-weight:300;line-height:1.1}
 .s-h2 em{font-style:italic;color:var(--blue-pale);font-weight:400}
-.s-p{font-size:.9rem;color:var(--muted);line-height:1.95;max-width:450px;margin-top:1.5rem}
+.s-p{font-size:.9rem;color:var(--muted);line-height:1.95;margin-top:1.5rem}
 
 /* SERVICES */
 .svc-wrap{display:grid;grid-template-columns:1fr 2fr;gap:8rem;align-items:start}
@@ -170,7 +170,7 @@ nav.sc{background:rgba(5,9,26,.97)}
 .wb6{background:linear-gradient(135deg,var(--navy5) 0%,rgba(30,77,158,.32) 100%)}
 
 /* PHILOSOPHY */
-.phil{padding:9rem 5vw;position:relative;overflow:hidden}
+.phil{padding:9rem 3vw;position:relative;overflow:hidden}
 .phil-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   font-family:var(--font-d);font-size:22vw;color:rgba(37,99,200,.028);
   font-weight:600;white-space:nowrap;pointer-events:none;user-select:none;line-height:1}
