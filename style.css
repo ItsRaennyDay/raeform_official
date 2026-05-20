@@ -169,6 +169,14 @@ nav.sc{background:rgba(5,9,26,.97)}
 .wb5{background:linear-gradient(135deg,var(--navy4) 0%,rgba(17,28,60,.85) 100%)}
 .wb6{background:linear-gradient(135deg,var(--navy5) 0%,rgba(30,77,158,.32) 100%)}
 
+/*MISSION, VISION, CORE*/
+@media(max-width:768px){
+  [style*="grid-template-columns:30fr 70fr"]{grid-template-columns:1fr!important}
+  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:480px){
+  [style*="grid-template-columns:repeat(4,1fr)"]{grid-template-columns:1fr!important}
+}
 /* PHILOSOPHY */
 .phil{padding:9rem 3vw;position:relative;overflow:hidden}
 .phil-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
