@@ -99,7 +99,49 @@ nav.sc{background:rgba(5,9,26,.97)}
   color:var(--muted2);z-index:2;cursor:pointer}
 .scue-line{width:1px;height:52px;background:linear-gradient(to bottom,var(--blue-glow),transparent);animation:sl 2s ease-in-out infinite}
 @keyframes sl{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.2)}}
+/* Update Hero Layout */
+.hero-container {
+  display: grid;
+  grid-template-columns: 1fr 45%; /* Text takes 55%, Image takes 45% */
+  gap: 4rem;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
 
+.hero-image-wrap {
+  width: 100%;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Fix Text Narrowness */
+.h-sub {
+  max-width: 100%; /* Changed from 460px to allow full width of its container */
+  margin-bottom: 3.5rem;
+}
+
+/* Responsive adjustment */
+@media(max-width: 960px) {
+  .hero-container {
+    grid-template-columns: 1fr; /* Stack vertically on small screens */
+    text-align: center;
+  }
+  .h-sub {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
+  }
+  .h-tag {
+    justify-content: center;
+  }
+}
 /* MARQUEE */
 .marq-wrap{border-top:1px solid rgba(37,99,200,.09);border-bottom:1px solid rgba(37,99,200,.09);
   background:var(--navy2);padding:1.1rem 0;overflow:hidden}
