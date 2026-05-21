@@ -41,20 +41,29 @@
 <!-- ═══════════ HOME ═══════════ -->
 <div class="page active" id="page-home">
 
-  <section class="hero">
-    <div class="hero-grid"></div>
-    <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-    <div class="h-tag">Business Support Services · Remote · Philippines & Beyond</div>
-    <h1 class="h-h1">Your business, running <br><em>the way</em><strong> it should</strong></h1>
-    <p class="h-sub">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
-    <div class="h-acts">
-      <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
-      <button class="btn-g" onclick="go('about')">Who We Are</button>
-    </div>
-    <div class="scue" onclick="document.getElementById('marq').scrollIntoView({behavior:'smooth'})">
-      <div class="scue-line"></div>Scroll
-    </div>
-  </section>
+    <section class="hero">
+      <div class="hero-content" style="display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 0 10%;">
+        
+        <div class="hero-text" style="flex: 1;">
+          <div class="h-tag">Business Support Services · Remote · Philippines & Beyond</div>
+          <h1 class="h-h1">Your business, running <br><em>the way</em><strong> it should</strong></h1>
+          <p class="h-sub">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
+          <div class="h-acts">
+            <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
+            <button class="btn-g" onclick="go('about')">Who We Are</button>
+          </div>
+        </div>
+    
+        <div class="hero-image" style="flex: 0 0 40%;">
+          <img src="team.svg" alt="" style="width: 100%; height: auto;">
+        </div>
+        
+      </div>
+    
+      <div class="scue" onclick="document.getElementById('marq').scrollIntoView({behavior:'smooth'})">
+        <div class="scue-line"></div>Scroll
+      </div>
+    </section>
 
   <div class="marq-wrap" id="marq"><div class="marq-inner" id="marq-inner"></div></div>
 
