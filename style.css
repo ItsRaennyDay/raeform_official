@@ -61,7 +61,7 @@ nav.sc{background:rgba(5,9,26,.97)}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;
-  padding:0 5vw 7rem;position:relative;overflow:hidden}
+  padding:0 5vw;position:relative;overflow:hidden}
 .hero-grid{position:absolute;inset:0;
   background-image:linear-gradient(rgba(37,99,200,.055) 1px,transparent 1px),
     linear-gradient(90deg,rgba(37,99,200,.055) 1px,transparent 1px);
