@@ -65,7 +65,7 @@ nav.sc{background:rgba(5,9,26,.97)}
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px 5vw 7rem; /* Change 100px to 40px here */
+    padding: 50px 5vw 7rem; /* Change 100px to 40px here */
     position: relative;
     overflow: hidden;
 }
@@ -119,8 +119,8 @@ nav.sc{background:rgba(5,9,26,.97)}
 /* Update Hero Layout */
 .hero-container {
   display: grid;
-  grid-template-columns: 1fr 45%; /* Text takes 55%, Image takes 45% */
-  gap: 10rem;
+  grid-template-columns: 6fr 4fr; /* Text takes 55%, Image takes 45% */
+  gap: 6rem;
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
