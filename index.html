@@ -41,27 +41,29 @@
 <!-- ═══════════ HOME ═══════════ -->
 <div class="page active" id="page-home">
 
-    <section class="hero">
-      <div class="hero-container">
-        <div class="hero-text">
-          <div class="h-tag">Business Support Services · Remote · Philippines & Beyond</div>
-          <h1 class="h-h1">Your business, running <br><em>the way</em><strong> it should</strong></h1>
-          <p class="h-sub">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
-          <div class="h-acts">
-            <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
-            <button class="btn-g" onclick="go('about')">Who We Are</button>
-          </div>
-        </div>
-        
-        <div class="hero-image-wrap">
-          <img src="team.svg" alt="" class="hero-img">
-        </div>
-      </div>
+  <section class="hero">
+  <div class="hero-grid"></div>
+  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
+
+  <div class="hero-content-wrapper" style="display: grid; grid-template-columns: 1fr 40%; gap: 4rem; align-items: center; position: relative; z-index: 2; padding: 0 5vw;">
     
-      <div class="scue" onclick="document.getElementById('marq').scrollIntoView({behavior:'smooth'})">
-        <div class="scue-line"></div>Scroll
+    <div> <div class="h-tag">Business Support Services · Remote · Philippines & Beyond</div>
+      <h1 class="h-h1">Your business, running <br><em>the way</em><strong> it should</strong></h1>
+      <p class="h-sub">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
+      <div class="h-acts">
+        <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
+        <button class="btn-g" onclick="go('about')">Who We Are</button>
       </div>
-    </section>
+    </div>
+
+    <div> <img src="team.svg" alt="Raeform Team" style="width: 100%; height: auto;">
+    </div>
+  </div>
+
+  <div class="scue" onclick="document.getElementById('marq').scrollIntoView({behavior:'smooth'})">
+    <div class="scue-line"></div>Scroll
+  </div>
+  </section>
 
   <div class="marq-wrap" id="marq"><div class="marq-inner" id="marq-inner"></div></div>
 
