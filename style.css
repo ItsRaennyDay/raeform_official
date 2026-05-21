@@ -120,7 +120,7 @@ nav.sc{background:rgba(5,9,26,.97)}
 .hero-container {
   display: grid;
   grid-template-columns: 1fr 45%; /* Text takes 55%, Image takes 45% */
-  gap: 4rem;
+  gap: 10rem;
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
