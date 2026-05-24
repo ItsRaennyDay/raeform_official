@@ -69,7 +69,7 @@ nav.sc{background:rgba(5,9,26,.97)}
 .h-h1{font-family:var(--font-d);font-size:clamp(2.8rem,5vw,6rem);line-height:.95;font-weight:300;letter-spacing:-.01em;max-width:960px;margin-bottom:2rem;position:relative;z-index:2;margin-top:0rem}
 .h-h1 em{font-style:italic;font-weight:400;color:var(--blue-pale)}
 .h-h1 strong{font-weight:600}
-.h-sub{font-size:clamp(.92rem,1.6vw,1.1rem);color:var(--muted);max-width:460px;line-height:1.95;margin-bottom:3.5rem;position:relative;z-index:2}
+.h-sub{font-size:clamp(.92rem,1.6vw,1.1rem);color:var(--muted);max-width:550px;line-height:1.95;margin-bottom:3.5rem;position:relative;z-index:2}
 .h-acts{display:flex;gap:1.5rem;flex-wrap:wrap;position:relative;z-index:2}
 .btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--blue-bright);color:var(--off-white);font-family:var(--font-u);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:15px 36px;border:none;cursor:pointer;transition:all .3s var(--ease)}
 .btn-p:hover{background:var(--blue-glow);transform:translateY(-3px);box-shadow:0 14px 42px rgba(37,99,200,.35)}
