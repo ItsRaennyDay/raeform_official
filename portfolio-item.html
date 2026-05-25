@@ -9,7 +9,47 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
+/* ── CRITICAL LIVE SITE FORCE-SHOW OVERRIDES ── */
+body, html {
+  background-color: #05091a !important; /* Force background color if style.css is missing */
+  color: #f8fafc !important;
+}
 
+/* Force elements to show immediately even if JavaScript fails */
+.rv {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Forcing the cursor to be visible and tracking correctly */
+#cur, #cur-r {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: none !important;
+  z-index: 99999 !important;
+  border-radius: 50% !important;
+  display: block !important;
+  visibility: visible !important;
+}
+#cur {
+  width: 8px !important;
+  height: 8px !important;
+  background-color: #3b82f6 !important; /* Bright Blue */
+}
+#cur-r {
+  width: 28px !important;
+  height: 28px !important;
+  border: 1.5px solid rgba(59, 130, 246, 0.7) !important;
+  background-color: rgba(59, 130, 246, 0.05) !important;
+}
+
+/* Ensure native cursor stays visible as a fallback if the custom cursor lags */
+body {
+  cursor: auto !important; 
+}
 /* ── BASE SETUP & REVEALS ── */
 :root {
   --blue-glow: #3b82f6;
