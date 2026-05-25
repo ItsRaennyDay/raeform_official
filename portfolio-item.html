@@ -839,13 +839,14 @@ function renderPage(page) {
   slice.forEach((img, i) => {
     const globalIndex = start + i;
     const item = document.createElement('div');
-    item.className = 'pf-masonry-item rv vis'; // Added vis manually here to guarantee display
+    item.className = 'pf-masonry-item rv'; // Removed 'vis' so it can fade in naturally
     item.innerHTML = `
-      <img src="${img.src}" alt="${img.caption}" loading="lazy">
+      <img src="${img.src}" alt="${img.caption}" loading="lazy" onload="this.parentElement.classList.add('vis')">
       <div class="pf-masonry-item-over">
         <div class="pf-masonry-caption">${img.caption}</div>
       </div>
       <div class="pf-masonry-icon">&#8599;</div>`;
+    
     item.addEventListener('click', () => openPreview(globalIndex));
     grid.appendChild(item);
   });
