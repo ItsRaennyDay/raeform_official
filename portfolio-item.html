@@ -11,18 +11,19 @@
 <style>
 /* ── CRITICAL LIVE SITE FORCE-SHOW OVERRIDES ── */
 body, html {
-  background-color: #05091a !important; /* Force background color if style.css is missing */
+  background-color: #05091a !important; 
   color: #f8fafc !important;
 }
 
-/* Force elements to show immediately even if JavaScript fails */
-.rv {
+/* FIX: This forces the dynamically built gallery grid items to stay completely visible */
+.rv, .pf-masonry-item.rv {
   opacity: 1 !important;
   transform: none !important;
   visibility: visible !important;
+  transition: none !important;
 }
 
-/* Forcing the cursor to be visible and tracking correctly */
+/* Forcing the custom tracking cursor to look sharp and stay on screen safely */
 #cur, #cur-r {
   position: fixed !important;
   top: 0;
@@ -37,7 +38,7 @@ body, html {
 #cur {
   width: 8px !important;
   height: 8px !important;
-  background-color: #3b82f6 !important; /* Bright Blue */
+  background-color: #3b82f6 !important; 
 }
 #cur-r {
   width: 28px !important;
@@ -46,7 +47,6 @@ body, html {
   background-color: rgba(59, 130, 246, 0.05) !important;
 }
 
-/* Ensure native cursor stays visible as a fallback if the custom cursor lags */
 body {
   cursor: auto !important; 
 }
