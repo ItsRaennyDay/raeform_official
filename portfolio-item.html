@@ -730,18 +730,20 @@ const PROJECTS = {
 };
 
 /* ══════════════════════════════════════════
-    INIT — read ?project= from URL
+    INIT RUNNER (Failsafe Wrapped)
 ══════════════════════════════════════════ */
-const params  = new URLSearchParams(window.location.search);
-const slug    = params.get('project') || Object.keys(PROJECTS)[0];
-const project = PROJECTS[slug];
+document.addEventListener("DOMContentLoaded", () => {
+  const params  = new URLSearchParams(window.location.search);
+  const slug    = params.get('project') || Object.keys(PROJECTS)[0];
+  const project = PROJECTS[slug];
 
-if (!project) {
-  const heroTitle = document.getElementById('pf-hero-title');
-  if (heroTitle) heroTitle.textContent = 'Project not found.';
-} else {
-  loadProject(project);
-}
+  if (!project) {
+    const heroTitle = document.getElementById('pf-hero-title');
+    if (heroTitle) heroTitle.textContent = 'Project not found.';
+  } else {
+    loadProject(project);
+  }
+});
 
 function loadProject(p) {
   const pageTitle = document.getElementById('page-title');
@@ -822,7 +824,7 @@ function renderPage(page) {
   slice.forEach((img, i) => {
     const globalIndex = start + i;
     const item = document.createElement('div');
-    item.className = 'pf-masonry-item rv';
+    item.className = 'pf-masonry-item rv vis'; // Added vis manually here to guarantee display
     item.innerHTML = `
       <img src="${img.src}" alt="${img.caption}" loading="lazy">
       <div class="pf-masonry-item-over">
@@ -831,7 +833,6 @@ function renderPage(page) {
       <div class="pf-masonry-icon">&#8599;</div>`;
     item.addEventListener('click', () => openPreview(globalIndex));
     grid.appendChild(item);
-    setTimeout(() => item.classList.add('vis'), 60 * i);
   });
 
   renderPagination();
@@ -870,37 +871,51 @@ function renderPagination() {
 }
 
 /* ══════════════════════════════════════════
-    IMAGE PREVIEW
+    IMAGE PREVIEW (Failsafe Protected)
 ══════════════════════════════════════════ */
 function openPreview(index) {
   previewIndex = index;
   const img = currentImages[index];
-  document.getElementById('pf-preview-img').src = img.src;
-  document.getElementById('pf-preview-caption').textContent = img.caption;
-  document.getElementById('pf-preview').classList.add('on');
+  const pImg = document.getElementById('pf-preview-img');
+  const pCap = document.getElementById('pf-preview-caption');
+  const pWrap = document.getElementById('pf-preview');
+  
+  if(pImg) pImg.src = img.src;
+  if(pCap) pCap.textContent = img.caption;
+  if(pWrap) pWrap.classList.add('on');
   document.body.style.overflow = 'hidden';
 }
 
 function closePreview() {
-  document.getElementById('pf-preview').classList.remove('on');
+  const pWrap = document.getElementById('pf-preview');
+  if(pWrap) pWrap.classList.remove('on');
   document.body.style.overflow = '';
 }
 
 function shiftPreview(dir) {
+  if (!currentImages.length) return;
   previewIndex = (previewIndex + dir + currentImages.length) % currentImages.length;
   const img = currentImages[previewIndex];
   const el  = document.getElementById('pf-preview-img');
-  el.style.opacity = '0';
-  setTimeout(() => {
-    el.src = img.src;
-    document.getElementById('pf-preview-caption').textContent = img.caption;
-    el.style.opacity = '1';
-  }, 180);
+  const pCap = document.getElementById('pf-preview-caption');
+  
+  if (el) {
+    el.style.opacity = '0';
+    setTimeout(() => {
+      el.src = img.src;
+      if (pCap) pCap.textContent = img.caption;
+      el.style.opacity = '1';
+    }, 180);
+  }
 }
 
-document.getElementById('pf-preview').addEventListener('click', e => {
-  if (e.target === document.getElementById('pf-preview')) closePreview();
-});
+// Fixed element checking to prevent script death
+const previewEl = document.getElementById('pf-preview');
+if (previewEl) {
+  previewEl.addEventListener('click', e => {
+    if (e.target === document.getElementById('pf-preview')) closePreview();
+  });
+}
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closePreview();
@@ -985,6 +1000,7 @@ setTimeout(reveal, 200);
 
 function openPop(id)  { document.getElementById(id)?.classList.add('on'); }
 function closePop(id) { document.getElementById(id)?.classList.remove('on'); }
+
 document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('on'); }));
 document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on')); });
 
@@ -1009,5 +1025,3 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('on'), 4500);
 }
 </script>
-</body>
-</html>
