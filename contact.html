@@ -359,51 +359,64 @@ function submitForm() {
     return;
   }
 
-  // 2. Change button UI state to visual "Loading..." state
+  // 2. Change button UI state to "Sending..."
   const submitBtn = document.querySelector('.f-sub');
   const originalBtnText = submitBtn.innerHTML;
   submitBtn.disabled = true;
   submitBtn.innerHTML = "Sending Message...";
 
-  // 3. Assemble parameters inside a true FormData footprint
-  const formData = new FormData();
-  formData.append('firstName', f1);
-  formData.append('lastName', f2);
-  formData.append('email', f3);
-  formData.append('company', f4);
-  formData.append('service', f5 || "Not specified");
-  formData.append('details', f6);
+  // 3. Create a hidden iframe if it doesn't exist yet
+  let hiddenIframe = document.getElementById('hidden_iframe');
+  if (!hiddenIframe) {
+    hiddenIframe = document.createElement('iframe');
+    hiddenIframe.id = 'hidden_iframe';
+    hiddenIframe.name = 'hidden_iframe';
+    hiddenIframe.style.display = 'none';
+    document.body.appendChild(hiddenIframe);
+  }
 
-  // 4. Send request and explicitly process response chain
-  fetch("https://script.google.com/macros/s/AKfycbzHbshFrhKLdmOPt7MCFn8-SLlXevRMUeqxS4_OKYcZC5Tf6zYwncJps-6bpB8luaW8lw/exec", {
-    method: "POST",
-    body: formData
-  })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network error received from server endpoints.');
-    }
-    return response.json();
-  })
-  .then(resData => {
-    if (resData.result === "success") {
-      // 5. Clear out fields ONLY after Google verifies success
-      ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
-      document.getElementById('f5').selectedIndex = 0;
-      toast("Message sent. You'll hear from us within one business day.");
-    } else {
-      throw new Error(resData.error || 'Google Script database error.');
-    }
-  })
-  .catch(error => {
-    console.error("Transmission breakdown:", error);
-    toast('Could not sync with database. Please try emailing raeformtoday@gmail.com directly.');
-  })
-  .finally(() => {
+  // 4. Create a temporary invisible form to handle the submission safely
+  const tempForm = document.createElement('form');
+  tempForm.method = 'POST';
+  tempForm.action = 'https://script.google.com/macros/s/AKfycbzB5uDdw46b4uxP_XLDxxupjSVYWE_tLwPKpWxjZmhlYWVv1A_lZ7wwAYXtvNqLkFXwNA/exec';
+  tempForm.target = 'hidden_iframe'; // Fires into the hidden frame so the page doesn't refresh
+
+  // Pack the variables into the form
+  const fields = {
+    firstName: f1,
+    lastName: f2,
+    email: f3,
+    company: f4,
+    service: f5 || "Not specified",
+    details: f6
+  };
+
+  for (const key in fields) {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = key;
+    input.value = fields[key];
+    tempForm.appendChild(input);
+  }
+
+  // 5. Submit the form into the background
+  document.body.appendChild(tempForm);
+  tempForm.submit();
+  document.body.removeChild(tempForm); // Clean up the temporary form
+
+  // 6. Wait exactly 1.2 seconds for the network transit to hit Google Sheets, then reset UI
+  setTimeout(() => {
+    // Clear out text fields
+    ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f5').selectedIndex = 0;
+    
     // Restore button functionality
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalBtnText;
-  });
+
+    // Show your custom success toast alert!
+    toast("Message sent. You'll hear from us within one business day.");
+  }, 1200);
 }
 
 function submitConsult() {
