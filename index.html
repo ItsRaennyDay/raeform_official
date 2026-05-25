@@ -119,21 +119,21 @@
     </div>
     <div class="work-grid rv delay-1">
       <!-- 1. SoFete Sisterhood Inc. -->
-      <div class="wcard" onclick="openWPop('SoFete Sisterhood Inc.','Brand, Operations + Web Development','We partnered with this Maryland-based 501(c)(3) nonprofit to elevate their branding, scale their internal operations, and build a digital home for their community.')">
+      <div class="wcard" onclick="openWPop('SoFete Sisterhood Inc.','Brand, Operations + Web Development','We partnered with this Maryland-based 501(c)(3) nonprofit to elevate their branding, scale their internal operations, and build a digital home for their community.','sofete')">
         <div class="wcard-bg wb1"><div class="wcard-shape">S</div></div>
         <div class="wc-arr">↗</div>
         <div class="wcard-over"><div class="wc-cat">Brand, Operations + Web</div><div class="wc-title">SoFete Sisterhood Inc.</div></div>
       </div>
 
       <!-- 2. The Nurtured Home -->
-      <div class="wcard" onclick="openWPop('The Nurtured Home','Visual Identity + Web Design','A holistic energy healing startup based in Illinois. We crafted their complete visual identity, designed their core logo, and built an intentional web experience from the ground up.')">
+      <div class="wcard" onclick="openWPop('The Nurtured Home','Visual Identity + Web Design','A holistic energy healing startup based in Illinois. We crafted their complete visual identity, designed their core logo, and built an intentional web experience from the ground up.','nurtured-home')">
         <div class="wcard-bg wb2"><div class="wcard-shape">N</div></div>
         <div class="wc-arr">↗</div>
         <div class="wcard-over"><div class="wc-cat">Visual Identity + Web Design</div><div class="wc-title">The Nurtured Home</div></div>
       </div>
 
       <!-- 3. The Celestial Sound Weaver -->
-      <div class="wcard" onclick="openWPop('The Celestial Sound Weaver','Website Development','A Massachusetts-based sound healing practice. We developed a high-end digital experience that translates the immersive, therapeutic nature of their work into a striking web presence.')">
+      <div class="wcard" onclick="openWPop('The Celestial Sound Weaver','Website Development','A Massachusetts-based sound healing practice. We developed a high-end digital experience that translates the immersive, therapeutic nature of their work into a striking web presence.','celestial-sound-weaver')">
         <div class="wcard-bg wb3"><div class="wcard-shape">C</div></div>
         <div class="wc-arr">↗</div>
         <div class="wcard-over"><div class="wc-cat">Website Development</div><div class="wc-title">The Celestial Sound Weaver</div></div>
@@ -254,7 +254,7 @@
     <h3 class="pop-h" id="wp-title"></h3>
     <div class="pop-svc" id="wp-svc"></div>
     <p class="pop-p" id="wp-desc"></p>
-    <button class="btn-p btn-sm" onclick="closePop('work-pop');go('contact')">Start a similar project &rarr;</button>
+    <button class="btn-p btn-sm" id="wp-portfolio-btn">View Full Project &rarr;</button>
   </div>
 </div>
 
@@ -410,10 +410,14 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on'));
 });
 
-function openWPop(title, svc, desc) {
+function openWPop(title, svc, desc, slug) {
   document.getElementById('wp-title').textContent = title;
   document.getElementById('wp-svc').textContent = svc;
   document.getElementById('wp-desc').textContent = desc;
+  document.getElementById('wp-portfolio-btn').onclick = function() {
+    closePop('work-pop');
+    window.location.href = 'portfolio-item.html?project=' + slug;
+  };
   openPop('work-pop');
 }
 function openTPop(name, role, bio) {
