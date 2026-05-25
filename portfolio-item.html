@@ -123,11 +123,18 @@ body.hov #cur-r {
 }
 .pf-hero-bg {
   position: absolute;
-  inset: -10%;
+  /* Centering boundaries tightly inside the hero container */
+  inset: 0; 
   background-size: cover;
   background-position: center;
-  filter: brightness(.28) saturate(.6);
-  transform: scale(1.1);
+  background-repeat: no-repeat;
+  
+  /* ADJUST BRIGHTNESS: Changed from .28 to .75 (75% brightness). 
+     Adjust this number up or down to find your sweet spot. */
+  filter: brightness(.75) saturate(.85);
+  
+  /* REMOVED scale(1.1) to stop the image from stretching out unnecessarily */
+  transform: scale(1);
   will-change: transform;
   transition: transform .1s linear;
 }
