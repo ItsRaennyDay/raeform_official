@@ -114,8 +114,8 @@
       <div class="ft-soc">
         <a class="soc-b" href="https://www.linkedin.com/company/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2[...]
-            </svg>
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2" />
+          </svg>
         </a>
         <a class="soc-b" href="https://www.instagram.com/byraeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -346,36 +346,66 @@ function toast(msg) {
 
 /* FORMS */
 function submitForm() {
-  // 1. Check required fields
-  if (!document.getElementById('f1').value.trim() || !document.getElementById('f3').value.trim() || !document.getElementById('f6').value.trim()) {
+  const f1 = document.getElementById('f1').value.trim();
+  const f2 = document.getElementById('f2').value.trim();
+  const f3 = document.getElementById('f3').value.trim();
+  const f4 = document.getElementById('f4').value.trim();
+  const f5 = document.getElementById('f5').value;
+  const f6 = document.getElementById('f6').value.trim();
+
+  // 1. Validation check
+  if (!f1 || !f3 || !f6) {
     toast('Please fill in all required fields.');
     return;
   }
 
-  // 2. Prepare the data using URLSearchParams (Fixes the Google Script parsing error)
-  const formData = new URLSearchParams();
-  formData.append('firstName', document.getElementById('f1').value.trim());
-  formData.append('lastName', document.getElementById('f2').value.trim());
-  formData.append('email', document.getElementById('f3').value.trim());
-  formData.append('company', document.getElementById('f4').value.trim());
-  formData.append('service', document.getElementById('f5').value || "Not specified");
-  formData.append('details', document.getElementById('f6').value.trim());
+  // 2. Change button UI state to visual "Loading..." state
+  const submitBtn = document.querySelector('.f-sub');
+  const originalBtnText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = "Sending Message...";
 
-  // 3. Fire the data to Google Sheets in the background
+  // 3. Assemble parameters inside a true FormData footprint
+  const formData = new FormData();
+  formData.append('firstName', f1);
+  formData.append('lastName', f2);
+  formData.append('email', f3);
+  formData.append('company', f4);
+  formData.append('service', f5 || "Not specified");
+  formData.append('details', f6);
+
+  // 4. Send request and explicitly process response chain
   fetch("https://script.google.com/macros/s/AKfycbzDLhU87TOUoRbx9vptXFJwBd7TLQrKS_6JTL2P7cN7DCtErjfMEnn5YcMr-FDG19XM8g/exec", {
     method: "POST",
-    mode: "no-cors", 
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: formData.toString()
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network error received from server endpoints.');
+    }
+    return response.json();
+  })
+  .then(resData => {
+    if (resData.result === "success") {
+      // 5. Clear out fields ONLY after Google verifies success
+      ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('f5').selectedIndex = 0;
+      toast("Message sent. You'll hear from us within one business day.");
+    } else {
+      throw new Error(resData.error || 'Google Script database error.');
+    }
+  })
+  .catch(error => {
+    console.error("Transmission breakdown:", error);
+    toast('Could not sync with database. Please try emailing raeformtoday@gmail.com directly.');
+  })
+  .finally(() => {
+    // Restore button functionality
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalBtnText;
   });
-
-  // 4. Your exact original UI behavior (instantly resets and shows toast)
-  ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('f5').selectedIndex = 0;
-  toast('Message sent. You\'ll hear from us within one business day.');
 }
+
 function submitConsult() {
   if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
     toast('Please enter your name and email.');
