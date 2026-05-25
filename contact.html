@@ -346,68 +346,35 @@ function toast(msg) {
 
 /* FORMS */
 function submitForm() {
-  const f1 = document.getElementById('f1').value.trim();
-  const f2 = document.getElementById('f2').value.trim();
-  const f3 = document.getElementById('f3').value.trim();
-  const f4 = document.getElementById('f4').value.trim();
-  const f5 = document.getElementById('f5').value;
-  const f6 = document.getElementById('f6').value.trim();
-
-  // Front-end validation for required fields
-  if (!f1 || !f3 || !f6) {
+  // 1. Check required fields
+  if (!document.getElementById('f1').value.trim() || !document.getElementById('f3').value.trim() || !document.getElementById('f6').value.trim()) {
     toast('Please fill in all required fields.');
     return;
   }
 
-  // Visual feedback: disable button and show sending state
-  const submitBtn = document.querySelector('.f-sub');
-  const originalBtnText = submitBtn.innerHTML;
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = "Sending...";
+  // 2. Prepare the data using URLSearchParams (Fixes the Google Script parsing error)
+  const formData = new URLSearchParams();
+  formData.append('firstName', document.getElementById('f1').value.trim());
+  formData.append('lastName', document.getElementById('f2').value.trim());
+  formData.append('email', document.getElementById('f3').value.trim());
+  formData.append('company', document.getElementById('f4').value.trim());
+  formData.append('service', document.getElementById('f5').value || "Not specified");
+  formData.append('details', document.getElementById('f6').value.trim());
 
-  // Map the HTML form values to keys your Google Apps Script expects
-  const payload = {
-    firstName: f1,
-    lastName: f2,
-    email: f3,
-    company: f4,
-    service: f5 || "Not specified",
-    details: f6
-  };
-
-  // Your live Google Apps Script Web App URL
-  const webAppUrl = "https://script.google.com/macros/s/AKfycbzDLhU87TOUoRbx9vptXFJwBd7TLQrKS_6JTL2P7cN7DCtErjfMEnn5YcMr-FDG19XM8g/exec";
-
-  // Post the data to your Google Sheet
-  fetch(webAppUrl, {
+  // 3. Fire the data to Google Sheets in the background
+  fetch("https://script.google.com/macros/s/AKfycbzDLhU87TOUoRbx9vptXFJwBd7TLQrKS_6JTL2P7cN7DCtErjfMEnn5YcMr-FDG19XM8g/exec", {
     method: "POST",
-    mode: "no-cors", // Bypasses standard browser CORS restrictions for script macros
+    mode: "no-cors", 
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/x-www-form-urlencoded"
     },
-    body: JSON.stringify(payload)
-  })
-  .then(() => {
-    // Clear out form input fields upon successful handoff
-    ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    
-    const selectEl = document.getElementById('f5');
-    if (selectEl) selectEl.selectedIndex = 0;
-    
-    toast("Message sent. You'll hear from us within one business day.");
-  })
-  .catch(error => {
-    console.error("Form Submission Error:", error);
-    toast('Something went wrong. Please try emailing us directly.');
-  })
-  .finally(() => {
-    // Restore button state
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = originalBtnText;
+    body: formData.toString()
   });
+
+  // 4. Your exact original UI behavior (instantly resets and shows toast)
+  ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f5').selectedIndex = 0;
+  toast('Message sent. You\'ll hear from us within one business day.');
 }
 function submitConsult() {
   if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
