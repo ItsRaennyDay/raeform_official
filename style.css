@@ -13,46 +13,53 @@ body{font-family:var(--font-u);background:var(--navy);color:var(--off-white);lin
 a,button,p,h1,h2,h3,h4,h5,h6,span,div,li,label,input,textarea{user-select:text}
 a{color:inherit;text-decoration:none}
 
-/* HERO BG - NEW FIXED VERSION */
+/* Hero 3D Wrapper */
 .hero-marquee-bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Sits behind your content (z-index 2) */
-  pointer-events: none; /* Crucial: allows clicks through to buttons */
+  inset: 0;
+  z-index: 1; /* Behind text */
   overflow: hidden;
-  opacity: 0.15; /* Subtle background */
+  perspective: 1000px; /* This creates the 3D depth */
+  opacity: 0.4;
+  pointer-events: none;
 }
 
-/* Dark overlay to ensure text readability */
+.marquee-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* The "Aceternity" Skew */
+  transform: rotateX(20deg) rotateZ(-20deg) scale(1.2);
+  transform-origin: center center;
+  width: 100%;
+}
+
+.marquee-row {
+  display: flex;
+  gap: 20px;
+  animation: scroll 40s linear infinite;
+  width: max-content;
+}
+
+.marquee-row img {
+  height: 180px; /* Tweak size as needed */
+  width: auto;
+  border-radius: 12px;
+  filter: grayscale(1);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Gradient overlay so it fades out at edges */
 .hero-marquee-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(5,9,26,0.2) 0%, var(--navy) 100%);
-}
-
-.marquee-track {
-  display: flex;
-  gap: 20px;
-  animation: scroll 60s linear infinite;
-  transform: rotateY(-15deg) rotateX(15deg);
-  width: max-content;
-  margin-top: 10vh; /* Positions images so they aren't crowded */
-}
-
-.marquee-track img {
-  height: 250px;
-  width: auto;
-  border-radius: 12px;
-  filter: grayscale(1); /* Keeps it from being too distracting */
-}
-
-@keyframes scroll {
-  from { transform: translateX(0) rotateY(-15deg) rotateX(15deg); }
-  to { transform: translateX(-50%) rotateY(-15deg) rotateX(15deg); }
+  background: radial-gradient(circle at center, rgba(5,9,26,0) 0%, var(--navy) 90%);
 }
 /* CURSOR */
 #cur,#cur-r{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%)}
