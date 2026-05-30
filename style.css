@@ -356,10 +356,6 @@ footer{background:var(--navy);border-top:1px solid rgba(37,99,200,.07);padding:5
     margin-left: auto !important;
     margin-right: auto !important;
   }
-
-  .hero-content-wrapper > div:last-child {
-    display: none !important;
-  }
   
   .h-acts {
     justify-content: center !important;
