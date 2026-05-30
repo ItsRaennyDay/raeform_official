@@ -10,7 +10,6 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:var(--font-u);background:var(--navy);color:var(--off-white);line-height:1.7;overflow-x:hidden;cursor:none}
-a,button,p,h1,h2,h3,h4,h5,h6,span,div,li,label,input,textarea{user-select:text}
 a{color:inherit;text-decoration:none}
 
 /* ── 3D MARQUEE BACKGROUND ── */
