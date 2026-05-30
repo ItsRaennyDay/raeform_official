@@ -505,6 +505,4 @@ body, main, section, .hero, .sec, .svc-wrap, .work-sec, .phil, .testi, .cta-stri
 }
 
 /* ALLOW THE CURSOR ONLY ON REAL TEXT AND INPUTS */
-p, h1, h2, h3, h4, h5, h6, span, a, button, input, textarea, label {
-  user-select: text !important;
-}
+input, textarea { user-select: text; cursor: text; }
