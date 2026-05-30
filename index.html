@@ -535,17 +535,22 @@ const portfolioImages = [
 const container = document.getElementById('marquee-rows');
 
 function populateMarquee() {
-  // Create 4 rows
-  for (let i = 0; i < 4; i++) {
-    const row = document.createElement('div');
-    row.className = 'marquee-row';
-    // Double the images so it's long enough to loop
-    [...portfolioImages, ...portfolioImages].forEach(src => {
+  const container = document.getElementById('marquee-rows');
+  container.innerHTML = '';
+  // 4 vertical columns
+  for (let col = 0; col < 4; col++) {
+    const column = document.createElement('div');
+    column.className = 'marquee-row';
+    // Shuffle images differently per column
+    const shuffled = [...portfolioImages, ...portfolioImages]
+      .sort(() => (col % 2 === 0 ? 0.5 : -0.5) - Math.random());
+    [...shuffled, ...shuffled].forEach(src => {
       const img = document.createElement('img');
       img.src = src;
-      row.appendChild(img);
+      img.loading = 'lazy';
+      column.appendChild(img);
     });
-    container.appendChild(row);
+    container.appendChild(column);
   }
 }
 
