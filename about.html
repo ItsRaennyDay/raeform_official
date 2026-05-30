@@ -14,7 +14,6 @@
 <div id="cur"></div>
 <div id="cur-r"></div>
 
-<!-- NAV -->
 <nav id="nav">
   <a class="logo" href="index.html" aria-label="RAEFORM Home"><img src="logo.svg" alt="RAEFORM"></a>
   <div class="nav-links">
@@ -36,10 +35,8 @@
   <button class="nav-btn" type="button" onclick="openPop('consult-pop');toggleMob()">Work With Us</button>
 </div>
 
-<!-- ═══════════ ABOUT ═══════════ -->
 <div class="page active" id="page-about">
 
-  <!-- HERO -->
   <div class="ab-hero">
     <div class="ab-orb"></div>
     <div class="rel-z2">
@@ -48,7 +45,6 @@
     </div>
   </div>
 
-  <!-- STORY -->
   <div class="story-grid">
     <div class="story-l rv">
       <div class="s-tag">Our beginning</div>
@@ -62,7 +58,6 @@
     </div>
   </div>
 
-  <!-- MISSION, VISION & CORE VALUES -->
   <section style="background:var(--navy2);padding:8rem 5vw">
 
     <div class="rv" style="margin-bottom:5rem">
@@ -70,10 +65,8 @@
       <h2 class="s-h2">Mission, Vision<br>&amp; <em>Core Values</em></h2>
     </div>
 
-    <!-- 30/70 image + text -->
     <div class="rv" style="display:grid;grid-template-columns:30fr 70fr;gap:0;margin-bottom:6rem;border:1px solid rgba(37,99,200,.1);overflow:hidden">
 
-      <!-- LEFT 30 — parallax image -->
       <div style="position:relative;overflow:hidden;min-height:440px">
         <div id="mv-parallax" style="position:absolute;inset:-20% 0;will-change:transform">
           <img
@@ -85,7 +78,6 @@
         </div>
       </div>
 
-      <!-- RIGHT 70 — mission + vision -->
       <div style="padding:4rem;display:flex;flex-direction:column;gap:3rem;justify-content:center;border-left:1px solid rgba(37,99,200,.1)">
         <div>
           <div style="font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.8rem">
@@ -103,7 +95,6 @@
 
     </div>
 
-    <!-- CORE VALUES grid -->
     <div class="rv" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(37,99,200,.08);border:1px solid rgba(37,99,200,.1)">
       <div style="background:var(--navy3);padding:2.5rem 2rem;transition:background .3s" onmouseenter="this.style.background='var(--navy4)'" onmouseleave="this.style.background='var(--navy3)'">
         <div style="font-family:var(--font-d);font-size:2.5rem;font-weight:300;font-style:italic;color:rgba(59,130,246,.12);line-height:1;margin-bottom:1.5rem">01</div>
@@ -129,7 +120,6 @@
 
   </section>
 
-  <!-- FOUNDER -->
   <section class="team-sec">
     <div class="rv">
       <div class="s-tag">The person behind it</div>
@@ -173,12 +163,11 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="ft-top">
       <div>
         <a class="ft-logo" href="index.html" aria-label="RAEFORM Home"><img src="logo.svg" alt="RAEFORM"></a>
-        <div class="ft-tag">Raeform Business Support Services. DTI Reg. No. 8049713. Remote — Philippines &amp; Beyond.</div>
+        <div class="ft-tag">Re-Imagine. Re-Design. Re-Form Your Success.</div>
       </div>
       <div>
         <div class="ft-col-h">Explore</div>
@@ -193,13 +182,12 @@
         <div class="ft-col-h">Contact</div>
         <div class="ft-links">
           <span class="ft-lnk no-click">raeformtoday@gmail.com</span>
-          <span class="ft-lnk no-click">+63 992 581 0750</span>
-          <span class="ft-lnk no-click">Remote · Philippines &amp; Beyond</span>
+          <span class="ft-lnk no-click">Taguig City, Metro Manila</span>
         </div>
       </div>
     </div>
     <div class="ft-bot">
-      <div class="ft-copy">&copy; 2026 Raeform Business Support Services. All rights reserved.</div>
+      <div class="ft-copy">&copy; 2025 RAEFORM. All rights reserved.</div>
       <div class="ft-soc">
         <a class="soc-b" href="https://www.linkedin.com/company/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -217,10 +205,7 @@
     </div>
   </footer>
 
-</div><!-- end page-about -->
-
-<!-- POPUPS -->
-<div class="overlay" id="team-pop">
+</div><div class="overlay" id="team-pop">
   <div class="pop">
     <button class="pop-x" onclick="closePop('team-pop')">&times;</button>
     <div class="pop-tag">Our Team</div>
@@ -231,20 +216,16 @@
   </div>
 </div>
 
-<!-- OPTIMIZED SCHEDULER POPUP CONTAINER (UNIFORM DESIGN) -->
 <div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
   <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
     
-    <!-- Floating Close Button -->
     <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
     
-    <!-- Centered Header Section -->
     <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem;">
       <div class="pop-tag" style="display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; float: none;">Availability</div>
       <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
     </div>
     
-    <!-- Clean, unrestricted frame container -->
     <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
       <div class="calendly-inline-widget" 
            data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
