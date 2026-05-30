@@ -350,8 +350,6 @@ footer{background:var(--navy);border-top:1px solid rgba(37,99,200,.07);padding:5
     width: 100% !important;
   }
   
-  /* ... keep your other existing mobile styles below this (nav-links, hbg, etc) ... */
-}
   .nav-links{display:none}
   .hbg{display:flex}
   .svc-wrap{grid-template-columns:1fr;gap:3rem}
