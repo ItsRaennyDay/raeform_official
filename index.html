@@ -44,16 +44,16 @@
     <div class="hero-grid"></div>
     <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
 
-    <div class="hero-content-wrapper" style="display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; position: relative; z-index: 2; padding: 0 5vw; min-height: 80vh;">
+    <div class="hero-content-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 2; padding: 20px; min-height: 80vh; text-align: center;">
       
-      <div style="max-width: 800px; width: 100%;"> 
-        <div class="h-tag" style="border: none !important; margin-bottom: 1rem;">Raeform · Premium Business Support</div>
+      <div style="max-width: 90vw; width: 100%;"> 
+        <div class="h-tag" style="border: none !important; margin-bottom: 1rem; display: inline-block;">Raeform · Premium Business Support</div>
         
-        <h1 class="h-h1" id="typewriter" style="margin: 0 auto 1.5rem auto;"></h1>
+        <h1 class="h-h1" id="typewriter" style="min-height: 2.5em; margin: 0 auto 1.5rem auto;"></h1>
         
-        <p class="h-sub" style="margin: 0 auto;">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
+        <p class="h-sub" style="margin: 0 auto 2rem auto; max-width: 600px;">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
         
-        <div class="h-acts" style="margin-top: 2rem;">
+        <div class="h-acts" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
           <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
           <button class="btn-g" onclick="go('about')">Who We Are</button>
         </div>
@@ -64,18 +64,41 @@
 </div>
 
 <script>
-  // Script to handle the typewriter animation
   const target = document.getElementById('typewriter');
-  const text = "We run the back end so you can run the brand";
-  let index = 0;
+  const phrases = [
+    "We run the back end so you can run the brand",
+    "Systems built for high-end growth",
+    "Your vision, flawlessly executed"
+  ];
+  
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
 
   function type() {
-    if (index < text.length) {
-      target.textContent += text.charAt(index);
-      index++;
-      setTimeout(type, 60);
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+      target.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      target.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
     }
+
+    let typeSpeed = isDeleting ? 30 : 60;
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      typeSpeed = 2000; // Pause at end
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+    }
+
+    setTimeout(type, typeSpeed);
   }
+
   type();
 </script>
 
