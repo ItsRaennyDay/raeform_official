@@ -187,10 +187,13 @@
 <div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
 
 <script>
-/* CURSOR */
+/* 1. PREVENT ACCIDENTALLY TRIGGERING INLINE EDITING */
+document.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+
+/* 2. CURSOR & HOVER EFFECTS */
 const cur = document.getElementById('cur');
 const ring = document.getElementById('cur-r');
-let mx = 0, my = 0, rx = 0, ry = 0;
+let mx = 0, my = 0;
 
 if (cur && ring) {
   document.addEventListener('mousemove', e => {
@@ -206,7 +209,37 @@ document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-
   el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
 });
 
-/* NAV */
+/* 3. CUSTOM RIGHT-CLICK CONTEXT MENU (Matches your exact CSS) */
+const contextMenu = document.createElement('div');
+contextMenu.className = 'context-menu'; // Uses your style sheet rule perfectly
+contextMenu.style.display = 'none';    // Hidden by default
+contextMenu.innerHTML = `
+  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Need Help?</div>
+  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block;">Contact Us Today! &rarr;</a>
+`;
+document.body.appendChild(contextMenu);
+
+document.addEventListener('contextmenu', e => {
+  e.preventDefault(); // Blocks the default browser right-click menu
+  
+  contextMenu.style.left = `${e.clientX + 12}px`; // Positions it right next to your cursor
+  contextMenu.style.top = `${e.clientY + 12}px`;
+  contextMenu.style.display = 'block';
+  contextMenu.style.animation = 'contextMenuIn .2s ease out forwards';
+});
+
+function closeContextMenu() {
+  contextMenu.style.display = 'none';
+}
+
+// Close the popup menu whenever a normal left-click happens anywhere on the screen
+document.addEventListener('click', e => {
+  if (!contextMenu.contains(e.target)) {
+    closeContextMenu();
+  }
+});
+
+/* 4. NAV FUNCTIONS */
 const pageLinks = {
   home: 'index.html',
   about: 'about.html',
@@ -252,7 +285,7 @@ window.addEventListener('scroll', () => {
   reveal();
 });
 
-/* REVEAL */
+/* 5. REVEAL ON SCROLL */
 function reveal() {
   document.querySelectorAll('.rv:not(.vis)').forEach(el => {
     if (el.getBoundingClientRect().top < window.innerHeight * .92) el.classList.add('vis');
@@ -260,41 +293,7 @@ function reveal() {
 }
 setTimeout(reveal, 200);
 
-/* MARQUEE */
-const words = ['Brand Strategy', 'Visual Identity', 'Digital Design', 'Brand Messaging', 'Brand Guidelines', 'Brand Refresh', 'Creative Direction', 'Positioning'];
-const mi = document.getElementById('marq-inner');
-if (mi) {
-  [...words, ...words].forEach((t, i) => {
-    const d = document.createElement('div');
-    d.className = 'mq-item';
-    d.innerHTML = t + (i < words.length * 2 - 1 ? '<span>✦</span>' : '');
-    mi.appendChild(d);
-  });
-}
-
-/* SERVICES */
-function toggleSvc(el) {
-  document.querySelectorAll('.svc-item').forEach(i => i.classList.remove('open'));
-  el.classList.add('open');
-}
-
-/* TESTIMONIALS */
-let cs = 0;
-function goSlide(i) {
-  const slides = document.getElementById('ts-slides');
-  if (!slides) return;
-  cs = i;
-  slides.style.transform = `translateX(-${i * 100}%)`;
-  document.querySelectorAll('.t-dot').forEach((d, j) => d.classList.toggle('on', j === i));
-}
-function slide(d) {
-  goSlide((cs + d + 3) % 3);
-}
-if (document.getElementById('ts-slides')) {
-  setInterval(() => slide(1), 6000);
-}
-
-/* POPUPS */
+/* 6. POPUPS INTERACTION */
 function openPop(id) {
   const pop = document.getElementById(id);
   if (pop) pop.classList.add('on');
@@ -307,25 +306,14 @@ document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e
   if (e.target === o) o.classList.remove('on');
 }));
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on'));
+  if (e.key === 'Escape') {
+    closePop('service-pop');
+    closePop('work-pop');
+    closePop('team-pop');
+    closePop('consult-pop');
+    closeContextMenu();
+  }
 });
-
-function openWPop(title, svc, desc) {
-  document.getElementById('wp-title').textContent = title;
-  document.getElementById('wp-svc').textContent = svc;
-  document.getElementById('wp-desc').textContent = desc;
-  openPop('work-pop');
-}
-function openTPop(name, role, bio) {
-  const n = document.getElementById('tp-name');
-  const r = document.getElementById('tp-role');
-  const b = document.getElementById('tp-bio');
-  if (!n || !r || !b) return;
-  n.textContent = name;
-  r.textContent = role;
-  b.textContent = bio;
-  openPop('team-pop');
-}
 
 function openSvcPop(title, tag, desc, includes) {
   const titleEl = document.getElementById('sp-title');
@@ -345,7 +333,7 @@ function openSvcPop(title, tag, desc, includes) {
   openPop('service-pop');
 }
 
-/* TOAST */
+/* 7. TOAST NOTIFICATIONS */
 function toast(msg) {
   const t = document.getElementById('toast');
   const msgBox = document.getElementById('t-msg');
@@ -355,16 +343,7 @@ function toast(msg) {
   setTimeout(() => t.classList.remove('on'), 4500);
 }
 
-/* FORMS */
-function submitForm() {
-  if (!document.getElementById('f1').value.trim() || !document.getElementById('f3').value.trim() || !document.getElementById('f6').value.trim()) {
-    toast('Please fill in all required fields.');
-    return;
-  }
-  ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('f5').selectedIndex = 0;
-  toast('Message sent. You\'ll hear from us within one business day.');
-}
+/* 8. FORM SUBMISSIONS */
 function submitConsult() {
   if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
     toast('Please enter your name and email.');
