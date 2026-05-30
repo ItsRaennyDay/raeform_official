@@ -86,7 +86,7 @@
       </div>
 
       <!-- RIGHT 70 — mission + vision -->
-      <div style="padding:4rem 4rem 4rem 4rem;display:flex;flex-direction:column;gap:3rem;justify-content:center;border-left:1px solid rgba(37,99,200,.1)">
+      <div style="padding:4rem;display:flex;flex-direction:column;gap:3rem;justify-content:center;border-left:1px solid rgba(37,99,200,.1)">
         <div>
           <div style="font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.8rem">
             <span style="display:inline-block;width:18px;height:1px;background:var(--blue-glow)"></span>Mission
@@ -122,7 +122,7 @@
       </div>
       <div style="background:var(--navy3);padding:2.5rem 2rem;transition:background .3s" onmouseenter="this.style.background='var(--navy4)'" onmouseleave="this.style.background='var(--navy3)'">
         <div style="font-family:var(--font-d);font-size:2.5rem;font-weight:300;font-style:italic;color:rgba(59,130,246,.12);line-height:1;margin-bottom:1.5rem">04</div>
-        <div style="font-size:.88rem;font-weight:700;letter-spacing:.04em;color:var(--off-white);margin-bottom:.75rem">Remote but present</div>
+        <div style="font-size:.78rem;color:var(--muted);line-height:1.9">Remote but present</div>
         <div style="font-size:.78rem;color:var(--muted);line-height:1.9">Fully online doesn't mean distant. Every client gets the same level of attention and communication regardless of where they are.</div>
       </div>
     </div>
@@ -167,7 +167,7 @@
           </a>
         </div>
         <div style="margin-top:2rem">
-          <a class="btn-p btn-sm" href="contact.html">Work with Rae &rarr;</a>
+          <button class="btn-p btn-sm" onclick="openPop('consult-pop')">Work with Rae &rarr;</button>
         </div>
       </div>
     </div>
@@ -231,23 +231,35 @@
   </div>
 </div>
 
-<div class="overlay" id="consult-pop">
-  <div class="pop">
-    <button class="pop-x" onclick="closePop('consult-pop')">&times;</button>
-    <div class="pop-tag">Work With Us</div>
-    <h3 class="pop-h">Let's talk.</h3>
-    <p class="pop-p">One conversation is enough to get started. Tell Trishia what you're working on — she'll come back to you directly.</p>
-    <div class="f-grp"><label class="f-lbl">Your name</label><input class="f-inp" type="text" placeholder="Maria Santos" id="cq1"></div>
-    <div class="f-grp"><label class="f-lbl">Email</label><input class="f-inp" type="email" placeholder="maria@company.com" id="cq2"></div>
-    <div class="f-grp mb-0"><label class="f-lbl">Company</label><input class="f-inp" type="text" placeholder="Lumina Group" id="cq3"></div>
-    <button class="f-sub" onclick="submitConsult()">Request a Call &rarr;</button>
+<!-- OPTIMIZED SCHEDULER POPUP CONTAINER (UNIFORM DESIGN) -->
+<div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
+  <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
+    
+    <!-- Floating Close Button -->
+    <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
+    
+    <!-- Centered Header Section -->
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem;">
+      <div class="pop-tag" style="display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; float: none;">Availability</div>
+      <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
+    </div>
+    
+    <!-- Clean, unrestricted frame container -->
+    <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
+      <div class="calendly-inline-widget" 
+           data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
+           style="min-width:320px; height:100%; width:100%;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+
   </div>
 </div>
 
 <div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
 
 <script>
-/* CURSOR */
+/* CURSOR & CUSTOM RIGHT-CLICK CONTEXT MENU */
 const cur  = document.getElementById('cur');
 const ring = document.getElementById('cur-r');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -265,6 +277,33 @@ if (cur && ring) {
 document.querySelectorAll('button,a,.tc,.val-card,.soc-b,.ft-lnk,.overlay').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+// Build and inject custom Right-Click menu targeting the new calendar layout uniformly
+const contextMenu = document.createElement('div');
+contextMenu.className = 'context-menu'; 
+contextMenu.style.display = 'none';    
+contextMenu.innerHTML = `
+  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6e768a;">Need Help?</div>
+  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block; color: #eef2ff; cursor: pointer;">Book a 30-Min Call &rarr;</a>
+`;
+document.body.appendChild(contextMenu);
+
+document.addEventListener('contextmenu', e => {
+  e.preventDefault(); 
+  contextMenu.style.left = `${e.clientX + 12}px`; 
+  contextMenu.style.top = `${e.clientY + 12}px`;
+  contextMenu.style.display = 'block';
+});
+
+function closeContextMenu() {
+  contextMenu.style.display = 'none';
+}
+
+document.addEventListener('click', e => {
+  if (!contextMenu.contains(e.target)) {
+    closeContextMenu();
+  }
 });
 
 /* NAV */
@@ -321,7 +360,7 @@ setTimeout(reveal, 200);
 })();
 
 /* POPUPS */
-function openPop(id)  { document.getElementById(id)?.classList.add('on'); }
+function openPop(id)   { document.getElementById(id)?.classList.add('on'); }
 function closePop(id) { document.getElementById(id)?.classList.remove('on'); }
 document.querySelectorAll('.overlay').forEach(o =>
   o.addEventListener('click', e => { if (e.target === o) o.classList.remove('on'); })
@@ -330,20 +369,12 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on'));
 });
 
-/* TOAST + FORM */
+/* TOAST OVERRIDE */
 function toast(msg) {
   const t = document.getElementById('toast');
   document.getElementById('t-msg').textContent = msg;
   t.classList.add('on');
   setTimeout(() => t.classList.remove('on'), 4500);
-}
-function submitConsult() {
-  if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
-    toast('Please enter your name and email.'); return;
-  }
-  closePop('consult-pop');
-  ['cq1','cq2','cq3'].forEach(id => document.getElementById(id).value = '');
-  toast('Request received. We\'ll be in touch soon.');
 }
 </script>
 </body>
