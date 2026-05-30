@@ -138,7 +138,6 @@
         <div class="wc-arr">↗</div>
         <div class="wcard-over"><div class="wc-cat">Website Development</div><div class="wc-title">The Celestial Sound Weaver</div></div>
       </div>
-</div>
     </div>
   </section>
 
@@ -269,23 +268,32 @@
   </div>
 </div>
 
-<div class="overlay" id="consult-pop">
-  <div class="pop">
-    <button class="pop-x" onclick="closePop('consult-pop')">&times;</button>
-    <div class="pop-tag">Work With Us</div>
-    <h3 class="pop-h">A quick intro call</h3>
-    <p class="pop-p">30 minutes. No pressure, no pitch. We'll hear about your brand, share an honest perspective, and figure out if we're the right fit for each other.</p>
-    <div class="f-grp"><label class="f-lbl">Your name</label><input class="f-inp" type="text" placeholder="Maria Santos" id="cq1"></div>
-    <div class="f-grp"><label class="f-lbl">Email</label><input class="f-inp" type="email" placeholder="maria@company.com" id="cq2"></div>
-    <div class="f-grp mb-0"><label class="f-lbl">Company</label><input class="f-inp" type="text" placeholder="Lumina Group" id="cq3"></div>
-    <button class="f-sub" onclick="submitConsult()">Request a Call &rarr;</button>
+<!-- MATCHED TO CALENDLY INLINE POPUP OVERLAY FROM ABOUT US PAGE -->
+<div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
+  <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
+    
+    <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
+    
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem;">
+      <div class="pop-tag" style="display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; float: none;">Availability</div>
+      <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
+    </div>
+    
+    <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
+      <div class="calendly-inline-widget" 
+           data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
+           style="min-width:320px; height:100%; width:100%;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+
   </div>
 </div>
 
 <div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
 
 <script>
-/* CURSOR */
+/* CURSOR & MATCHED CUSTOM RIGHT-CLICK CONTEXT MENU */
 const cur = document.getElementById('cur');
 const ring = document.getElementById('cur-r');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -297,6 +305,11 @@ if (cur && ring) {
     cur.style.left = mx + 'px';
     cur.style.top = my + 'px';
   });
+  (function tick() {
+    rx += (mx - rx) * .35; ry += (my - ry) * .35;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
 }
 
 document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-btn,.t-dot,.soc-b,.ft-lnk,.overlay').forEach(el => {
@@ -304,7 +317,7 @@ document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-
   el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
 });
 
-/* INJECTED RIGHT-CLICK CONTEXT MENU */
+// Build and inject custom Right-Click menu targeting the new calendar layout uniformly
 const contextMenu = document.createElement('div');
 contextMenu.className = 'context-menu'; 
 contextMenu.style.display = 'none';    
@@ -316,22 +329,20 @@ document.body.appendChild(contextMenu);
 
 document.addEventListener('contextmenu', e => {
   e.preventDefault();
-  contextMenu.style.left = e.clientX + 'px';
-  contextMenu.style.top = e.clientY + 'px';
+  contextMenu.style.left = `${e.clientX + 12}px`;
+  contextMenu.style.top = `${e.clientY + 12}px`;
   contextMenu.style.display = 'block';
-  document.body.classList.add('hov');
 });
+
+function closeContextMenu() {
+  contextMenu.style.display = 'none';
+}
 
 document.addEventListener('click', e => {
   if (!contextMenu.contains(e.target)) {
     closeContextMenu();
   }
 });
-
-function closeContextMenu() {
-  contextMenu.style.display = 'none';
-  document.body.classList.remove('hov');
-}
 
 /* NAV */
 const pageLinks = {
@@ -422,14 +433,8 @@ if (document.getElementById('ts-slides')) {
 }
 
 /* POPUPS */
-function openPop(id) {
-  const pop = document.getElementById(id);
-  if (pop) pop.classList.add('on');
-}
-function closePop(id) {
-  const pop = document.getElementById(id);
-  if (pop) pop.classList.remove('on');
-}
+function openPop(id)   { document.getElementById(id)?.classList.add('on'); }
+function closePop(id) { document.getElementById(id)?.classList.remove('on'); }
 document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => {
   if (e.target === o) o.classList.remove('on');
 }));
@@ -476,34 +481,12 @@ function openSvcPop(title, tag, desc, includes) {
   openPop('service-pop');
 }
 
-/* TOAST */
+/* TOAST OVERRIDE */
 function toast(msg) {
   const t = document.getElementById('toast');
-  const msgBox = document.getElementById('t-msg');
-  if (!t || !msgBox) return;
-  msgBox.textContent = msg;
+  document.getElementById('t-msg').textContent = msg;
   t.classList.add('on');
   setTimeout(() => t.classList.remove('on'), 4500);
-}
-
-/* FORMS */
-function submitForm() {
-  if (!document.getElementById('f1').value.trim() || !document.getElementById('f3').value.trim() || !document.getElementById('f6').value.trim()) {
-    toast('Please fill in all required fields.');
-    return;
-  }
-  ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('f5').selectedIndex = 0;
-  toast('Message sent. You\'ll hear from us within one business day.');
-}
-function submitConsult() {
-  if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
-    toast('Please enter your name and email.');
-    return;
-  }
-  closePop('consult-pop');
-  ['cq1', 'cq2', 'cq3'].forEach(id => document.getElementById(id).value = '');
-  toast('Call request received. We\'ll reach out within one business day.');
 }
 </script>
 </body>
