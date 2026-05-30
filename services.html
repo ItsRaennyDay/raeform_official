@@ -173,23 +173,28 @@
   </div>
 </div>
 
-<!-- OPTIMIZED SCHEDULER POPUP CONTAINER -->
-<div class="overlay" id="consult-pop">
-  <div class="pop" style="max-width: 900px; width: 100%; height: 85vh; display: flex; flex-direction: column; padding: 2.5rem 2rem 1.5rem;">
-    <button class="pop-x" onclick="closePop('consult-pop')">&times;</button>
-    <div class="pop-tag">Availability</div>
-    <h3 class="pop-h" style="margin-bottom: 0.5rem;">Schedule an Intro Call</h3>
+<!-- OPTIMIZED SCHEDULER POPUP CONTAINER (FULL SCREEN BLEND) -->
+<div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
+  <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
     
-    <!-- Seamless frame container for Calendly -->
-    <div style="flex-grow: 1; width: 100%; overflow-y: auto; margin-top: 1rem; border-radius: 6px; background: #05091A;">
-      <!-- Calendly inline widget begin (With URL adjustments to match your theme) -->
+    <!-- Floating Close Button -->
+    <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
+    
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <div class="s-tag" style="margin: 0 auto 0.5rem;">Availability</div>
+      <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
+    </div>
+    
+    <!-- Clean, unrestricted frame container -->
+    <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
+      <!-- Calendly inline widget (Clean URL properties for dark integration) -->
       <div class="calendly-inline-widget" 
            data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
-           style="min-width:320px; height:100%;">
+           style="min-width:320px; height:100%; width:100%;">
       </div>
       <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-      <!-- Calendly inline widget end -->
     </div>
+
   </div>
 </div>
 
