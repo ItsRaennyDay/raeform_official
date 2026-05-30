@@ -50,7 +50,7 @@
     <div class="hero-marquee-bg">
       <div class="marquee-rows-container" id="marquee-rows"></div>
     </div>
-
+      <div class="marquee-overlay">
     <div class="hero-content-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 10; padding: 20px; min-height: 80vh; text-align: center;">
       <div style="max-width: 90vw; width: 100%;"> 
         <div class="h-tag" style="border: none !important; margin-bottom: 1rem; display: inline-block;">Raeform · Premium Business Support</div>
@@ -550,33 +550,22 @@ const portfolioImages = [
 
 const container = document.getElementById('marquee-rows');
 
-function initMarquee() {
-  if (!container) return;
-  
-  // Clear previous content
-  container.innerHTML = '';
-  
-  // Create 4 rows for that dense "Aceternity" look
+function populateMarquee() {
+  // Create 4 rows
   for (let i = 0; i < 4; i++) {
     const row = document.createElement('div');
     row.className = 'marquee-row';
-    
-    // Duplicate the array so it loops seamlessly
-    const duplicatedImages = [...portfolioImages, ...portfolioImages];
-    
-    duplicatedImages.forEach(src => {
+    // Double the images so it's long enough to loop
+    [...portfolioImages, ...portfolioImages].forEach(src => {
       const img = document.createElement('img');
       img.src = src;
-      img.alt = "Portfolio Item";
-      img.loading = "lazy";
       row.appendChild(img);
     });
-    
     container.appendChild(row);
   }
 }
 
-initMarquee();
+populateMarquee();
 </script>
 </body>
 </html>
