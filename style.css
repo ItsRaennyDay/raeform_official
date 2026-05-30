@@ -14,11 +14,10 @@ a,button,p,h1,h2,h3,h4,h5,h6,span,div,li,label,input,textarea{user-select:text}
 a{color:inherit;text-decoration:none}
 
 /* ── 3D MARQUEE BACKGROUND ── */
-.hero-marquee-bg {
+..hero-marquee-bg {
   position: absolute;
-  inset: 0;
+  inset: -20%;
   z-index: 1;
-  overflow: hidden;
   pointer-events: none;
 }
 
@@ -26,10 +25,10 @@ a{color:inherit;text-decoration:none}
   display: flex;
   flex-direction: row;
   gap: 16px;
-  transform: rotateX(55deg) rotateY(0deg) rotateZ(-45deg) scale(1.8);
+  transform: rotateX(55deg) rotateZ(-45deg) scale(1.8);
   transform-origin: center center;
-  width: 200%;
-  height: 200%;
+  width: 250%;
+  height: 250%;
   position: absolute;
   top: -50%;
   left: -50%;
