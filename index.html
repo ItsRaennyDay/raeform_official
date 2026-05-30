@@ -40,25 +40,47 @@
 
 <!-- ═══════════ HOME ═══════════ -->
 <div class="page active" id="page-home">
-
   <section class="hero">
-  <div class="hero-grid"></div>
-  <div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div>
-
-  <div class="hero-content-wrapper" style="display: grid; grid-template-columns: 1fr 40%; gap: 4rem; align-items: center; position: relative; z-index: 2; padding: 0 5vw;">
-    
-    <div> <div class="h-tag">Raeform · Premium Business Support</div>
-      <h1 class="h-h1">We run the back end <br><em>so you can</em><strong> run the brand</strong></h1>
-      <p class="h-sub">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
-      <div class="h-acts">
-        <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
-        <button class="btn-g" onclick="go('about')">Who We Are</button>
+    <div class="hero-content-wrapper" style="display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; position: relative; z-index: 2; padding: 0 5vw; min-height: 80vh;">
+      
+      <div>
+        <div class="h-tag">Raeform · Premium Business Support</div>
+        
+        <h1 class="h-h1" id="typewriter"></h1>
+        
+        <p class="h-sub">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
+        
+        <div class="h-acts">
+          <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
+          <button class="btn-g" onclick="go('about')">Who We Are</button>
+        </div>
       </div>
+      
     </div>
+  </section>
+</div>
 
-    <div> <img src="team.svg" alt="Raeform Team" style="width: 100%; height: auto;">
-    </div>
-  </div>
+<script>
+  const target = document.getElementById('typewriter');
+  const fullText = "We run the back end so you can run the brand";
+  target.innerText = ""; 
+  
+  let index = 0;
+  function type() {
+    if (index < fullText.length) {
+      target.innerText += fullText.charAt(index);
+      index++;
+      setTimeout(type, 60);
+    }
+  }
+  type();
+</script>
+
+<style>
+  .h-tag::before {
+    display: none !important;
+  }
+</style>
 
   <div class="scue" onclick="document.getElementById('marq').scrollIntoView({behavior:'smooth'})">
     <div class="scue-line"></div>Scroll
