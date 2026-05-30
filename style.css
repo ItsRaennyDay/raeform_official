@@ -307,21 +307,51 @@ footer{background:var(--navy);border-top:1px solid rgba(37,99,200,.07);padding:5
 /* RESPONSIVE MASTER OVERRIDES */
 @media(max-width:960px){
   .hero-content-wrapper {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    text-align: center;
-    padding: 7rem 5vw 2rem;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 8rem 6vw 4rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
+  
+  /* Force the text block to expand full width and drop desktop constraints */
+  .hero-content-wrapper > div:first-child {
+    grid-row: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important; 
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Make sure headlines and paragraph blocks aren't artificially capped tight */
+  .h-h1 {
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .h-sub {
+    max-width: 580px !important; /* Keeps paragraph readable but centered */
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
   .hero-content-wrapper > div:last-child {
     display: none !important;
   }
-  .hero-content-wrapper > div:first-child {
-    grid-row: 1;
-    width: 100%;
-  }
+  
   .h-acts {
-    justify-content: center;
+    justify-content: center !important;
+    width: 100% !important;
   }
+  
+  /* ... keep your other existing mobile styles below this (nav-links, hbg, etc) ... */
+}
   .nav-links{display:none}
   .hbg{display:flex}
   .svc-wrap{grid-template-columns:1fr;gap:3rem}
