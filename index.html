@@ -71,42 +71,25 @@
   </section>
 
 <script>
-  const target = document.getElementById('typewriter');
-  const phrases = [
-    "We run the back end so you can run the brand",
-    "Systems built for high-end growth",
-    "Your vision, flawlessly executed"
-  ];
-  
-  let phraseIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-
-  function type() {
-    const currentPhrase = phrases[phraseIndex];
-    
-    if (isDeleting) {
-      target.textContent = currentPhrase.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      target.textContent = currentPhrase.substring(0, charIndex + 1);
-      charIndex++;
-    }
-
-    let typeSpeed = isDeleting ? 30 : 60;
-
-    if (!isDeleting && charIndex === currentPhrase.length) {
-      typeSpeed = 2000; // Pause at end
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      isDeleting = false;
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-    }
-
-    setTimeout(type, typeSpeed);
-  }
-
-  type();
+const target = document.getElementById('typewriter');
+const phrases = [
+  'We run the back end so you can run the brand.',
+  'Systems built for serious growth.',
+  'Your vision, flawlessly executed.'
+];
+let phraseIndex = 0, charIndex = 0, isDeleting = false;
+function type() {
+  const phrase = phrases[phraseIndex];
+  target.textContent = isDeleting
+    ? phrase.substring(0, charIndex - 1)
+    : phrase.substring(0, charIndex + 1);
+  isDeleting ? charIndex-- : charIndex++;
+  let speed = isDeleting ? 28 : 55;
+  if (!isDeleting && charIndex === phrase.length) { speed = 2200; isDeleting = true; }
+  else if (isDeleting && charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; }
+  setTimeout(type, speed);
+}
+type();
 </script>
 
   <div class="scue" onclick="document.getElementById('marq').scrollIntoView({behavior:'smooth'})">
