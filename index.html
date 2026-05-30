@@ -39,37 +39,36 @@
 </div>
 
 <!-- ═══════════ HOME ═══════════ -->
+<!-- ═══════════ HOME ═══════════ -->
 <div class="page active" id="page-home">
-  <section class="hero" style="position: relative; overflow: hidden;">
-    
-    <div class="hero-grid"></div>
-    <div class="orb o1"></div>
-    <div class="orb o2"></div>
-    <div class="orb o3"></div>
-    
+
+  <section class="hero">
+
+    <!-- 3D MARQUEE BACKGROUND -->
     <div class="hero-marquee-bg">
       <div class="marquee-rows-container" id="marquee-rows"></div>
     </div>
 
+    <!-- DARK OVERLAY -->
     <div class="marquee-overlay"></div>
 
-    <div class="hero-content-wrapper" style="display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; z-index: 10; padding: 20px; min-height: 80vh; text-align: center;">
-      <div style="max-width: 90vw; width: 100%;"> 
-        <div class="h-tag" style="border: none !important; margin-bottom: 1rem; display: inline-block;">Raeform · Premium Business Support</div>
-        
-        <h1 class="h-h1" id="typewriter" style="min-height: 2.5em; margin: 0 auto 0rem auto;"></h1>
-        
-        <p class="h-sub" style="margin: 0 auto 2rem auto; max-width: 600px;">You’ve built the vision; we build the systems that bring it to life. Raeform is your partner in elevating brand identity and streamlining the operations that keep your mission moving forward.</p>
-        
-        <div class="h-acts" style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-          <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
-          <button class="btn-g" onclick="go('about')">Who We Are</button>
-        </div>
+    <!-- HERO CONTENT -->
+    <div class="hero-content-center">
+      <div class="h-tag">Raeform · Premium Business Support</div>
+      <h1 class="h-h1" id="typewriter"></h1>
+      <p class="h-sub">Whether you're buried in admin, building from scratch, or scaling faster than your systems can handle — Raeform steps in and gets it sorted.</p>
+      <div class="h-acts">
+        <button class="btn-p" onclick="go('contact')">Start a Project &rarr;</button>
+        <button class="btn-g" onclick="go('about')">Who We Are</button>
       </div>
     </div>
 
+    <!-- SCROLL CUE -->
+    <div class="scue" onclick="document.getElementById('marq').scrollIntoView({behavior:'smooth'})">
+      <div class="scue-line"></div>Scroll
+    </div>
+  </div>
   </section>
-</div>
 
 <script>
   const target = document.getElementById('typewriter');
