@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact RAEFORM — Creative & Branding Agency</title>
+<title>RAEFORM | Contact Us</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -152,23 +152,35 @@
   </div>
 </div>
 
-<div class="overlay" id="consult-pop">
-  <div class="pop">
-    <button class="pop-x" onclick="closePop('consult-pop')">&times;</button>
-    <div class="pop-tag">Work With Us</div>
-    <h3 class="pop-h">A quick intro call</h3>
-    <p class="pop-p">30 minutes. No pressure, no pitch. We'll hear about your brand, share an honest perspective, and figure out if we're the right fit for each other.</p>
-    <div class="f-grp"><label class="f-lbl">Your name</label><input class="f-inp" type="text" placeholder="Maria Santos" id="cq1"></div>
-    <div class="f-grp"><label class="f-lbl">Email</label><input class="f-inp" type="email" placeholder="maria@company.com" id="cq2"></div>
-    <div class="f-grp mb-0"><label class="f-lbl">Company</label><input class="f-inp" type="text" placeholder="Lumina Group" id="cq3"></div>
-    <button class="f-sub" onclick="submitConsult()">Request a Call &rarr;</button>
+<!-- UNIFORM DESIGN SCHEDULER POPUP CONTAINER -->
+<div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
+  <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
+    
+    <!-- Floating Close Button -->
+    <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
+    
+    <!-- Centered Header Section -->
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem;">
+      <div class="pop-tag" style="display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; float: none;">Availability</div>
+      <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
+    </div>
+    
+    <!-- Frame Container -->
+    <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
+      <div class="calendly-inline-widget" 
+           data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
+           style="min-width:320px; height:100%; width:100%;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+
   </div>
 </div>
 
 <div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
 
 <script>
-/* CURSOR */
+/* CURSOR & CUSTOM RIGHT-CLICK CONTEXT MENU */
 const cur = document.getElementById('cur');
 const ring = document.getElementById('cur-r');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -182,8 +194,8 @@ if (cur && ring) {
   });
 
   (function tick() {
-    rx += (mx - rx) * 1;
-    ry += (my - ry) * 1;
+    rx += (mx - rx) * .35;
+    ry += (my - ry) * .35;
     ring.style.left = rx + 'px';
     ring.style.top = ry + 'px';
     requestAnimationFrame(tick);
@@ -193,6 +205,33 @@ if (cur && ring) {
 document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-btn,.t-dot,.soc-b,.ft-lnk,.overlay').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+// Build and inject custom Right-Click menu dynamically
+const contextMenu = document.createElement('div');
+contextMenu.className = 'context-menu'; 
+contextMenu.style.display = 'none';    
+contextMenu.innerHTML = `
+  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6e768a;">Need Help?</div>
+  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block; color: #eef2ff; cursor: pointer;">Book a 30-Min Call &rarr;</a>
+`;
+document.body.appendChild(contextMenu);
+
+document.addEventListener('contextmenu', e => {
+  e.preventDefault(); 
+  contextMenu.style.left = `${e.clientX + 12}px`; 
+  contextMenu.style.top = `${e.clientY + 12}px`;
+  contextMenu.style.display = 'block';
+});
+
+function closeContextMenu() {
+  contextMenu.style.display = 'none';
+}
+
+document.addEventListener('click', e => {
+  if (!contextMenu.contains(e.target)) {
+    closeContextMenu();
+  }
 });
 
 /* NAV */
@@ -249,40 +288,6 @@ function reveal() {
 }
 setTimeout(reveal, 200);
 
-/* MARQUEE */
-const words = ['Brand Strategy', 'Visual Identity', 'Digital Design', 'Brand Messaging', 'Brand Guidelines', 'Brand Refresh', 'Creative Direction', 'Positioning'];
-const mi = document.getElementById('marq-inner');
-if (mi) {
-  [...words, ...words].forEach((t, i) => {
-    const d = document.createElement('div');
-    d.className = 'mq-item';
-    d.innerHTML = t + (i < words.length * 2 - 1 ? '<span>✦</span>' : '');
-    mi.appendChild(d);
-  });
-}
-
-/* SERVICES */
-function toggleSvc(el) {
-  document.querySelectorAll('.svc-item').forEach(i => i.classList.remove('open'));
-  el.classList.add('open');
-}
-
-/* TESTIMONIALS */
-let cs = 0;
-function goSlide(i) {
-  const slides = document.getElementById('ts-slides');
-  if (!slides) return;
-  cs = i;
-  slides.style.transform = `translateX(-${i * 100}%)`;
-  document.querySelectorAll('.t-dot').forEach((d, j) => d.classList.toggle('on', j === i));
-}
-function slide(d) {
-  goSlide((cs + d + 3) % 3);
-}
-if (document.getElementById('ts-slides')) {
-  setInterval(() => slide(1), 6000);
-}
-
 /* POPUPS */
 function openPop(id) {
   const pop = document.getElementById(id);
@@ -316,24 +321,6 @@ function openTPop(name, role, bio) {
   openPop('team-pop');
 }
 
-function openSvcPop(title, tag, desc, includes) {
-  const titleEl = document.getElementById('sp-title');
-  const tagEl = document.getElementById('sp-tag');
-  const descEl = document.getElementById('sp-desc');
-  const listEl = document.getElementById('sp-list');
-  if (!titleEl || !tagEl || !descEl || !listEl) return;
-  titleEl.textContent = title;
-  tagEl.textContent = tag;
-  descEl.textContent = desc;
-  listEl.innerHTML = '';
-  includes.forEach(item => {
-    const li = document.createElement('li');
-    li.textContent = item;
-    listEl.appendChild(li);
-  });
-  openPop('service-pop');
-}
-
 /* TOAST */
 function toast(msg) {
   const t = document.getElementById('toast');
@@ -345,9 +332,7 @@ function toast(msg) {
 }
 
 /* FORMS */
-/* FORMS */
 async function submitForm() {
-  // 1. Grab values from your input field IDs
   const f1 = document.getElementById('f1').value.trim();
   const f2 = document.getElementById('f2').value.trim();
   const f3 = document.getElementById('f3').value.trim();
@@ -355,20 +340,17 @@ async function submitForm() {
   const f5 = document.getElementById('f5').value;
   const f6 = document.getElementById('f6').value.trim();
 
-  // 2. Validation check
   if (!f1 || !f3 || !f6) {
     toast('Please fill in all required fields.');
     return;
   }
 
-  // 3. UI Loading State Indicator (Keeps original text like "Send Message →")
   const submitBtn = document.querySelector('.f-sub');
   const originalBtnText = submitBtn.innerHTML;
   submitBtn.disabled = true;
   submitBtn.innerHTML = "Submitting...";
 
   try {
-    // 4. Construct URL-encoded payload for Google Engine
     const payload = new URLSearchParams();
     payload.append("firstName", f1);
     payload.append("lastName", f2 || "");
@@ -377,7 +359,6 @@ async function submitForm() {
     payload.append("service", f5 || "Not specified");
     payload.append("details", f6);
 
-    // 5. Send network request using no-cors mode to safely bypass Google's redirect restrictions
     await fetch("https://script.google.com/macros/s/AKfycbwa2wihoLckSZdmITtgUE21A9fjIfdvL_KmDSIs-ZE4HXgh_yFOQ_lZSEznLZyTM3NMEw/exec", {
       method: "POST",
       mode: "no-cors", 
@@ -387,31 +368,18 @@ async function submitForm() {
       body: payload.toString(),
     });
 
-    // 6. Safe Reset: Since no-cors hides the payload result, we verify data completion here
     ['f1', 'f2', 'f3', 'f4', 'f6'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('f5').selectedIndex = 0;
 
-    // Trigger your visual completion notification alert
     toast("Message sent. You'll hear from us within one business day.");
 
   } catch (error) {
     console.error("Transmission breakdown trace:", error);
     window.alert("Something went wrong while submitting the form.");
   } finally {
-    // Reset structural button lock state flags
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalBtnText;
   }
-}
-  
-function submitConsult() {
-  if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
-    toast('Please enter your name and email.');
-    return;
-  }
-  closePop('consult-pop');
-  ['cq1', 'cq2', 'cq3'].forEach(id => document.getElementById(id).value = '');
-  toast('Call request received. We\'ll reach out within one business day.');
 }
 </script>
 </body>
