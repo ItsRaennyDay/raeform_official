@@ -46,21 +46,29 @@ a{color:inherit;text-decoration:none}
   flex: 1;
   min-width: 0;
   flex-shrink: 0;
-  animation: scrollDown 60s linear infinite;
+  animation: scrollDown 120s linear infinite;
 }
 
 .marquee-row:nth-child(even) {
   animation-direction: reverse;
-  animation-duration: 75s;
+  animation-duration: 150s;
 }
 
 .marquee-row img {
   width: 100%;
   height: auto;
   border-radius: 10px;
-  filter: brightness(0.65) saturate(0.7);
+  filter: brightness(0.3) saturate(0.5);
   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
   display: block;
+}
+
+.marquee-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(5,9,26,.7) 0%, rgba(5,9,26,.97) 100%);
 }
 
 @keyframes scrollDown {
