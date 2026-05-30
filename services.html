@@ -59,7 +59,7 @@
       <p class="s-p">Every service is built to integrate with how your business actually operates. Whether you need one solution or all six, we scope it specifically to what you require — and we deliver it without you having to manage the process.</p>
     </div>
 
-<div class="svc-detail-grid rv delay-1">
+    <div class="svc-detail-grid rv delay-1">
       <article class="svc-card" onclick="openSvcPop('Executive & Administrative Coordination','Operational backbone for leaders and moving organizations','Raeform provides professional executive coordination that allows leadership to stay focused on high-impact decisions. Every task is handled with absolute accuracy and discretion — from stakeholder management to corporate governance and executive calendar architecture.',['Executive calendar & inbox gatekeeping','Document preparation & records management','Stakeholder communications & liaison support','Meeting governance and minutes lifecycle','Administrative workflow integration'])">
         <span class="svc-card-num">01</span><h3>Executive & Admin Coordination</h3><p>Structured, high-level administrative partnership built for executive leadership.</p><span>Open details &rarr;</span>
       </article>
@@ -90,9 +90,10 @@
     <div class="s-tag rv" style="justify-content:center;margin-bottom:2rem">Get Started</div>
     <h2 class="rv" style="font-family:var(--font-d);font-size:clamp(2.5rem,6vw,5rem);font-weight:300;font-style:italic;color:var(--off-white);margin-bottom:1.5rem">Not sure where to begin?</h2>
     <p class="rv" style="font-size:.9rem;color:var(--muted);max-width:460px;margin:0 auto 3rem">You don't need to have it all figured out before reaching out. Tell us what's going on in your business and we'll identify exactly what needs to happen next.</p>
-    <button class="btn-p rv" onclick="go('contact')">Start the Conversation &rarr;</button>
+    <button class="btn-p rv" onclick="openPop('consult-pop')">Start the Conversation &rarr;</button>
   </section>
-<footer>
+  
+  <footer>
     <div class="ft-top">
       <div>
         <a class="ft-logo" href="index.html" aria-label="RAEFORM Home">
@@ -113,12 +114,12 @@
         <div class="ft-col-h">Contact</div>
         <div class="ft-links">
           <span class="ft-lnk no-click">raeformtoday@gmail.com</span>
-          <span class="ft-lnk no-click">Taguig City, Metro Manila</span>
+          <span class="ft-lnk no-click">Binangonan, Rizal</span>
         </div>
       </div>
     </div>
     <div class="ft-bot">
-      <div class="ft-copy">&copy; 2025 RAEFORM. All rights reserved.</div>
+      <div class="ft-copy">&copy; 2026 RAEFORM. All rights reserved.</div>
       <div class="ft-soc">
         <a class="soc-b" href="https://www.linkedin.com/company/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on LinkedIn">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -136,6 +137,7 @@
     </div>
   </footer>
 </main>
+
 <!-- POPUPS -->
 <div class="overlay" id="service-pop">
   <div class="pop svc-pop">
@@ -145,7 +147,7 @@
     <div class="pop-svc" id="sp-tag"></div>
     <p class="pop-p" id="sp-desc"></p>
     <ul class="pop-list" id="sp-list"></ul>
-    <button class="btn-p btn-sm" onclick="closePop('service-pop');go('contact')" type="button">Ask about this service &rarr;</button>
+    <button class="btn-p btn-sm" onclick="closePop('service-pop');openPop('consult-pop')" type="button">Book this service now &rarr;</button>
   </div>
 </div>
 
@@ -156,7 +158,7 @@
     <h3 class="pop-h" id="wp-title"></h3>
     <div class="pop-svc" id="wp-svc"></div>
     <p class="pop-p" id="wp-desc"></p>
-    <button class="btn-p btn-sm" onclick="closePop('work-pop');go('contact')">Start a similar project &rarr;</button>
+    <button class="btn-p btn-sm" onclick="closePop('work-pop');openPop('consult-pop')">Start a similar project &rarr;</button>
   </div>
 </div>
 
@@ -167,20 +169,27 @@
     <h3 class="pop-h" id="tp-name"></h3>
     <div class="pop-svc" id="tp-role"></div>
     <p class="pop-p" id="tp-bio"></p>
-    <button class="btn-g btn-sm" onclick="closePop('team-pop');go('contact')">Work with us &rarr;</button>
+    <button class="btn-g btn-sm" onclick="closePop('team-pop');openPop('consult-pop')">Work with us &rarr;</button>
   </div>
 </div>
 
+<!-- OPTIMIZED SCHEDULER POPUP CONTAINER -->
 <div class="overlay" id="consult-pop">
-  <div class="pop">
+  <div class="pop" style="max-width: 900px; width: 100%; height: 85vh; display: flex; flex-direction: column; padding: 2.5rem 2rem 1.5rem;">
     <button class="pop-x" onclick="closePop('consult-pop')">&times;</button>
-    <div class="pop-tag">Work With Us</div>
-    <h3 class="pop-h">A quick intro call</h3>
-    <p class="pop-p">30 minutes. No pressure, no pitch. We'll hear about your brand, share an honest perspective, and figure out if we're the right fit for each other.</p>
-    <div class="f-grp"><label class="f-lbl">Your name</label><input class="f-inp" type="text" placeholder="Maria Santos" id="cq1"></div>
-    <div class="f-grp"><label class="f-lbl">Email</label><input class="f-inp" type="email" placeholder="maria@company.com" id="cq2"></div>
-    <div class="f-grp mb-0"><label class="f-lbl">Company</label><input class="f-inp" type="text" placeholder="Lumina Group" id="cq3"></div>
-    <button class="f-sub" onclick="submitConsult()">Request a Call &rarr;</button>
+    <div class="pop-tag">Availability</div>
+    <h3 class="pop-h" style="margin-bottom: 0.5rem;">Schedule an Intro Call</h3>
+    
+    <!-- Seamless frame container for Calendly -->
+    <div style="flex-grow: 1; width: 100%; overflow-y: auto; margin-top: 1rem; border-radius: 6px; background: #05091A;">
+      <!-- Calendly inline widget begin (With URL adjustments to match your theme) -->
+      <div class="calendly-inline-widget" 
+           data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
+           style="min-width:320px; height:100%;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+      <!-- Calendly inline widget end -->
+    </div>
   </div>
 </div>
 
@@ -209,20 +218,20 @@ document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-
   el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
 });
 
-/* 3. CUSTOM RIGHT-CLICK CONTEXT MENU (Matches your exact CSS) */
+/* 3. CUSTOM RIGHT-CLICK CONTEXT MENU (Locks to custom scheduler) */
 const contextMenu = document.createElement('div');
-contextMenu.className = 'context-menu'; // Uses your style sheet rule perfectly
-contextMenu.style.display = 'none';    // Hidden by default
+contextMenu.className = 'context-menu'; 
+contextMenu.style.display = 'none';    
 contextMenu.innerHTML = `
-  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;">Need Help?</div>
-  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block;">Contact Us Today! &rarr;</a>
+  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6e768a;">Need Help?</div>
+  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block; color: #eef2ff; cursor: pointer;">Book a 30-Min Call &rarr;</a>
 `;
 document.body.appendChild(contextMenu);
 
 document.addEventListener('contextmenu', e => {
-  e.preventDefault(); // Blocks the default browser right-click menu
+  e.preventDefault(); 
   
-  contextMenu.style.left = `${e.clientX + 12}px`; // Positions it right next to your cursor
+  contextMenu.style.left = `${e.clientX + 12}px`; 
   contextMenu.style.top = `${e.clientY + 12}px`;
   contextMenu.style.display = 'block';
   contextMenu.style.animation = 'contextMenuIn .2s ease out forwards';
@@ -232,7 +241,6 @@ function closeContextMenu() {
   contextMenu.style.display = 'none';
 }
 
-// Close the popup menu whenever a normal left-click happens anywhere on the screen
 document.addEventListener('click', e => {
   if (!contextMenu.contains(e.target)) {
     closeContextMenu();
@@ -341,17 +349,6 @@ function toast(msg) {
   msgBox.textContent = msg;
   t.classList.add('on');
   setTimeout(() => t.classList.remove('on'), 4500);
-}
-
-/* 8. FORM SUBMISSIONS */
-function submitConsult() {
-  if (!document.getElementById('cq1').value.trim() || !document.getElementById('cq2').value.trim()) {
-    toast('Please enter your name and email.');
-    return;
-  }
-  closePop('consult-pop');
-  ['cq1', 'cq2', 'cq3'].forEach(id => document.getElementById(id).value = '');
-  toast('Call request received. We\'ll reach out within one business day.');
 }
 </script>
 </body>
