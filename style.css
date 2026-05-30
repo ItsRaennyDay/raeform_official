@@ -13,68 +13,62 @@ body{font-family:var(--font-u);background:var(--navy);color:var(--off-white);lin
 a,button,p,h1,h2,h3,h4,h5,h6,span,div,li,label,input,textarea{user-select:text}
 a{color:inherit;text-decoration:none}
 
-/* 1. The Container */
+/* ── 3D MARQUEE BACKGROUND ── */
 .hero-marquee-bg {
   position: absolute;
   inset: 0;
   z-index: 1;
-  perspective: 600px;
+  overflow: hidden;
   pointer-events: none;
-  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
-/* 2. The Inner Wrapper */
 .marquee-rows-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  transform: rotateX(55deg) rotateY(0deg) rotateZ(-45deg) scale(1.8);
+  transform-origin: center center;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  top: -50%;
+  left: -50%;
+}
+
+.marquee-row {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transform: rotateX(45deg) rotateZ(-25deg) scale(1.8);
-  transform-origin: center center;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
+  width: calc(25% - 12px);
+  flex-shrink: 0;
+  animation: scrollDown 30s linear infinite;
 }
 
-/* 3. The Rows - ADDED THE ALTERNATING EFFECT */
-.marquee-row {
-  display: flex;
-  gap: 20px;
-  width: max-content;
-  animation: scroll 40s linear infinite;
-}
-
-/* ADD THIS: Reverses every second row for the "woven" look */
 .marquee-row:nth-child(even) {
   animation-direction: reverse;
 }
 
 .marquee-row img {
-  height: 200px;
-  width: auto;
-  border-radius: 12px;
-  filter: grayscale(1) brightness(0.7);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  transition: filter 0.3s ease; /* Smooth hover effect */
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  filter: brightness(0.65) saturate(0.7);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  display: block;
 }
 
-.marquee-row img:hover {
-  filter: grayscale(0) brightness(1);
+@keyframes scrollDown {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
 }
 
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* 4. The Overlay (Ensure this sits ON TOP of .hero-marquee-bg in your HTML) */
 .marquee-overlay {
   position: absolute;
   inset: 0;
-  background: 
-    radial-gradient(ellipse 60% 60% at 50% 50%, rgba(5,9,26,.55) 0%, rgba(5,9,26,.88) 100%);
   z-index: 2;
   pointer-events: none;
+  background:
+    radial-gradient(ellipse 55% 55% at 50% 50%, rgba(5,9,26,.5) 0%, rgba(5,9,26,.92) 100%);
 }
 /* CURSOR */
 #cur,#cur-r{position:fixed;pointer-events:none;z-index:9999;border-radius:50%;transform:translate(-50%,-50%)}
