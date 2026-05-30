@@ -308,24 +308,16 @@ footer{background:var(--navy);border-top:1px solid rgba(37,99,200,.07);padding:5
 @media(max-width:960px){
   .hero-content-wrapper {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
     text-align: center;
-    padding: 6rem 5vw 2rem;
+    padding: 7rem 5vw 2rem;
   }
   .hero-content-wrapper > div:last-child {
-    grid-row: 1;
-    display: flex;
-    justify-content: center;
-  }
-  .hero-content-wrapper > div:last-child img,
-  .hero-content-wrapper > div:last-child svg {
-    max-width: 280px;
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
+    display: none !important;
   }
   .hero-content-wrapper > div:first-child {
-    grid-row: 2;
+    grid-row: 1;
+    width: 100%;
   }
   .h-acts {
     justify-content: center;
