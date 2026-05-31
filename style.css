@@ -509,3 +509,20 @@ body, main, section, .hero, .sec, .svc-wrap, .work-sec, .phil, .testi, .cta-stri
 }
 /* ALLOW THE CURSOR ONLY ON REAL TEXT AND INPUTS */
 input, textarea { user-select: text; cursor: text; }
+
+@media(max-width:768px){
+  .scue { display: none; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
