@@ -503,5 +503,9 @@ body, main, section, .hero, .sec, .svc-wrap, .work-sec, .phil, .testi, .cta-stri
   user-select: none !important;
 }
 
+@media(max-width:768px){
+  .hero-marquee-bg { display: none; }
+  .marquee-overlay { display: none; }
+}
 /* ALLOW THE CURSOR ONLY ON REAL TEXT AND INPUTS */
 input, textarea { user-select: text; cursor: text; }
