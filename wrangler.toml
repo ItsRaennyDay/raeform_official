@@ -1,0 +1,5 @@
+name = "raeform-official"
+pages_build_output_dir = "."
+
+[env.production]
+assets = { directory = "./", binding = "ASSETS", ignore = [".git/**", ".gitignore", ".github/**"] }
