@@ -618,6 +618,7 @@
 .art-toc-label::before { content: ''; display: inline-block; width: 12px; height: 1px; background: var(--blue-glow); }
 .art-toc-list { display: block; }
 .art-toc-item {
+  position: relative;
   font-size: .72rem;
   color: var(--muted2);
   text-decoration: none;
@@ -914,7 +915,7 @@
 
   <aside class="art-toc" id="art-toc" aria-label="Table of contents">
     <div class="art-toc-label">Contents</div>
-    <div class="art-toc-list" id="toc-list"></div>
+    <nav class="art-toc-list" id="toc-list"></nav>
   </aside>
 </div>
 
