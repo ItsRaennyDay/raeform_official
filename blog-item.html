@@ -772,9 +772,16 @@
 ═══════════════════════════════════ */
 @media(max-width: 1100px) {
   .art-three-col {
-    grid-template-columns: 1fr 72px;
+    grid-template-columns: 200px 1fr 60px;  /* Keep TOC but smaller */
   }
-  .art-toc { display: none; }
+}
+@media(max-width: 860px) {
+  .art-three-col {
+    grid-template-columns: 1fr;  /* Only hide on mobile phones */
+    padding: 4rem 5vw 6rem;
+  }
+  .art-toc { display: none; }  /* Hide only on phones */
+  .art-share-col { display: none; }
 }
 @media(max-width: 860px) {
   .art-three-col {
