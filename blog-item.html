@@ -917,6 +917,7 @@
           <div class="art-author-card-name" id="art-ac-name">Trishia Raymundo</div>
           <div class="art-author-card-role" id="art-ac-role">Founder, RAEFORM</div>
           <p class="art-author-card-bio" id="art-ac-bio"></p>
+         <div id="art-ac-social"></div>
         </div>
       </div>
     </div></article>
@@ -1195,7 +1196,7 @@ async function init() {
     "coverRef": coverImage,
     "coverUrl": coverImage.asset->url,
     "categories": categories[]->{ title, slug },
-    "author": author->{ name, initials, role, bio },
+    "author": author->{ name, initials, role, bio, linkedin, instagram },
     body,
     seoTitle, seoDescription,
     "prevPost": *[_type=="post" && publishedAt < ^.publishedAt && !(_id in path("drafts.**"))] | order(publishedAt desc)[0]{ title, "slug": slug.current },
@@ -1308,14 +1309,37 @@ function populatePage(post) {
   }
 
   /* ── AUTHOR CARD ── */
-  const acAvatarEl = document.getElementById('art-ac-avatar');
-  const acNameEl   = document.getElementById('art-ac-name');
-  const acRoleEl   = document.getElementById('art-ac-role');
-  const acBioEl    = document.getElementById('art-ac-bio');
-  if (acAvatarEl) acAvatarEl.textContent = post.author?.initials || 'TR';
-  if (acNameEl)   acNameEl.textContent   = post.author?.name     || 'Trishia Raymundo';
-  if (acRoleEl)   acRoleEl.textContent   = post.author?.role     || 'Founder, RAEFORM';
-  if (acBioEl)    acBioEl.textContent    = post.author?.bio      || '';
+const acAvatarEl = document.getElementById('art-ac-avatar');
+const acNameEl   = document.getElementById('art-ac-name');
+const acRoleEl   = document.getElementById('art-ac-role');
+const acBioEl    = document.getElementById('art-ac-bio');
+if (acAvatarEl) acAvatarEl.textContent = post.author?.initials || 'TR';
+if (acNameEl)   acNameEl.textContent   = post.author?.name     || 'Trishia Raymundo';
+if (acRoleEl)   acRoleEl.textContent   = post.author?.role     || 'Founder, RAEFORM';
+if (acBioEl)    acBioEl.textContent    = post.author?.bio      || '';
+
+const acSocialEl = document.getElementById('art-ac-social');
+if (acSocialEl && post.author) {
+  const linkedin = post.author.linkedin;
+  const instagram = post.author.instagram;
+  
+  let socialHtml = '<div style="display: flex; gap: 12px; margin-top: 16px;">';
+  
+  if (linkedin) {
+    socialHtml += `<a href="${linkedin}" target="_blank" class="art-share-btn" style="width: 36px; height: 36px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+    </a>`;
+  }
+  
+  if (instagram) {
+    socialHtml += `<a href="${instagram}" target="_blank" class="art-share-btn" style="width: 36px; height: 36px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="18" height="18" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2"/></svg>
+    </a>`;
+  }
+  
+  socialHtml += '</div>';
+  acSocialEl.innerHTML = socialHtml;
+}
 
   /* ── RELATED POSTS ── */
   const relGrid = document.getElementById('art-related-grid');
