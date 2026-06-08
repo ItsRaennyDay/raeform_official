@@ -1006,20 +1006,20 @@
 <div class="art-prev-next">
   <a class="art-prev-next-item" id="art-prev" href="#">
     <span class="art-prev-next-dir">← Previous</span>
-    <span class="art-prev-next-title">What a brand refresh actually involves — and when you need one</span>
+    <span class="art-prev-next-title">Loading...</span>
   </a>
   <a class="art-prev-next-item" id="art-next" href="#" style="text-align:right;align-items:flex-end">
     <span class="art-prev-next-dir">Next →</span>
-    <span class="art-prev-next-title">Build the system before you need to scale it</span>
+    <span class="art-prev-next-title">Loading...</span>
   </a>
 </div>
 
-<div style="padding:6rem 5vw;text-align:center;background:var(--navy);position:relative;overflow:hidden">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 70% at 50% 50%,rgba(30,77,158,.1) 0%,transparent 70%);pointer-events:none"></div>
-  <div class="s-tag rv" style="justify-content:center;margin-bottom:1.5rem">Work with Raeform</div>
-  <h2 class="rv" style="font-family:var(--font-d);font-size:clamp(2rem,5vw,4.2rem);font-weight:300;font-style:italic;color:var(--off-white);margin-bottom:1.2rem;transition-delay:.05s">Ready to build a brand<br><em>that actually holds?</em></h2>
-  <p class="rv" style="font-size:.88rem;color:var(--muted);max-width:400px;margin:0 auto 2.5rem;line-height:1.95;transition-delay:.1s">One conversation is enough to get clear on what your brand needs next. No pressure, no package push.</p>
-  <button class="btn-p rv" style="transition-delay:.15s" onclick="openPop('consult-pop')">Book an intro call &rarr;</button>
+<div style="padding:6rem 5vw;text-align:center;background:var(--navy2);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 65% 75% at 50% 50%,rgba(30,77,158,.1) 0%,transparent 70%);pointer-events:none"></div>
+  <div class="s-tag rv" style="justify-content:center;margin-bottom:1.5rem">Write for us</div>
+  <h2 class="rv" style="font-family:var(--font-d);font-size:clamp(2.2rem,5vw,4.5rem);font-weight:300;font-style:italic;color:var(--off-white);line-height:1.1;margin-bottom:1.2rem">Got a story or insight to share?<br><em>Let's get it on the journal.</em></h2>
+  <p class="rv" style="font-size:.88rem;color:var(--muted);max-width:1200px;margin:0 auto 2.5rem;line-height:1.9">We love featuring fresh perspectives, real business stories, and lessons learned from other creators.<br>If you've got a piece you want to publish, send it over and let's collaborate.</p>
+  <button class="btn-p rv" onclick="openPop('submission-pop')">Submit your entry &rarr;</button>
 </div>
 
 <footer>
@@ -1407,29 +1407,39 @@ if (acSocialEl && post.author) {
     }
   }
 
-  /* ── PREV / NEXT ── */
-  const prevEl = document.getElementById('art-prev');
-  const nextEl = document.getElementById('art-next');
-  if (prevEl) {
-    if (post.prevPost) {
-      prevEl.href = `blog-item.html?slug=${encodeURIComponent(post.prevPost.slug)}`;
-      const t = prevEl.querySelector('.art-prev-next-title');
-      if (t) t.textContent = post.prevPost.title;
-    } else {
-      prevEl.style.opacity = '.35';
-      prevEl.style.pointerEvents = 'none';
-    }
+/* ── PREV / NEXT ── */
+const prevEl = document.getElementById('art-prev');
+const nextEl = document.getElementById('art-next');
+
+if (prevEl) {
+  if (post.prevPost && post.prevPost.slug) {
+    const prevLink = prevEl;
+    prevLink.href = `blog-item.html?slug=${post.prevPost.slug}`;
+    const prevTitle = prevEl.querySelector('.art-prev-next-title');
+    if (prevTitle) prevTitle.textContent = post.prevPost.title;
+    prevEl.style.opacity = '1';
+    prevEl.style.pointerEvents = 'auto';
+  } else {
+    prevEl.style.opacity = '0.4';
+    prevEl.style.pointerEvents = 'none';
+    prevEl.removeAttribute('href');
   }
-  if (nextEl) {
-    if (post.nextPost) {
-      nextEl.href = `blog-item.html?slug=${encodeURIComponent(post.nextPost.slug)}`;
-      const t = nextEl.querySelector('.art-prev-next-title');
-      if (t) t.textContent = post.nextPost.title;
-    } else {
-      nextEl.style.opacity = '.35';
-      nextEl.style.pointerEvents = 'none';
-    }
+}
+
+if (nextEl) {
+  if (post.nextPost && post.nextPost.slug) {
+    const nextLink = nextEl;
+    nextLink.href = `blog-item.html?slug=${post.nextPost.slug}`;
+    const nextTitle = nextEl.querySelector('.art-prev-next-title');
+    if (nextTitle) nextTitle.textContent = post.nextPost.title;
+    nextEl.style.opacity = '1';
+    nextEl.style.pointerEvents = 'auto';
+  } else {
+    nextEl.style.opacity = '0.4';
+    nextEl.style.pointerEvents = 'none';
+    nextEl.removeAttribute('href');
   }
+}
 
   /* ── SHARE URLS ── */
   const url   = encodeURIComponent(window.location.href);
