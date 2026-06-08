@@ -591,8 +591,6 @@
 }
 
 .art-toc {
-  position: sticky;
-  top: 160px;  /* Below the progress bar (110px + 50px margin) */
   align-self: start;
   padding-right: 2rem;
   border-right: 1px solid rgba(37,99,200,.09);
@@ -600,6 +598,12 @@
   min-width: 0;
   grid-column: 1;
   height: auto;
+}
+.art-toc-wrapper {
+  position: sticky;
+  top: 110px;
+  align-self: start;
+  grid-column: 1;
 }
 .art-toc-label {
   font-size: .54rem;
@@ -805,18 +809,6 @@
   .art-stats { grid-template-columns: 1fr; }
   .art-hero-content { padding: 9rem 5vw 4rem; }
 }
-.art-toc,
-.art-toc-progress,
-.art-toc-item,
-.art-toc-item.active,
-#art-toc,
-#toc-list,
-[class*="art-toc"] {
-  position: static !important;
-  top: auto !important;
-  inset: auto !important;
-  transform: none !important;
-}
 </style>
 </head>
 <body data-page="blog">
@@ -913,17 +905,19 @@
 <div class="art-three-col">
 
 
-<div class="art-toc-progress" style="position: sticky; top: 110px; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(37,99,200,.09);">
-  <div class="art-toc-progress-label">Reading Progress</div>
-  <div class="art-toc-progress-bar">
-    <div class="art-toc-progress-fill" id="toc-fill"></div>
+<div class="art-toc-wrapper">
+  <div class="art-toc-progress" style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(37,99,200,.09);">
+    <div class="art-toc-progress-label">Reading Progress</div>
+    <div class="art-toc-progress-bar">
+      <div class="art-toc-progress-fill" id="toc-fill"></div>
+    </div>
   </div>
-</div>
 
-<aside class="art-toc" id="art-toc" aria-label="Table of contents">
-  <div class="art-toc-label">Contents</div>
-  <nav class="art-toc-list" id="toc-list"></nav>
-</aside>
+  <aside class="art-toc" id="art-toc" aria-label="Table of contents">
+    <div class="art-toc-label">Contents</div>
+    <nav class="art-toc-list" id="toc-list"></nav>
+  </aside>
+</div>
 
   <article class="art-content" id="art-body-wrap">
     <p class="art-lead" id="art-lead"></p>
