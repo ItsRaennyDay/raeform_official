@@ -1199,12 +1199,12 @@ async function init() {
     return;
   }
 
-  const PROJECTION = `{
+const PROJECTION = `{
     _id, title, titleEmphasis,
     "slug": slug.current,
     excerpt, lead, publishedAt, readingTime, issue,
-    "coverRef": coverImage,
-    "coverUrl": coverImage.asset->url,
+    "coverRef": mainImage,
+    "coverUrl": mainImage.asset->url,
     "categories": categories[]->{ title, slug },
     "author": author->{ name, initials, role, bio, linkedin, instagram, photo },
     body,
