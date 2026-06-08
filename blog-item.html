@@ -778,17 +778,21 @@
 }
 @media(max-width: 860px) {
   .art-three-col {
-    grid-template-columns: 1fr;  /* Only hide on mobile phones */
-    padding: 4rem 5vw 6rem;
-  }
-  .art-toc { display: none; }  /* Hide only on phones */
-  .art-share-col { display: none; }
-}
-@media(max-width: 860px) {
-  .art-three-col {
     grid-template-columns: 1fr;
     padding: 4rem 5vw 6rem;
   }
+  .art-toc {
+    display: block;
+    position: sticky;
+    top: 110px;
+    max-width: 100%;
+    margin-bottom: 2rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(37,99,200,.09);
+    padding-bottom: 1.5rem;
+  }
+  .art-share-col { display: none; }
+}
   .art-share-col { display: none; }
   .art-related-grid { grid-template-columns: repeat(2, 1fr); }
   .art-prev-next { grid-template-columns: 1fr; }
