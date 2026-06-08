@@ -586,13 +586,13 @@
   max-width: 1340px;
   margin: 0 auto;
   padding: 6rem 5vw 8rem;
-  align-items: start; /* Crucial: stops columns from stretching infinite heights */
+  align-items: start;
   position: relative;
 }
 
 .art-toc {
   position: sticky;
-  top: 110px; /* Seats beautifully below your scrolling navigation bar layer */
+  top: 160px;  /* Below the progress bar (110px + 50px margin) */
   align-self: start;
   padding-right: 2rem;
   border-right: 1px solid rgba(37,99,200,.09);
@@ -895,17 +895,18 @@
 
 <div class="art-three-col">
 
-  <aside class="art-toc" id="art-toc" aria-label="Table of contents">
-    <div class="art-toc-label">Contents</div>
-    <nav class="art-toc-list" id="toc-list">
-      </nav>
-    <div class="art-toc-progress">
-      <div class="art-toc-progress-label">Progress</div>
-      <div class="art-toc-progress-bar">
-        <div class="art-toc-progress-fill" id="toc-fill"></div>
-      </div>
-    </div>
-  </aside>
+
+<div class="art-toc-progress" style="position: sticky; top: 110px; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(37,99,200,.09);">
+  <div class="art-toc-progress-label">Reading Progress</div>
+  <div class="art-toc-progress-bar">
+    <div class="art-toc-progress-fill" id="toc-fill"></div>
+  </div>
+</div>
+
+<aside class="art-toc" id="art-toc" aria-label="Table of contents">
+  <div class="art-toc-label">Contents</div>
+  <nav class="art-toc-list" id="toc-list"></nav>
+</aside>
 
   <article class="art-content" id="art-body-wrap">
     <p class="art-lead" id="art-lead"></p>
