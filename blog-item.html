@@ -631,6 +631,7 @@
   padding-top: 1.5rem;
   border-top: 1px solid rgba(37,99,200,.09);
 }
+
 .art-toc-progress-label {
   font-size: .52rem;
   letter-spacing: .18em;
@@ -799,6 +800,18 @@
   .art-author-card { flex-direction: column; }
   .art-stats { grid-template-columns: 1fr; }
   .art-hero-content { padding: 9rem 5vw 4rem; }
+}
+.art-toc,
+.art-toc-progress,
+.art-toc-item,
+.art-toc-item.active,
+#art-toc,
+#toc-list,
+[class*="art-toc"] {
+  position: static !important;
+  top: auto !important;
+  inset: auto !important;
+  transform: none !important;
 }
 </style>
 </head>
