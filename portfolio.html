@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAEFORM | Work</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ── PORTFOLIO PAGE ── */
+.pf-cat-hero {
+  min-height: 55vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 9rem 5vw 6rem;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(37,99,200,.08);
+}
+.pf-cat-orb {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  right: -200px; top: -200px;
+  background: radial-gradient(circle, rgba(30,77,158,.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+.pf-cat-grid-line {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(37,99,200,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37,99,200,.04) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 80% at 70% 40%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+.pf-cat-h1 {
+  font-family: var(--font-d);
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  font-weight: 300;
+  line-height: 1.04;
+  max-width: 780px;
+  position: relative;
+  z-index: 2;
+}
+.pf-cat-h1 em { font-style: italic; color: var(--blue-pale); }
+
+/* FILTER BAR */
+.pf-filter-bar {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2.5rem 5vw;
+  border-bottom: 1px solid rgba(37,99,200,.08);
+  background: var(--navy2);
+  position: sticky;
+  top: 70px;
+  z-index: 100;
+}
+.pf-filter-btn {
+  font-size: .62rem;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: none;
+  border: 1px solid rgba(37,99,200,.15);
+  padding: 7px 18px;
+  cursor: pointer;
+  transition: all .25s;
+  font-family: var(--font-u);
+}
+.pf-filter-btn:hover {
+  border-color: var(--blue-glow);
+  color: var(--off-white);
+}
+.pf-filter-btn.active {
+  background: var(--blue-bright);
+  border-color: var(--blue-bright);
+  color: var(--off-white);
+}
+.pf-filter-count {
+  margin-left: auto;
+  font-size: .65rem;
+  color: var(--muted2);
+  letter-spacing: .12em;
+}
+
+/* GRID */
+.pf-cat-sec {
+  padding: 6rem 5vw;
+}
+.pf-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.pf-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--navy3);
+  aspect-ratio: 4/3;
+  display: block;
+  text-decoration: none;
+}
+.pf-card-cover {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform .6s var(--ease), filter .4s;
+  filter: brightness(.55) saturate(.7);
+}
+.pf-card:hover .pf-card-cover {
+  transform: scale(1.05);
+  filter: brightness(.4) saturate(.5);
+}
+.pf-card-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pf-card-letter {
+  font-family: var(--font-d);
+  font-size: 5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(147,197,253,.12);
+  transition: color .4s;
+}
+.pf-card:hover .pf-card-letter {
+  color: rgba(147,197,253,.22);
+}
+.pf-card-over {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+  background: linear-gradient(to top, rgba(5,9,26,.95) 0%, rgba(5,9,26,.3) 60%, transparent 100%);
+  transition: background .4s;
+}
+.pf-card:hover .pf-card-over {
+  background: linear-gradient(to top, rgba(5,9,26,.98) 0%, rgba(5,9,26,.5) 70%, transparent 100%);
+}
+.pf-card-cat {
+  font-size: .58rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--blue-ice);
+  font-weight: 600;
+  margin-bottom: .5rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .35s, transform .35s;
+}
+.pf-card:hover .pf-card-cat {
+  opacity: 1;
+  transform: none;
+}
+.pf-card-title {
+  font-family: var(--font-d);
+  font-size: 1.6rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--off-white);
+  line-height: 1.2;
+  margin-bottom: .5rem;
+}
+.pf-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pf-card-type {
+  font-size: .6rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+.pf-card-arr {
+  color: var(--blue-glow);
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .35s, transform .35s;
+}
+.pf-card:hover .pf-card-arr {
+  opacity: 1;
+  transform: none;
+}
+
+/* FEATURED CARD — spans 2 columns */
+.pf-card.featured {
+  grid-column: span 2;
+  aspect-ratio: 16/7;
+}
+
+/* EMPTY STATE */
+.pf-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 6rem 2rem;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* CTA */
+.pf-cta {
+  padding: 7rem 5vw;
+  text-align: center;
+  background: var(--navy2);
+  position: relative;
+  overflow: hidden;
+}
+.pf-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(30,77,158,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* RESPONSIVE */
+@media(max-width: 960px) {
+  .pf-cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .pf-card.featured { grid-column: span 2; aspect-ratio: 16/8; }
+}
+@media(max-width: 600px) {
+  .pf-cat-grid { grid-template-columns: 1fr; }
+  .pf-card.featured { grid-column: span 1; aspect-ratio: 4/3; }
+  .pf-filter-bar { top: 70px; gap: .4rem; }
+  .pf-filter-count { display: none; }
+}
+</style>
+</head>
+<body data-page="portfolio">
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-left"></div>
+  <div class="pre-right"></div>
+  <div class="pre-content">
+    <img src="logo.svg" alt="RAEFORM" class="pre-logo">
+    <div class="pre-text-wrap">
+      <span class="pre-brand">RAEFORM</span>
+      <span class="pre-tagline">Business Support Services</span>
+    </div>
+    <div class="pre-bar-wrap">
+      <div class="pre-bar"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const pre = document.getElementById('preloader');
+  if (!pre) return;
+
+  /* minimum display time so it doesn't flash too fast */
+  const minTime = 2600;
+  const start   = Date.now();
+
+  function dismiss() {
+    const elapsed = Date.now() - start;
+    const delay   = Math.max(0, minTime - elapsed);
+    setTimeout(() => {
+      pre.classList.add('done');
+      /* remove from DOM after curtain finishes */
+      setTimeout(() => pre.remove(), 1100);
+    }, delay);
+  }
+
+  if (document.readyState === 'complete') {
+    dismiss();
+  } else {
+    window.addEventListener('load', dismiss);
+  }
+})();
+</script>
+  
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="index.html" aria-label="RAEFORM Home">
+    <img src="logo.svg" alt="RAEFORM">
+  </a>
+  <div class="nav-links">
+    <a class="nl" id="n-home" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this)">Home</a>
+    <a class="nl" id="n-about" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this)">About</a>
+    <a class="nl" id="n-services" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this)">Services</a>
+    <a class="nl act" id="n-portfolio" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Work</a>
+     <a class="nl" id="n-journal" href="?page=RAEFORM-Journal" data-target="journal" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+    <a class="nl" id="n-contact" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)">Contact</a>
+    <button class="nav-btn" type="button" onclick="openPop('consult-pop')">Book a Consultation</button>
+  </div>
+  <button class="hbg" id="hbg" onclick="toggleMob()" aria-label="Menu" type="button">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a class="nl" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Home</a>
+  <a class="nl" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">About</a>
+  <a class="nl" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Services</a>
+  <a class="nl act" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Work</a>
+  <a class="nl" href="?page=RAEFORM-Journal" data-target="journal" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+  <a class="nl" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Contact</a>
+  <button class="nav-btn" type="button" onclick="openPop('consult-pop'); toggleMob()">Book a Consultation</button>
+</div>
+
+<!-- HERO -->
+<section class="pf-cat-hero" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 65vh; text-align: center; position: relative;">
+  <div class="pf-cat-orb"></div>
+  <div class="pf-cat-grid-line"></div>
+  
+  <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%;">
+    <div class="s-tag" style="justify-content: center;">Selected Work</div>
+    <h1 class="pf-cat-h1">Setting the standard for <em>digital execution.</em></h1>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="pf-filter-bar">
+  <button class="pf-filter-btn active" data-filter="all" onclick="filterCards('all', this)">All</button>
+  <button class="pf-filter-btn" data-filter="branding" onclick="filterCards('branding', this)">Branding</button>
+  <button class="pf-filter-btn" data-filter="web" onclick="filterCards('web', this)">Web</button>
+  <button class="pf-filter-btn" data-filter="operations" onclick="filterCards('operations', this)">Operations</button>
+  <button class="pf-filter-btn" data-filter="nonprofit" onclick="filterCards('nonprofit', this)">Nonprofit</button>
+  <span class="pf-filter-count" id="pf-count"></span>
+</div>
+
+<!-- GRID -->
+<section class="pf-cat-sec">
+  <div class="pf-cat-grid" id="pf-grid"></div>
+</section>
+
+<!-- CTA -->
+<div class="pf-cta">
+  <div class="s-tag rv" style="justify-content:center;margin-bottom:1.5rem">Start a Project</div>
+  <h2 class="rv" style="font-family:var(--font-d);font-size:clamp(2.2rem,5vw,4.5rem);font-weight:300;font-style:italic;color:var(--off-white);margin-bottom:1.5rem;transition-delay:.05s">Your project could be next.</h2>
+  <p class="rv" style="font-size:.88rem;color:var(--muted);max-width:420px;margin:0 auto 2.5rem;line-height:1.9;transition-delay:.1s">Every project on this page started with one conversation. Reach out and tell us what you're building.</p>
+  <a class="btn-p rv" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)" style="transition-delay:.15s;font-size:.68rem">Get in Touch &rarr;</a>
+</div>
+
+<!-- FOOTER -->
+  <footer>
+    <div class="ft-top">
+      <div>
+        <a class="ft-logo" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this)" aria-label="RAEFORM Home">
+          <img src="logo.svg" alt="RAEFORM">
+        </a>
+        <div class="ft-tag">Re-Imagine. Re-Design. Re-Form Your Success.</div>
+      </div>
+      <div>
+        <div class="ft-col-h">Explore</div>
+        <div class="ft-links">
+          <a class="ft-lnk" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this)">Home</a>
+          <a class="ft-lnk" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this)">About Us</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this)">Services</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Work</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Journal" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-h">Contact</div>
+        <div class="ft-links">
+          <span class="ft-lnk no-click">raeformtoday@gmail.com</span>
+          <span class="ft-lnk no-click">Binangonan, Rizal</span>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">&copy; 2026 RAEFORM. All rights reserved.</div>
+      <div class="ft-soc">
+        <a class="soc-b" href="https://www.linkedin.com/company/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path>
+          </svg>
+        </a>
+        <a class="soc-b" href="https://www.instagram.com/byraeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect class="icon-stroke" x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+            <circle class="icon-stroke" cx="12" cy="12" r="4"></circle>
+            <circle class="icon-fill" cx="17.5" cy="6.5" r="1.2"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+<!-- CONSULT POPUP -->
+<div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
+  <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
+    
+    <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
+    
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem;">
+      <div class="pop-tag" style="display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; float: none;">Availability</div>
+      <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
+    </div>
+    
+    <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
+      <div class="calendly-inline-widget" 
+           data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
+           style="min-width:320px; height:100%; width:100%;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
+
+
+
+<script>
+/* ══════════════════════
+   PROJECT DATA
+   Add new projects here.
+   tags   = used for filtering — match the data-filter values on the buttons
+   cover  = path to your cover image — leave empty for placeholder
+   slug   = must match the key in portfolio-item.html PROJECTS object
+   featured = true makes the card span 2 columns (use for your best work)
+══════════════════════ */
+const PROJECTS = [
+  {
+    slug:     'sofete',
+    title:    'SoFete Sisterhood Inc.',
+    category: 'Nonprofit · Maryland, USA',
+    type:     'Brand, Operations + Web',
+    cover:    'assets/portfolio/sofete/SoFete.jpg',
+    tags:     ['branding', 'web', 'operations', 'nonprofit'],
+    featured: true,
+  },
+  {
+    slug:     'nurtured-home',
+    title:    'The Nurtured Home',
+    category: 'Wellness · Illinois, USA',
+    type:     'Visual Identity + Web Design',
+    cover:    'assets/portfolio/nurtured-home/The Nurtured Home.jpg',
+    tags:     ['branding', 'web'],
+    featured: false,
+  },
+  {
+    slug:     'celestial-sound-weaver',
+    title:    'The Celestial Sound Weaver',
+    category: 'Sound Healing · Massachusetts, USA',
+    type:     'Website Development',
+    cover:    'assets/portfolio/celestial-sound-weaver/The Celestial Sound Weaver.jpg',
+    tags:     ['web'],
+    featured: false,
+  },
+];
+
+/* ══════════════════════
+   RENDER GRID
+══════════════════════ */
+let activeFilter = 'all';
+
+function renderGrid(filter) {
+  activeFilter = filter;
+  const grid = document.getElementById('pf-grid');
+  const count = document.getElementById('pf-count');
+  grid.innerHTML = '';
+
+  const filtered = filter === 'all'
+    ? PROJECTS
+    : PROJECTS.filter(p => p.tags.includes(filter));
+
+  count.textContent = filtered.length + ' project' + (filtered.length !== 1 ? 's' : '');
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="pf-empty">No projects in this category yet.</div>';
+    return;
+  }
+
+  filtered.forEach((p, i) => {
+    const a = document.createElement('a');
+    a.className = 'pf-card rv' + (p.featured ? ' featured' : '');
+    a.href = `portfolio-item.html?project=${p.slug}`;
+    a.style.transitionDelay = (i * 0.06) + 's';
+
+    const letter = p.title.charAt(0);
+
+    a.innerHTML = `
+      ${p.cover
+        ? `<div class="pf-card-cover" style="background-image:url('${p.cover}')"></div>`
+        : `<div class="pf-card-placeholder"><div class="pf-card-letter">${letter}</div></div>`
+      }
+      <div class="pf-card-over">
+        <div class="pf-card-cat">${p.category}</div>
+        <div class="pf-card-title">${p.title}</div>
+        <div class="pf-card-meta">
+          <span class="pf-card-type">${p.type}</span>
+          <span class="pf-card-arr">&#8599;</span>
+        </div>
+      </div>`;
+
+    grid.appendChild(a);
+    requestAnimationFrame(() => requestAnimationFrame(() => a.classList.add('vis')));
+  });
+}
+
+function filterCards(filter, btn) {
+  document.querySelectorAll('.pf-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrid(filter);
+}
+
+/* init */
+renderGrid('all');
+
+/* ══════════════════════
+   SHARED SITE FUNCTIONS
+══════════════════════ */
+const cur  = document.getElementById('cur');
+const ring = document.getElementById('cur-r');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+});
+(function tick() {
+  rx += (mx - rx) * .35; ry += (my - ry) * .35;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(tick);
+})();
+document.addEventListener('mouseover', e => {
+  const t = e.target.closest('button,a,.pf-card,.soc-b,.ft-lnk');
+  document.body.classList.toggle('hov', !!t);
+});
+
+/* NAV */
+const pageLinks = {
+  home: 'index.html',
+  about: 'about.html',
+  services: 'services.html',
+  work: 'portfolio.html',
+  journal: 'blog.html',
+  contact: 'contact.html'
+};
+
+function hiddenGo(element) {
+  const targetName = element.getAttribute('data-target');
+  if (targetName) {
+    window.location.href = pageLinks[targetName] || pageLinks.home;
+  }
+}
+
+function setActiveNav() {
+  const current = document.body.dataset.page || 'home';
+  ['home','about','services','contact'].forEach(name => {
+    const el = document.getElementById('n-' + name);
+    if (el) el.classList.toggle('act', name === current);
+  });
+}
+setActiveNav();
+
+let mobOpen = false;
+function toggleMob() {
+  mobOpen = !mobOpen;
+  document.getElementById('mob').classList.toggle('open', mobOpen);
+  const s = document.querySelectorAll('.hbg span');
+  if (mobOpen) {
+    s[0].style.transform = 'rotate(45deg) translate(4px,5px)';
+    s[1].style.opacity   = '0';
+    s[2].style.transform = 'rotate(-45deg) translate(4px,-5px)';
+  } else {
+    s.forEach(x => { x.style.transform = ''; x.style.opacity = ''; });
+  }
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('sc', scrollY > 40);
+  reveal();
+}, { passive: true });
+
+function reveal() {
+  document.querySelectorAll('.rv:not(.vis)').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * .92) el.classList.add('vis');
+  });
+}
+setTimeout(reveal, 200);
+
+function openPop(id)  { document.getElementById(id)?.classList.add('on'); }
+function closePop(id) { document.getElementById(id)?.classList.remove('on'); }
+document.querySelectorAll('.overlay').forEach(o =>
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('on'); })
+);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on'));
+});
+
+function submitConsult() {
+  const n  = document.getElementById('cq1').value.trim();
+  const em = document.getElementById('cq2').value.trim();
+  if (!n || !em) { showToast('Please enter your name and email.'); return; }
+  closePop('consult-pop');
+  ['cq1','cq2','cq3'].forEach(id => document.getElementById(id).value = '');
+  showToast('Request received. Rae will be in touch soon.');
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('t-msg').textContent = msg;
+  t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 4500);
+}
+
+const contextMenu = document.createElement('div');
+contextMenu.className = 'context-menu'; 
+contextMenu.style.display = 'none';    
+contextMenu.innerHTML = `
+  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6e768a;">Need Help?</div>
+  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block; color: #eef2ff; cursor: pointer;">Book a 30-Min Call &rarr;</a>
+`;
+document.body.appendChild(contextMenu);
+
+document.addEventListener('contextmenu', e => {
+  e.preventDefault();
+  contextMenu.style.left = `${e.clientX + 12}px`;
+  contextMenu.style.top = `${e.clientY + 12}px`;
+  contextMenu.style.display = 'block';
+});
+
+function closeContextMenu() {
+  contextMenu.style.display = 'none';
+}
+
+document.addEventListener('click', e => {
+  if (!contextMenu.contains(e.target)) {
+    closeContextMenu();
+  }
+});
+  
+</script>
+</body>
+</html>

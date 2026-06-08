@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAEFORM | Services</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="services">
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-left"></div>
+  <div class="pre-right"></div>
+  <div class="pre-content">
+    <img src="logo.svg" alt="RAEFORM" class="pre-logo">
+    <div class="pre-text-wrap">
+      <span class="pre-brand">RAEFORM</span>
+      <span class="pre-tagline">Business Support Services</span>
+    </div>
+    <div class="pre-bar-wrap">
+      <div class="pre-bar"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const pre = document.getElementById('preloader');
+  if (!pre) return;
+
+  /* minimum display time so it doesn't flash too fast */
+  const minTime = 2600;
+  const start   = Date.now();
+
+  function dismiss() {
+    const elapsed = Date.now() - start;
+    const delay   = Math.max(0, minTime - elapsed);
+    setTimeout(() => {
+      pre.classList.add('done');
+      /* remove from DOM after curtain finishes */
+      setTimeout(() => pre.remove(), 1100);
+    }, delay);
+  }
+
+  if (document.readyState === 'complete') {
+    dismiss();
+  } else {
+    window.addEventListener('load', dismiss);
+  }
+})();
+</script>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo" href="index.html" aria-label="RAEFORM Home">
+    <img src="logo.svg" alt="RAEFORM">
+  </a>
+  <div class="nav-links">
+    <a class="nl" id="n-home" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this)">Home</a>
+    <a class="nl" id="n-about" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this)">About</a>
+    <a class="nl act" id="n-services" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this)">Services</a>
+    <a class="nl" id="n-portfolio" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Work</a>
+     <a class="nl" id="n-journal" href="?page=RAEFORM-Journal" data-target="journal" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+    <a class="nl" id="n-contact" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)">Contact</a>
+    <button class="nav-btn" type="button" onclick="openPop('consult-pop')">Book a Consultation</button>
+  </div>
+  <button class="hbg" id="hbg" onclick="toggleMob()" aria-label="Menu" type="button">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a class="nl" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Home</a>
+  <a class="nl" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">About</a>
+  <a class="nl act" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Services</a>
+  <a class="nl" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Work</a>
+  <a class="nl" href="?page=RAEFORM-Journal" data-target="journal" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+  <a class="nl" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Contact</a>
+  <button class="nav-btn" type="button" onclick="openPop('consult-pop'); toggleMob()">Book a Consultation</button>
+</div>
+
+<!-- ═══════════ SERVICES ═══════════ -->
+<main>
+<section class="svc-hero" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 65vh; text-align: center;">
+    <div class="hero-grid"></div>
+    <div class="orb o1"></div><div class="orb o3"></div>
+    <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; max-width: 1400px; padding: 0 20px; width: 100%;">
+      <div class="s-tag" style="justify-content: center;">Services</div>
+      <h1 class="ct-h1" style="max-width: 100% !important; width: 100%;">Everything your business<br>needs <em>under one roof.</em></h1>
+      <p class="svc-lead" style="max-width: 780px; width: 100%; margin-left: auto; margin-right: auto;">From administrative support and staffing to branding, web development, and automation — RAEFORM delivers the operational and creative solutions that keep businesses moving. Select any service to see the full scope.</p>
+    </div>
+</section>
+
+  <section class="sec" style="padding-bottom: 2rem !important;">
+    <div class="svc-page-head rv">
+      <div>
+        <div class="s-tag">Our Services</div>
+        <h2 class="s-h2">Six areas. One<br>accountable <em>partner.</em></h2>
+      </div>
+      <p class="s-p">Every service is built to integrate with how your business actually operates. Whether you need one solution or all six, we scope it specifically to what you require — and we deliver it without you having to manage the process.</p>
+    </div>
+
+    <div class="svc-detail-grid rv delay-1">
+      <article class="svc-card" onclick="openSvcPop('Executive & Administrative Coordination','Operational backbone for leaders and moving organizations','RAEFORM provides professional executive coordination that allows leadership to stay focused on high-impact decisions. Every task is handled with absolute accuracy and discretion — from stakeholder management to corporate governance and executive calendar architecture.',['Executive calendar & inbox gatekeeping','Document preparation & records management','Stakeholder communications & liaison support','Meeting governance and minutes lifecycle','Administrative workflow integration'])">
+        <span class="svc-card-num">01</span><h3>Executive & Admin Coordination</h3><p>Structured, high-level administrative partnership built for executive leadership.</p><span>Open details &rarr;</span>
+      </article>
+      
+      <article class="svc-card" onclick="openSvcPop('Virtual Assistance & On-Demand Support','Flexible capacity to scale your output without the overhead','RAEFORM provides reliable remote personnel for businesses that need high-quality task execution without the commitment of full-time placement. Our VAs handle routine operations, data, and communication lines at pace.',['Task and project coordination','Research, market analysis, and reporting','Customer service and front-line communications','Social media grid and content scheduling','Data entry, cleansing, and ad-hoc execution'])">
+        <span class="svc-card-num">02</span><h3>Virtual Assistance & On-Demand Support</h3><p>Skilled remote capacity delivering consistent output across business functions.</p><span>Open details &rarr;</span>
+      </article>
+      
+      <article class="svc-card" onclick="openSvcPop('Branding & Design Services','Visual identity and design systems that communicate authority', 'RAEFORM delivers end-to-end branding and design for organizations that understand how perception drives opportunity. From brand strategy and identity development to marketing collateral and presentation design — every output is deliberate, polished, and built to hold up across every audience and context.', ['Brand strategy and positioning','Logo system and visual identity development','Marketing and promotional materials','Presentation and pitch deck design','Digital assets and brand guidelines'])">
+        <span class="svc-card-num">03</span><h3>Branding & Design Services</h3><p>Professional brand identity and design built for credibility at every level.</p><span>Open details &rarr;</span>
+      </article>
+      
+      <article class="svc-card" onclick="openSvcPop('Web Development & Business Automation','Digital infrastructure that works as hard as you do', 'RAEFORM designs and develops web platforms that are clear, functional, and built with a defined purpose. Alongside that, we implement automation systems that eliminate manual, repetitive processes and replace them with integrated workflows — so organizations operate faster and scale without unnecessary complexity.', ['Website design and development','Landing pages and conversion-focused builds','CRM and third-party tool integration','Workflow automation via Zapier, Make, and GoHighLevel','Ongoing maintenance and system support'])">
+        <span class="svc-card-num">04</span><h3>Web Development & Business Automation</h3><p>Websites built for performance. Workflows built to run without you.</p><span>Open details &rarr;</span>
+      </article>
+      
+      <article class="svc-card" onclick="openSvcPop('Staffing Solutions', 'Qualified personnel for roles and projects that cannot wait', 'RAEFORM supports organizations in sourcing, vetting, and deploying the right talent for specific roles or project engagements. Whether the need is a single specialized placement or a scalable team, we move quickly and deliver personnel who are ready to contribute from day one.', ['Role scoping and candidate sourcing','Vetting and qualification review','Project-based and permanent placement','Remote and on-site staffing options','Ongoing workforce support'])">
+        <span class="svc-card-num">05</span><h3>Staffing Solutions</h3><p>The right people, placed and ready.</p><span>Open details &rarr;</span>
+      </article>
+      
+      <article class="svc-card" onclick="openSvcPop('Business Consulting & Operations Infrastructure','Architecture and process re-engineering for scale', 'RAEFORM works with organizations to audit operational gaps, redesign inefficient processes, and implement the structural blueprint needed for sustainable growth. We build the operational engine that your team or our virtual assistants can execute smoothly.', ['Business review and bottleneck analysis','Process optimization and workflow mapping','Operational planning & standard operating procedures (SOPs)','Software stack selection and setup','Execution auditing and key performance indicators (KPIs) monitoring'])">
+        <span class="svc-card-num">06</span><h3>Business Consulting & Operations</h3><p>Strategic architecture, process optimization, and hands-on execution systems.</p><span>Open details &rarr;</span>
+      </article>
+    </div>
+  </section>
+
+<section class="rae-process-section">
+  
+  <!-- 1. HOOK HEADLINE & SUBTEXT -->
+  <div class="s-tag rv" style="display:flex; justify-content:center; margin-bottom:2rem; margin-top:2rem;">Get Started</div>
+  
+  <h2 class="rv" style="font-family:var(--font-d); font-size:clamp(2.5rem,6vw,5rem); font-weight:300; font-style:italic; color:var(--off-white); margin-bottom:1.5rem; text-align:center;">
+    Not sure where to begin?
+  </h2>
+  
+  <p class="rv" style="font-size:1.05rem; color:var(--muted); max-width:520px; margin:0 auto 5rem; text-align:center; line-height: 1.8;">
+    You don't need to have it all figured out before reaching out. Tell us what's going on in your business and we'll identify exactly what needs to happen next.
+  </p>
+
+  <!-- 2. THE THREE-STEP ARCHITECTURE -->
+  <div class="process-container rv">
+    <div class="step-column">
+      <div class="step-digit">01</div>
+      <div class="step-header">Fill the Form</div>
+      <div class="step-body">Tell us about your business and what you need. Takes two minutes.</div>
+    </div>
+    
+    <div class="step-line"></div>
+    
+    <div class="step-column">
+      <div class="step-digit">02</div>
+      <div class="step-header">We Review</div>
+      <div class="step-body">We look at your submission and come back within one business day.</div>
+    </div>
+    
+    <div class="step-line"></div>
+    
+    <div class="step-column">
+      <div class="step-digit">03</div>
+      <div class="step-header">We Get to Work</div>
+      <div class="step-body">Once we're aligned, we scope it out and start moving.</div>
+    </div>
+  </div>
+
+  <!-- 3. THE ACTION CONVERSION POINT -->
+  <div style="text-align: center; margin-top: 2rem;">
+    <a class="btn-p rv" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)" style="display:inline-block;">Fill Out the Form &rarr;</a>
+  </div>
+
+</section>
+  
+  <footer>
+    <div class="ft-top">
+      <div>
+        <a class="ft-logo" href="index.html" aria-label="RAEFORM Home">
+          <img src="logo.svg" alt="RAEFORM">
+        </a>
+        <div class="ft-tag">Re-Imagine. Re-Design. Re-Form Your Success.</div>
+      </div>
+      <div>
+        <div class="ft-col-h">Explore</div>
+        <div class="ft-links">
+          <a class="ft-lnk" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this)">Home</a>
+          <a class="ft-lnk" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this)">About Us</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this)">Services</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Work</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Journal" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-h">Contact</div>
+        <div class="ft-links">
+          <span class="ft-lnk no-click">raeformtoday@gmail.com</span>
+          <span class="ft-lnk no-click">Binangonan, Rizal</span>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">&copy; 2026 RAEFORM. All rights reserved.</div>
+      <div class="ft-soc">
+        <a class="soc-b" href="https://www.linkedin.com/company/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path>
+          </svg>
+        </a>
+        <a class="soc-b" href="https://www.instagram.com/byraeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect class="icon-stroke" x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+            <circle class="icon-stroke" cx="12" cy="12" r="4"></circle>
+            <circle class="icon-fill" cx="17.5" cy="6.5" r="1.2"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<!-- POPUPS -->
+<div class="overlay" id="service-pop">
+  <div class="pop svc-pop">
+    <button class="pop-x" onclick="closePop('service-pop')" type="button">&times;</button>
+    <div class="pop-tag">Service Details</div>
+    <h3 class="pop-h" id="sp-title"></h3>
+    <div class="pop-svc" id="sp-tag"></div>
+    <p class="pop-p" id="sp-desc"></p>
+    <ul class="pop-list" id="sp-list"></ul>
+    <a class="btn-p btn-sm" href="?page=RAEFORM-Contact" data-target="contact" onclick="closePop('service-pop'); event.preventDefault(); hiddenGo(this)">Send Us a Message &rarr;</a>
+  </div>
+</div>
+
+<div class="overlay" id="work-pop">
+  <div class="pop">
+    <button class="pop-x" onclick="closePop('work-pop')">&times;</button>
+    <div class="pop-tag">Selected Work</div>
+    <h3 class="pop-h" id="wp-title"></h3>
+    <div class="pop-svc" id="wp-svc"></div>
+    <p class="pop-p" id="wp-desc"></p>
+    <button class="btn-p btn-sm" onclick="closePop('work-pop');openPop('consult-pop')">Start a similar project &rarr;</button>
+  </div>
+</div>
+
+<div class="overlay" id="team-pop">
+  <div class="pop">
+    <button class="pop-x" onclick="closePop('team-pop')">&times;</button>
+    <div class="pop-tag">Our Team</div>
+    <h3 class="pop-h" id="tp-name"></h3>
+    <div class="pop-svc" id="tp-role"></div>
+    <p class="pop-p" id="tp-bio"></p>
+    <button class="btn-g btn-sm" onclick="closePop('team-pop');openPop('consult-pop')">Work with us &rarr;</button>
+  </div>
+</div>
+
+<!-- OPTIMIZED SCHEDULER POPUP CONTAINER (FULL SCREEN BLEND) -->
+<div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
+  <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
+    
+    <!-- Floating Close Button -->
+    <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
+    
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <div class="pop-tag" style="display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; float: none;">Availability</div>
+      <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
+    </div>
+    
+    <!-- Clean, unrestricted frame container -->
+    <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
+      <!-- Calendly inline widget -->
+      <div class="calendly-inline-widget" 
+           data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
+           style="min-width:320px; height:100%; width:100%;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
+
+<script>
+/* 1. PREVENT ACCIDENTALLY TRIGGERING INLINE EDITING */
+document.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+
+/* 2. CURSOR & HOVER EFFECTS */
+const cur = document.getElementById('cur');
+const ring = document.getElementById('cur-r');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+if (cur && ring) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top = my + 'px';
+  });
+
+  (function tick() {
+    rx += (mx - rx) * .35;
+    ry += (my - ry) * .35;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+}
+
+document.querySelectorAll('button,a,.wcard,.svc-item,.svc-card,.tc,.val-card,.t-btn,.t-dot,.soc-b,.ft-lnk,.overlay').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+/* 3. CUSTOM RIGHT-CLICK CONTEXT MENU */
+const contextMenu = document.createElement('div');
+contextMenu.className = 'context-menu'; 
+contextMenu.style.display = 'none';    
+contextMenu.innerHTML = `
+  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6e768a;">Need Help?</div>
+  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block; color: #eef2ff; cursor: pointer;">Book a 30-Min Call &rarr;</a>
+`;
+document.body.appendChild(contextMenu);
+
+document.addEventListener('contextmenu', e => {
+  e.preventDefault(); 
+  contextMenu.style.left = `${e.clientX + 12}px`; 
+  contextMenu.style.top = `${e.clientY + 12}px`;
+  contextMenu.style.display = 'block';
+});
+
+function closeContextMenu() {
+  contextMenu.style.display = 'none';
+}
+
+document.addEventListener('click', e => {
+  if (!contextMenu.contains(e.target)) {
+    closeContextMenu();
+  }
+});
+
+/* 4. STEALTH NAV SYSTEM */
+const pageLinks = {
+  home: 'index.html',
+  about: 'about.html',
+  services: 'services.html',
+  work: 'portfolio.html',
+  journal: 'blog.html',
+  contact: 'contact.html'
+};
+
+function hiddenGo(element) {
+  if (!element) {
+    window.location.href = pageLinks.home;
+    return;
+  }
+  const targetName = element.getAttribute('data-target');
+  if (targetName) {
+    window.location.href = pageLinks[targetName] || pageLinks.home;
+  } else {
+    window.location.href = pageLinks.home;
+  }
+}
+
+function setActiveNav() {
+  const current = document.body.dataset.page || 'home';
+  ['home', 'about', 'services', 'contact'].forEach(name => {
+    const el = document.getElementById('n-' + name);
+    if (el) el.classList.toggle('act', name === current);
+  });
+}
+setActiveNav();
+
+let mobOpen = false;
+function toggleMob() {
+  mobOpen = !mobOpen;
+  const mob = document.getElementById('mob');
+  if (mob) mob.classList.toggle('open', mobOpen);
+
+  const s = document.querySelectorAll('.hbg span');
+  if (mobOpen) {
+    s[0].style.transform = 'rotate(45deg) translate(4px,5px)';
+    s[1].style.opacity = '0';
+    s[2].style.transform = 'rotate(-45deg) translate(4px,-5px)';
+  } else {
+    s.forEach(x => {
+      x.style.transform = '';
+      x.style.opacity = '';
+    });
+  }
+}
+
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  if (nav) nav.classList.toggle('sc', window.scrollY > 40);
+  reveal();
+});
+
+/* 5. REVEAL ON SCROLL */
+function reveal() {
+  document.querySelectorAll('.rv:not(.vis)').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * .92) el.classList.add('vis');
+  });
+}
+setTimeout(reveal, 200);
+
+/* 6. POPUPS INTERACTION */
+function openPop(id) {
+  const pop = document.getElementById(id);
+  if (pop) pop.classList.add('on');
+}
+function closePop(id) {
+  const pop = document.getElementById(id);
+  if (pop) pop.classList.remove('on');
+}
+document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => {
+  if (e.target === o) o.classList.remove('on');
+}));
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closePop('service-pop');
+    closePop('work-pop');
+    closePop('team-pop');
+    closePop('consult-pop');
+    closeContextMenu();
+  }
+});
+
+function openSvcPop(title, tag, desc, includes) {
+  const titleEl = document.getElementById('sp-title');
+  const tagEl = document.getElementById('sp-tag');
+  const descEl = document.getElementById('sp-desc');
+  const listEl = document.getElementById('sp-list');
+  if (!titleEl || !tagEl || !descEl || !listEl) return;
+  titleEl.textContent = title;
+  tagEl.textContent = tag;
+  descEl.textContent = desc;
+  listEl.innerHTML = '';
+  includes.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    listEl.appendChild(li);
+  });
+  openPop('service-pop');
+}
+
+/* 7. TOAST NOTIFICATIONS */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  const msgBox = document.getElementById('t-msg');
+  if (!t || !msgBox) return;
+  msgBox.textContent = msg;
+  t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 4500);
+}
+</script>
+</body>
+</html>

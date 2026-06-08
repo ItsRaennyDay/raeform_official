@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAEFORM | About Us</title>
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="about">
+<div id="preloader">
+  <div class="pre-left"></div>
+  <div class="pre-right"></div>
+  <div class="pre-content">
+    <img src="logo.svg" alt="RAEFORM" class="pre-logo">
+    <div class="pre-text-wrap">
+      <span class="pre-brand">RAEFORM</span>
+      <span class="pre-tagline">Business Support Services</span>
+    </div>
+    <div class="pre-bar-wrap">
+      <div class="pre-bar"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const pre = document.getElementById('preloader');
+  if (!pre) return;
+
+  /* minimum display time so it doesn't flash too fast */
+  const minTime = 2600;
+  const start   = Date.now();
+
+  function dismiss() {
+    const elapsed = Date.now() - start;
+    const delay   = Math.max(0, minTime - elapsed);
+    setTimeout(() => {
+      pre.classList.add('done');
+      /* remove from DOM after curtain finishes */
+      setTimeout(() => pre.remove(), 1100);
+    }, delay);
+  }
+
+  if (document.readyState === 'complete') {
+    dismiss();
+  } else {
+    window.addEventListener('load', dismiss);
+  }
+})();
+</script>
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<nav id="nav">
+  <a class="logo" href="index.html" aria-label="RAEFORM Home">
+    <img src="logo.svg" alt="RAEFORM">
+  </a>
+  <div class="nav-links">
+    <a class="nl" id="n-home" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this)">Home</a>
+    <a class="nl act" id="n-about" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this)">About</a>
+    <a class="nl" id="n-services" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this)">Services</a>
+    <a class="nl" id="n-portfolio" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Work</a>
+     <a class="nl" id="n-journal" href="?page=RAEFORM-Journal" data-target="journal" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+    <a class="nl" id="n-contact" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)">Contact</a>
+    <button class="nav-btn" type="button" onclick="openPop('consult-pop')">Book a Consultation</button>
+  </div>
+  <button class="hbg" id="hbg" onclick="toggleMob()" aria-label="Menu" type="button">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mob-menu" id="mob">
+  <a class="nl" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Home</a>
+  <a class="nl act" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">About</a>
+  <a class="nl" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Services</a>
+  <a class="nl" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Work</a>
+  <a class="nl" href="?page=RAEFORM-Journal" data-target="journal" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+  <a class="nl" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this); toggleMob()">Contact</a>
+  <button class="nav-btn" type="button" onclick="openPop('consult-pop'); toggleMob()">Book a Consultation</button>
+</div>
+
+<div class="page active" id="page-about">
+
+<div class="ab-hero" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 65vh; background-image: linear-gradient(rgba(5,9,26,0.65), rgba(5,9,26,0.75)), url('about-hero.jpg'); background-position: center; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; user-select: auto;">
+  <div class="ab-orb"></div>
+  <div class="rel-z2" style="text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div class="s-tag" style="justify-content: center;">About RAEFORM</div>
+    <h1 class="ab-h1" style="max-width: 900px; width: 100%;">Built for the ones<br>doing <em>work that matters.</em></h1>
+  </div>
+</div>
+  
+  <div class="story-grid">
+    <div class="story-l rv">
+      <div class="s-tag">Our beginning</div>
+      <div class="story-pull">The businesses that need the most support are usually the ones who have the least of it.</div>
+    </div>
+      <div class="story-r rv delay-1">
+        <p>It started with a passion for design — and an even bigger passion for the people behind the work. Nonprofits doing real things for real communities. Small business owners putting everything on the line for something they believe in. Those were the people I wanted to be in the room with.</p>
+        <p>But somewhere along the way, I realized that what they needed wasn't just a logo or a website. They needed someone who could see the whole picture — the brand that wasn't landing, the admin that was eating their time, the systems that didn't exist yet, the vision that was stuck in their head with no clear way out.</p>
+        <p>That's why I built Raeform. Not just as a design studio, but as a place where all of it gets handled — branding, operations, web, automation, support — so the people doing meaningful work can actually focus on doing it.</p>
+        <p>I believe every brand should speak to who you are and what you stand for. <strong>That's the whole reason this exists.</strong></p>
+        <p>— Trishia "Rae" Raymundo, <i>Founder of RAEFORM</i></p>
+      </div>
+  </div>
+
+  <section style="background:var(--navy2);padding:8rem 5vw">
+
+    <div class="rv" style="margin-bottom:5rem">
+      <div class="s-tag">What we're here for</div>
+      <div class="s-h2">Mission, Vision<br>&amp; <em>Core Values</em></h2>
+    </div>
+
+    <div class="rv" style="display:grid;grid-template-columns:30fr 70fr;gap:0;margin-bottom:6rem;border:1px solid rgba(37,99,200,.1);overflow:hidden">
+
+      <div style="position:relative;overflow:hidden;min-height:440px">
+        <div id="mv-parallax" style="position:absolute;inset:-20% 0;will-change:transform">
+          <img
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80"
+            alt="People collaborating"
+            style="width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.65) saturate(.6)"
+          >
+          <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent,rgba(8,14,36,.5));pointer-events:none"></div>
+        </div>
+      </div>
+
+      <div style="padding:4rem;display:flex;flex-direction:column;gap:3rem;justify-content:center;border-left:1px solid rgba(37,99,200,.1)">
+        <div>
+          <div style="font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.8rem">
+            <span style="display:inline-block;width:18px;height:1px;background:var(--blue-glow)"></span>Mission
+          </div>
+          <p style="font-size:.92rem;color:var(--muted);line-height:2">To give nonprofits, small businesses, and purpose-driven organizations the operational, creative, and strategic support they need to do their best work — without having to figure it all out alone.</p>
+        </div>
+        <div style="border-top:1px solid rgba(37,99,200,.1);padding-top:3rem">
+          <div style="font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--blue-glow);font-weight:600;margin-bottom:.9rem;display:flex;align-items:center;gap:.8rem">
+            <span style="display:inline-block;width:18px;height:1px;background:var(--blue-glow)"></span>Vision
+          </div>
+          <p style="font-size:.92rem;color:var(--muted);line-height:2">A world where the size of an organization doesn't determine the quality of support it has access to — where the businesses doing the most meaningful work are also the best equipped to grow.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="rv" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(37,99,200,.08);border:1px solid rgba(37,99,200,.1)">
+      <div style="background:var(--navy3);padding:2.5rem 2rem;transition:background .3s" onmouseenter="this.style.background='var(--navy4)'" onmouseleave="this.style.background='var(--navy3)'">
+        <div style="font-family:var(--font-d);font-size:2.5rem;font-weight:300;font-style:italic;color:rgba(59,130,246,.12);line-height:1;margin-bottom:1.5rem">01</div>
+        <div style="font-size:.88rem;font-weight:700;letter-spacing:.04em;color:var(--off-white);margin-bottom:.75rem">Purpose before aesthetics</div>
+        <div style="font-size:.78rem;color:var(--muted);line-height:1.9">Every decision — visual or operational — should serve a clear purpose. If it doesn't earn its place, it goes.</div>
+      </div>
+      <div style="background:var(--navy3);padding:2.5rem 2rem;transition:background .3s" onmouseenter="this.style.background='var(--navy4)'" onmouseleave="this.style.background='var(--navy3)'">
+        <div style="font-family:var(--font-d);font-size:2.5rem;font-weight:300;font-style:italic;color:rgba(59,130,246,.12);line-height:1;margin-bottom:1.5rem">02</div>
+        <div style="font-size:.88rem;font-weight:700;letter-spacing:.04em;color:var(--off-white);margin-bottom:.75rem">Direct and accountable</div>
+        <div style="font-size:.78rem;color:var(--muted);line-height:1.9">No chasing for updates, no vague timelines. You always know what's happening and who's responsible for it.</div>
+      </div>
+      <div style="background:var(--navy3);padding:2.5rem 2rem;transition:background .3s" onmouseenter="this.style.background='var(--navy4)'" onmouseleave="this.style.background='var(--navy3)'">
+        <div style="font-family:var(--font-d);font-size:2.5rem;font-weight:300;font-style:italic;color:rgba(59,130,246,.12);line-height:1;margin-bottom:1.5rem">03</div>
+        <div style="font-size:.88rem;font-weight:700;letter-spacing:.04em;color:var(--off-white);margin-bottom:.75rem">Built for real people</div>
+        <div style="font-size:.78rem;color:var(--muted);line-height:1.9">Raeform exists for founders, nonprofits, and small businesses doing meaningful work. That's not a niche — it's a deliberate choice.</div>
+      </div>
+      <div style="background:var(--navy3);padding:2.5rem 2rem;transition:background .3s" onmouseenter="this.style.background='var(--navy4)'" onmouseleave="this.style.background='var(--navy3)'">
+        <div style="font-family:var(--font-d);font-size:2.5rem;font-weight:300;font-style:italic;color:rgba(59,130,246,.12);line-height:1;margin-bottom:1.5rem">04</div>
+        <div style="font-size:.78rem;color:var(--muted);line-height:1.9">Remote but present</div>
+        <div style="font-size:.78rem;color:var(--muted);line-height:1.9">Fully online doesn't mean distant. Every client gets the same level of attention and communication regardless of where they are.</div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <div class="ft-top">
+      <div>
+        <a class="ft-logo" href="index.html" aria-label="RAEFORM Home"><img src="logo.svg" alt="RAEFORM"></a>
+        <div class="ft-tag">Re-Imagine. Re-Design. Re-Form Your Success.</div>
+      </div>
+      <div>
+        <div class="ft-col-h">Explore</div>
+        <div class="ft-links">
+          <a class="ft-lnk" href="?page=RAEFORM-Home" data-target="home" onclick="event.preventDefault(); hiddenGo(this)">Home</a>
+          <a class="ft-lnk" href="?page=RAEFORM-About" data-target="about" onclick="event.preventDefault(); hiddenGo(this)">About Us</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Services" data-target="services" onclick="event.preventDefault(); hiddenGo(this)">Services</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Work" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Work</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Journal" data-target="work" onclick="event.preventDefault(); hiddenGo(this)">Journal</a>
+          <a class="ft-lnk" href="?page=RAEFORM-Contact" data-target="contact" onclick="event.preventDefault(); hiddenGo(this)">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-h">Contact</div>
+        <div class="ft-links">
+          <span class="ft-lnk no-click">raeformtoday@gmail.com</span>
+          <span class="ft-lnk no-click">Binangonan, Rizal</span>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <div class="ft-copy">&copy; 2025 RAEFORM. All rights reserved.</div>
+      <div class="ft-soc">
+        <a class="soc-b" href="https://www.linkedin.com/company/raeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.44-2.13 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"></path>
+          </svg>
+        </a>
+        <a class="soc-b" href="https://www.instagram.com/byraeform" target="_blank" rel="noopener noreferrer" aria-label="RAEFORM on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect class="icon-stroke" x="3" y="3" width="18" height="18" rx="5" ry="5"></rect>
+            <circle class="icon-stroke" cx="12" cy="12" r="4"></circle>
+            <circle class="icon-fill" cx="17.5" cy="6.5" r="1.2"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</div><div class="overlay" id="team-pop">
+  <div class="pop">
+    <button class="pop-x" onclick="closePop('team-pop')">&times;</button>
+    <div class="pop-tag">Our Team</div>
+    <h3 class="pop-h" id="tp-name"></h3>
+    <div class="pop-svc" id="tp-role"></div>
+    <p class="pop-p" id="tp-bio"></p>
+    <button class="btn-g btn-sm" onclick="closePop('team-pop')">Close</button>
+  </div>
+</div>
+
+<div class="overlay" id="consult-pop" style="backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); background: rgba(5, 9, 26, 0.85);">
+  <div class="pop" style="max-width: 100%; width: 100vw; height: 100vh; display: flex; flex-direction: column; padding: 4rem 2rem 2rem; background: transparent; box-shadow: none; border: none;">
+    
+    <button class="pop-x" onclick="closePop('consult-pop')" style="top: 2rem; right: 2rem; font-size: 2.5rem; color: var(--off-white); z-index: 99;">&times;</button>
+    
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 1.5rem;">
+      <div class="pop-tag" style="display: flex; justify-content: center; align-items: center; margin: 0 auto 1rem; float: none;">Availability</div>
+      <h3 class="pop-h" style="margin: 0; color: var(--off-white);">Schedule an Intro Call</h3>
+    </div>
+    
+    <div style="flex-grow: 1; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%;">
+      <div class="calendly-inline-widget" 
+           data-url="https://calendly.com/raeformtoday/30-min-intro-call?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=05091a&text_color=eef2ff&primary_color=3b82f6" 
+           style="min-width:320px; height:100%; width:100%;">
+      </div>
+      <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Message sent.</div></div>
+
+<script>
+/* CURSOR & CUSTOM RIGHT-CLICK CONTEXT MENU */
+const cur  = document.getElementById('cur');
+const ring = document.getElementById('cur-r');
+let mx = 0, my = 0, rx = 0, ry = 0;
+if (cur && ring) {
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  });
+  (function tick() {
+    rx += (mx - rx) * .35; ry += (my - ry) * .35;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+}
+document.querySelectorAll('button,a,.tc,.val-card,.soc-b,.ft-lnk,.overlay').forEach(el => {
+  el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+  el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+});
+
+// Build and inject custom Right-Click menu targeting the new calendar layout uniformly
+const contextMenu = document.createElement('div');
+contextMenu.className = 'context-menu'; 
+contextMenu.style.display = 'none';    
+contextMenu.innerHTML = `
+  <div style="margin-bottom: 4px; opacity: 0.6; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: #6e768a;">Need Help?</div>
+  <a onclick="closeContextMenu(); openPop('consult-pop')" style="font-weight: 600; display: block; color: #eef2ff; cursor: pointer;">Book a 30-Min Call &rarr;</a>
+`;
+document.body.appendChild(contextMenu);
+
+document.addEventListener('contextmenu', e => {
+  e.preventDefault(); 
+  contextMenu.style.left = `${e.clientX + 12}px`; 
+  contextMenu.style.top = `${e.clientY + 12}px`;
+  contextMenu.style.display = 'block';
+});
+
+function closeContextMenu() {
+  contextMenu.style.display = 'none';
+}
+
+document.addEventListener('click', e => {
+  if (!contextMenu.contains(e.target)) {
+    closeContextMenu();
+  }
+});
+
+/* NAV */
+const pageLinks = {
+  home: 'index.html',
+  about: 'about.html',
+  services: 'services.html',
+  work: 'portfolio.html',
+  journal: 'blog.html',
+  contact: 'contact.html'
+};
+
+function hiddenGo(element) {
+  const targetName = element.getAttribute('data-target');
+  if (targetName) {
+    window.location.href = pageLinks[targetName] || pageLinks.home;
+  }
+}
+
+function setActiveNav() {
+  const current = document.body.dataset.page || 'home';
+  ['home','about','services','contact'].forEach(name => {
+    const el = document.getElementById('n-' + name);
+    if (el) el.classList.toggle('act', name === current);
+  });
+}
+setActiveNav();
+
+let mobOpen = false;
+function toggleMob() {
+  mobOpen = !mobOpen;
+  document.getElementById('mob').classList.toggle('open', mobOpen);
+  const s = document.querySelectorAll('.hbg span');
+  if (mobOpen) {
+    s[0].style.transform = 'rotate(45deg) translate(4px,5px)';
+    s[1].style.opacity   = '0';
+    s[2].style.transform = 'rotate(-45deg) translate(4px,-5px)';
+  } else {
+    s.forEach(x => { x.style.transform = ''; x.style.opacity = ''; });
+  }
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('sc', scrollY > 40);
+  reveal();
+});
+
+/* REVEAL */
+function reveal() {
+  document.querySelectorAll('.rv:not(.vis)').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight * .92) el.classList.add('vis');
+  });
+}
+setTimeout(reveal, 200);
+
+/* PARALLAX */
+(function(){
+  const el = document.getElementById('mv-parallax');
+  if (!el) return;
+  function onScroll() {
+    const section = el.closest('section');
+    const rect    = section.getBoundingClientRect();
+    const vh      = window.innerHeight;
+    if (rect.bottom < 0 || rect.top > vh) return;
+    const progress = (vh - rect.top) / (vh + rect.height);
+    el.style.transform = 'translateY(' + ((progress - 0.5) * 100) + 'px)';
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
+/* POPUPS */
+function openPop(id)   { document.getElementById(id)?.classList.add('on'); }
+function closePop(id)  { document.getElementById(id)?.classList.remove('on'); } // Restored token state mapping
+document.querySelectorAll('.overlay').forEach(o =>
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('on'); })
+);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on'));
+});
+
+/* TOAST OVERRIDE */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('t-msg').textContent = msg;
+  t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 4500);
+}
+</script>
+</body>
+</html>
