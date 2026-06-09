@@ -939,7 +939,6 @@
 <div class="toast" id="toast"><div class="t-ico">✓</div><div class="t-msg" id="t-msg">Done.</div></div>
 
 <script src="sanity-client.js" defer></script>
-
 <script>
 /* ============================================
    GLOBAL UI FUNCTIONS
@@ -949,13 +948,26 @@
 const cur = document.getElementById('cur');
 const ring = document.getElementById('cur-r');
 let mx = 0, my = 0, rx = 0, ry = 0;
+
 if (cur && ring) {
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
-  (function tick() { rx += (mx - rx) * 0.35; ry += (my - ry) * 0.35; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(tick); })();
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    cur.style.left = mx + 'px';
+    cur.style.top = my + 'px';
+  });
+
+  (function tick() {
+    rx += (mx - rx) * 0.35;
+    ry += (my - ry) * 0.35;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
 }
 
 function bindHover() {
-  document.querySelectorAll('button, a, .blog-standard-card, .blog-hero-card, .blog-side-card, .sidebar-recent-item, .soc-b, .ft-lnk').forEach(el => {
+  document.querySelectorAll('button, a, .blog-standard-card, .blog-hero-card, .sidebar-recent-item, .soc-b, .ft-lnk').forEach(el => {
     if (el.dataset.hoverBound) return;
     el.dataset.hoverBound = '1';
     el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
@@ -965,12 +977,22 @@ function bindHover() {
 
 // Nav
 let mobOpen = false;
+
 function toggleMob() {
   mobOpen = !mobOpen;
   document.getElementById('mob').classList.toggle('open', mobOpen);
+
   const s = document.querySelectorAll('.hbg span');
-  if (mobOpen) { s[0].style.transform = 'rotate(45deg) translate(4px,5px)'; s[1].style.opacity = '0'; s[2].style.transform = 'rotate(-45deg) translate(4px,-5px)'; }
-  else s.forEach(x => { x.style.transform = ''; x.style.opacity = ''; });
+  if (mobOpen) {
+    s[0].style.transform = 'rotate(45deg) translate(4px,5px)';
+    s[1].style.opacity = '0';
+    s[2].style.transform = 'rotate(-45deg) translate(4px,-5px)';
+  } else {
+    s.forEach(x => {
+      x.style.transform = '';
+      x.style.opacity = '';
+    });
+  }
 }
 
 window.addEventListener('scroll', () => {
@@ -980,14 +1002,18 @@ window.addEventListener('scroll', () => {
 
 function reveal() {
   document.querySelectorAll('.rv:not(.vis)').forEach(el => {
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) el.classList.add('vis');
+    if (el.getBoundingClientRect().top < window.innerHeight * 0.92) {
+      el.classList.add('vis');
+    }
   });
 }
+
 setTimeout(reveal, 200);
 
 // Ticker
 const tickerWords = ['Branding', 'Operations', 'Web Development', 'Business Tips', 'Mindset', 'Nonprofit Strategy'];
 const ti = document.getElementById('ticker-inner');
+
 if (ti) {
   [...tickerWords, ...tickerWords].forEach((w, i) => {
     const d = document.createElement('div');
@@ -998,10 +1024,25 @@ if (ti) {
 }
 
 // Popups
-function openPop(id) { document.getElementById(id)?.classList.add('on'); }
-function closePop(id) { document.getElementById(id)?.classList.remove('on'); }
-document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('on'); }));
-document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on')); });
+function openPop(id) {
+  document.getElementById(id)?.classList.add('on');
+}
+
+function closePop(id) {
+  document.getElementById(id)?.classList.remove('on');
+}
+
+document.querySelectorAll('.overlay').forEach(o => {
+  o.addEventListener('click', e => {
+    if (e.target === o) o.classList.remove('on');
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.overlay.on').forEach(o => o.classList.remove('on'));
+  }
+});
 
 function toast(msg) {
   const t = document.getElementById('toast');
@@ -1012,9 +1053,13 @@ function toast(msg) {
 
 function subscribeNl() {
   const email = document.getElementById('nl-email')?.value.trim();
-  if (!email || !email.includes('@')) { toast('Please enter a valid email'); return; }
+  if (!email || !email.includes('@')) {
+    toast('Please enter a valid email');
+    return;
+  }
+
   toast('Thanks for subscribing!');
-  if (document.getElementById('nl-email')) document.getElementById('nl-email').value = '';
+  document.getElementById('nl-email').value = '';
 }
 
 /* ============================================
@@ -1024,31 +1069,18 @@ function subscribeNl() {
 let allPostsCache = [];
 let activeFilter = 'all';
 
-async function loadBlogData() {
-  if (typeof RAEFORM === 'undefined') {
-    console.warn('[BLOG] RAEFORM not loaded, retrying...');
-    setTimeout(loadBlogData, 500);
-    return;
-  }
+function esc(str) {
+  if (window.RAEFORM?.escapeHtml) return RAEFORM.escapeHtml(str || '');
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
 
-  try {
-    console.log('[BLOG] Fetching posts from Sanity...');
-    
-    const categoryParam = activeFilter === 'all' ? null : activeFilter;
-    allPostsCache = await RAEFORM.getAllPosts(categoryParam);
-    
-    if (!allPostsCache || allPostsCache.length === 0) {
-      document.getElementById('featured-row').innerHTML = '<div class="blog-empty"><span>✦</span><p>No posts found.</p></div>';
-      return;
-    }
-    
-    console.log(`[BLOG] Loaded ${allPostsCache.length} posts`);
-    renderLayout(allPostsCache);
-    
-  } catch (err) {
-    console.error('[BLOG] Error:', err);
-    document.getElementById('featured-row').innerHTML = '<div class="blog-empty"><span>⚠️</span><p>Unable to load journal posts. Please refresh.</p></div>';
-  }
+function isPostFeatured(post) {
+  return post.featured === true || post.isFeatured === true;
 }
 
 function getPostImage(post, width = 1200) {
@@ -1065,10 +1097,16 @@ function getPostImage(post, width = 1200) {
   return post.mainImageUrl || post.coverUrl || '';
 }
 
-function renderLocalFeaturedCard(post) {
-  const cover = getPostImage(post, 1400);
+function renderTag(post) {
   const firstCat = post.categories?.[0];
-  const tags = firstCat && RAEFORM.renderCardTag ? RAEFORM.renderCardTag(firstCat) : '';
+  if (!firstCat) return '';
+  if (RAEFORM.renderCardTag) return RAEFORM.renderCardTag(firstCat);
+
+  return `<span class="blog-card-tag tag-biz">${esc(firstCat.title)}</span>`;
+}
+
+function renderFeaturedCard(post) {
+  const cover = getPostImage(post, 1400);
   const date = RAEFORM.formatDate ? RAEFORM.formatDate(post.publishedAt) : '';
   const reading = post.readingTime || '';
 
@@ -1077,42 +1115,60 @@ function renderLocalFeaturedCard(post) {
       <div class="blog-hero-card-bg" style="background-image:url('${cover}')"></div>
       <div class="blog-hero-card-over">
         <div class="blog-card-featured-badge">Featured Read</div>
-        <h2 class="blog-hero-card-title">${RAEFORM.escapeHtml(post.title)}</h2>
+        <h2 class="blog-hero-card-title">${esc(post.title)}</h2>
         <div class="blog-hero-card-meta">
-          ${tags}
+          ${renderTag(post)}
           <span class="blog-card-date">${date}</span>
-          ${reading ? `<span class="blog-card-read">${RAEFORM.escapeHtml(reading)}</span>` : ''}
+          ${reading ? `<span class="blog-card-read">${esc(reading)}</span>` : ''}
           <span class="blog-card-arr">↗</span>
         </div>
       </div>
     </a>`;
 }
 
-function renderLocalSideCard(post, index) {
+function renderStandardCard(post, index) {
   const cover = getPostImage(post, 900);
-  const firstCat = post.categories?.[0];
-  const tag = firstCat && RAEFORM.renderCardTag ? RAEFORM.renderCardTag(firstCat) : '';
-  const reading = post.readingTime || '';
+  const date = RAEFORM.formatDate ? RAEFORM.formatDate(post.publishedAt) : '';
+  const excerpt = post.excerpt || '';
 
   return `
-    <a class="blog-side-card" href="blog-item.html?slug=${encodeURIComponent(post.slug)}">
-      <div class="blog-side-card-bg" style="background-image:url('${cover}')"></div>
-      <div class="blog-side-card-content">
-        <div class="blog-side-card-num">${String(index + 2).padStart(2, '0')}</div>
-        <div class="blog-side-card-title">${RAEFORM.escapeHtml(post.title)}</div>
-        <div class="blog-side-card-foot">
-          ${tag}
-          ${reading ? `<span class="blog-card-read">${RAEFORM.escapeHtml(reading)}</span>` : ''}
-        </div>
+    <a class="blog-standard-card" href="blog-item.html?slug=${encodeURIComponent(post.slug)}">
+      ${cover ? `<div class="blog-standard-card-bg" style="background-image:url('${cover}')"></div>` : ''}
+      <div>
+        <div class="blog-standard-card-num">${String(index + 1).padStart(2, '0')}</div>
+        <h3 class="blog-standard-card-title">${esc(post.title)}</h3>
+        <p class="blog-standard-card-excerpt">${esc(excerpt)}</p>
+      </div>
+      <div class="blog-standard-card-foot">
+        ${renderTag(post)}
+        <span class="blog-card-date">${date}</span>
+        <span class="blog-standard-card-arr">↗</span>
       </div>
     </a>`;
 }
-  
-function renderLayout(posts) {
-  if (!posts || posts.length === 0) return;
 
-function isPostFeatured(post) {
-  return post.featured === true || post.isFeatured === true;
+async function loadBlogData() {
+  if (typeof RAEFORM === 'undefined') {
+    console.warn('[BLOG] RAEFORM not loaded, retrying...');
+    setTimeout(loadBlogData, 500);
+    return;
+  }
+
+  try {
+    const categoryParam = activeFilter === 'all' ? null : activeFilter;
+    allPostsCache = await RAEFORM.getAllPosts(categoryParam);
+
+    if (!allPostsCache || allPostsCache.length === 0) {
+      document.getElementById('featured-row').innerHTML = '<div class="blog-empty"><span>✦</span><p>No posts found.</p></div>';
+      document.getElementById('secondary-grid').innerHTML = '';
+      return;
+    }
+
+    renderLayout(allPostsCache);
+  } catch (err) {
+    console.error('[BLOG] Error:', err);
+    document.getElementById('featured-row').innerHTML = '<div class="blog-empty"><span>!</span><p>Unable to load journal posts. Please refresh.</p></div>';
+  }
 }
 
 function renderLayout(posts) {
@@ -1121,54 +1177,57 @@ function renderLayout(posts) {
   const featuredPost = posts.find(isPostFeatured);
   const latestPosts = posts.filter(post => !isPostFeatured(post));
 
-  // Render Featured Row: ONLY the featured post
   const featuredRow = document.getElementById('featured-row');
   if (featuredRow) {
-    if (featuredPost && RAEFORM.renderFeaturedCard) {
-      featuredRow.innerHTML = RAEFORM.renderFeaturedCard(featuredPost);
+    if (featuredPost) {
+      featuredRow.innerHTML = renderFeaturedCard(featuredPost);
     } else {
       featuredRow.innerHTML = '<div class="blog-empty"><span>✦</span><p>No featured post yet.</p></div>';
     }
   }
 
-  // Render Latest Articles: ONLY non-featured posts
   const secondaryGrid = document.getElementById('secondary-grid');
-  if (secondaryGrid && RAEFORM.renderStandardCard) {
+  if (secondaryGrid) {
     if (latestPosts.length === 0) {
-      secondaryGrid.innerHTML = '<div class="blog-empty"><span>📖</span><p>No latest articles yet.</p></div>';
+      secondaryGrid.innerHTML = '<div class="blog-empty"><span>✦</span><p>No latest articles yet.</p></div>';
     } else {
-      secondaryGrid.innerHTML = latestPosts.map((post, i) => RAEFORM.renderStandardCard(post, i)).join('');
+      secondaryGrid.innerHTML = latestPosts.map((post, i) => renderStandardCard(post, i)).join('');
     }
   }
 
-  // Render Sidebar latest: non-featured posts only
   const sidebarRecent = document.getElementById('sidebar-recent');
-  if (sidebarRecent && RAEFORM.escapeHtml && RAEFORM.formatDate) {
+  if (sidebarRecent) {
     sidebarRecent.innerHTML = latestPosts.slice(0, 4).map(post => `
       <a class="sidebar-recent-item" href="blog-item.html?slug=${encodeURIComponent(post.slug)}">
-        <div class="sidebar-recent-title">${RAEFORM.escapeHtml(post.title)}</div>
-        <div class="sidebar-recent-date">${RAEFORM.formatDate(post.publishedAt)}</div>
+        <div class="sidebar-recent-title">${esc(post.title)}</div>
+        <div class="sidebar-recent-date">${RAEFORM.formatDate ? RAEFORM.formatDate(post.publishedAt) : ''}</div>
       </a>
     `).join('');
   }
 
   bindHover();
+  reveal();
 }
-  
+
 async function filterPosts(category, btn) {
   activeFilter = category;
-  
+
   document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  
+
   toast(`Showing: ${category === 'all' ? 'All articles' : category}`);
-  
-  // Show skeletons
+
   const featuredRow = document.getElementById('featured-row');
   const secondaryGrid = document.getElementById('secondary-grid');
-  if (featuredRow) featuredRow.innerHTML = '<div class="skeleton-pulse" style="aspect-ratio:16/10"></div><div class="blog-side-stack"><div class="skeleton-pulse" style="min-height:140px"></div><div class="skeleton-pulse" style="min-height:140px"></div><div class="skeleton-pulse" style="min-height:140px"></div></div>';
-  if (secondaryGrid) secondaryGrid.innerHTML = '<div class="skeleton-pulse" style="min-height:280px"></div><div class="skeleton-pulse" style="min-height:280px"></div><div class="skeleton-pulse" style="min-height:280px"></div>';
-  
+
+  if (featuredRow) {
+    featuredRow.innerHTML = '<div class="skeleton-pulse" style="aspect-ratio:16/10"></div>';
+  }
+
+  if (secondaryGrid) {
+    secondaryGrid.innerHTML = '<div class="skeleton-pulse" style="min-height:280px"></div><div class="skeleton-pulse" style="min-height:280px"></div><div class="skeleton-pulse" style="min-height:280px"></div>';
+  }
+
   try {
     const categoryParam = category === 'all' ? null : category;
     allPostsCache = await RAEFORM.getAllPosts(categoryParam);
@@ -1178,11 +1237,11 @@ async function filterPosts(category, btn) {
   }
 }
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('[BLOG] Page loaded, initiating data fetch...');
   loadBlogData();
 });
 </script>
+
+
 </body>
 </html>
