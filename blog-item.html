@@ -782,10 +782,12 @@
   }
 }
 @media(max-width: 860px) {
-  .art-three-col {
-    grid-template-columns: 1fr;
-    padding: 4rem 5vw 6rem;
-  }
+  .art-share-col { display: none; }
+  .art-related-grid { grid-template-columns: repeat(2, 1fr); }
+  .art-prev-next { grid-template-columns: 1fr; }
+  .art-prev-next-item:first-child { border-right: none; border-bottom: 1px solid rgba(37,99,200,.08); }
+  .art-stats { grid-template-columns: repeat(2, 1fr); }
+}
   .art-toc {
     display: block;
     position: sticky;
@@ -796,14 +798,7 @@
     border-bottom: 1px solid rgba(37,99,200,.09);
     padding-bottom: 1.5rem;
   }
-  .art-share-col { display: none; }
-}
-  .art-share-col { display: none; }
-  .art-related-grid { grid-template-columns: repeat(2, 1fr); }
-  .art-prev-next { grid-template-columns: 1fr; }
-  .art-prev-next-item:first-child { border-right: none; border-bottom: 1px solid rgba(37,99,200,.08); }
-  .art-stats { grid-template-columns: repeat(2, 1fr); }
-}
+   
 @media(max-width: 600px) {
   .art-related-grid { grid-template-columns: 1fr; }
   .art-author-card { flex-direction: column; }
