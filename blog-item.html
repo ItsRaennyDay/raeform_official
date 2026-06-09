@@ -763,24 +763,18 @@
   transition: color .25s;
 }
 .art-prev-next-item:hover .art-prev-next-title { color: var(--blue-ice); }
-.art-toc-list { 
-  display: flex; 
+.art-toc {
+  display: flex;
+  flex-direction: column;
+}
+
+.art-toc-list {
+  display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-/* Ensure this block is correctly placed inside or outside your media queries as intended */
-.art-toc {
-  display: flex;
-  flex-direction: column;
-  position: sticky;
-  top: 110px;
-  max-width: 100%;
-  margin-bottom: 2rem;
-  border-right: none;
-  border-bottom: 1px solid rgba(37,99,200,.09);
-  padding-bottom: 1.5rem;
-}
+
 /* ═══════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════ */
@@ -789,23 +783,10 @@
     grid-template-columns: 200px 1fr 60px;  /* Keep TOC but smaller */
   }
 }
-@media(max-width: 860px) {
-  .art-share-col { display: none; }
-  .art-related-grid { grid-template-columns: repeat(2, 1fr); }
-  .art-prev-next { grid-template-columns: 1fr; }
-  .art-prev-next-item:first-child { border-right: none; border-bottom: 1px solid rgba(37,99,200,.08); }
-  .art-stats { grid-template-columns: repeat(2, 1fr); }
-  
-  .art-toc {
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 110px;
-    max-width: 100%;
+@media (max-width: 860px) {
+  .art-toc-wrapper {
+    position: static; /* This stops it from sticking as you scroll on mobile */
     margin-bottom: 2rem;
-    border-right: none;
-    border-bottom: 1px solid rgba(37,99,200,.09);
-    padding-bottom: 1.5rem;
   }
 }
    
