@@ -621,7 +621,7 @@
 }
 .art-toc-item:hover { color: var(--off-white); border-left-color: var(--blue-glow); padding-left: 1rem; }
 .art-toc-item.active { color: var(--blue-ice); border-left-color: var(--blue-glow); font-weight: 600; }
-.art-toc-list { display: block; }
+/*.art-toc-list { display: block; }*/
 .art-toc-progress {
   margin-top: 2rem;
   padding-top: 1.5rem;
@@ -763,7 +763,24 @@
   transition: color .25s;
 }
 .art-prev-next-item:hover .art-prev-next-title { color: var(--blue-ice); }
+.art-toc-list { 
+  display: flex; 
+  flex-direction: column;
+  width: 100%;
+}
 
+/* Ensure this block is correctly placed inside or outside your media queries as intended */
+.art-toc {
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 110px;
+  max-width: 100%;
+  margin-bottom: 2rem;
+  border-right: none;
+  border-bottom: 1px solid rgba(37,99,200,.09);
+  padding-bottom: 1.5rem;
+}
 /* ═══════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════ */
@@ -778,9 +795,10 @@
   .art-prev-next { grid-template-columns: 1fr; }
   .art-prev-next-item:first-child { border-right: none; border-bottom: 1px solid rgba(37,99,200,.08); }
   .art-stats { grid-template-columns: repeat(2, 1fr); }
-}
+  
   .art-toc {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: sticky;
     top: 110px;
     max-width: 100%;
@@ -789,6 +807,7 @@
     border-bottom: 1px solid rgba(37,99,200,.09);
     padding-bottom: 1.5rem;
   }
+}
    
 @media(max-width: 600px) {
   .art-related-grid { grid-template-columns: 1fr; }
