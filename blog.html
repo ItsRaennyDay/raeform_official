@@ -691,6 +691,32 @@
 </head>
 <body data-page="blog">
 
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-left"></div>
+  <div class="pre-right"></div>
+  <div class="pre-content">
+    <img src="logo.svg" alt="RAEFORM" class="pre-logo">
+    <div class="pre-text-wrap">
+      <span class="pre-brand">RAEFORM</span>
+      <span class="pre-tagline">Business Support Services</span>
+    </div>
+    <div class="pre-bar-wrap"><div class="pre-bar"></div></div>
+  </div>
+</div>
+<script>
+(function(){
+  const pre = document.getElementById('preloader');
+  if (!pre) return;
+  const minTime = 2600, start = Date.now();
+  function dismiss() {
+    const delay = Math.max(0, minTime - (Date.now() - start));
+    setTimeout(() => { pre.classList.add('done'); setTimeout(() => pre.remove(), 1100); }, delay);
+  }
+  document.readyState === 'complete' ? dismiss() : window.addEventListener('load', dismiss);
+})();
+</script>
+  
 <div id="cur"></div>
 <div id="cur-r"></div>
 
