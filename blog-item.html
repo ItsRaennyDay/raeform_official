@@ -769,9 +769,16 @@
 }
 
 .art-toc-list {
+  position: static;
+  inset: auto;
+  transform: none;
+  z-index: auto;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   width: 100%;
+  gap: 0;
 }
 
 
@@ -780,13 +787,29 @@
 ═══════════════════════════════════ */
 @media(max-width: 1100px) {
   .art-three-col {
-    grid-template-columns: 200px 1fr 60px;  /* Keep TOC but smaller */
+    grid-template-columns: 200px 1fr 60px;
   }
 }
-@media (max-width: 860px) {
-  .art-toc-wrapper {
-    position: static; /* This stops it from sticking as you scroll on mobile */
-    margin-bottom: 2rem;
+
+@media(max-width: 860px) {
+  .art-three-col {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  .art-toc-wrapper,
+  .art-toc,
+  .art-toc-list,
+  #toc-list {
+    display: none !important;
+  }
+
+  .art-content {
+    grid-column: 1;
+  }
+
+  .art-share-col {
+    display: none;
   }
 }
    
@@ -877,7 +900,7 @@
 
   <aside class="art-toc" id="art-toc" aria-label="Table of contents">
     <div class="art-toc-label">Contents</div>
-    <nav class="art-toc-list" id="toc-list"></nav>
+    <div class="art-toc-list" id="toc-list"></div>
   </aside>
 </div>
 
