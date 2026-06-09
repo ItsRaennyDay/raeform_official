@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-/* ─── BLOG-SPECIFIC STYLES ─── */
+
 .blog-hero {
   min-height: 64vh;
   display: flex;
@@ -176,7 +176,7 @@
 /* FEATURED ROW */
 .blog-featured-row {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2px;
   margin-bottom: 2px;
   background: rgba(37,99,200,.07);
@@ -388,7 +388,25 @@
   transition: opacity .3s;
 }
 .blog-standard-card:hover .blog-standard-card-arr { opacity: 1; }
+.blog-standard-card-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: .28;
+  filter: brightness(.75) saturate(.9);
+  transition: opacity .35s, transform .6s;
+}
 
+.blog-standard-card > *:not(.blog-standard-card-bg) {
+  position: relative;
+  z-index: 2;
+}
+
+.blog-standard-card:hover .blog-standard-card-bg {
+  opacity: .36;
+  transform: scale(1.03);
+}
 /* SIDEBAR */
 .blog-sidebar {
   position: sticky;
@@ -619,49 +637,63 @@
   }
 }
 @media(max-width: 960px) {
-  .blog-featured-row { grid-template-columns: 1fr; }
-  .blog-hero-card { aspect-ratio: 16/9; }
-  .blog-secondary { grid-template-columns: repeat(2, 1fr); }
+  .blog-featured-row {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-hero-card {
+    aspect-ratio: auto;
+    min-height: 520px;
+  }
+
+  .blog-secondary {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
+
 @media(max-width: 600px) {
-  .blog-secondary { grid-template-columns: 1fr; }
-  .blog-sidebar { grid-template-columns: 1fr; }
-  .blog-pullquote-card { padding: 2rem 1.5rem; }
+  .blog-hero-card {
+    min-height: 560px;
+  }
+
+  .blog-hero-card-over {
+    padding: 1.5rem;
+    justify-content: flex-end;
+  }
+
+  .blog-card-featured-badge {
+    margin-bottom: .8rem;
+    line-height: 1.4;
+  }
+
+  .blog-hero-card-title {
+    font-size: 1.65rem;
+    line-height: 1.2;
+  }
+
+  .blog-hero-card-meta {
+    gap: .65rem;
+  }
+
+  .blog-secondary {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-pullquote-card {
+    padding: 2rem 1.5rem;
+  }
 }
 </style>
 </head>
 <body data-page="blog">
 
-<!-- PRELOADER -->
-<div id="preloader">
-  <div class="pre-left"></div>
-  <div class="pre-right"></div>
-  <div class="pre-content">
-    <img src="logo.svg" alt="RAEFORM" class="pre-logo">
-    <div class="pre-text-wrap">
-      <span class="pre-brand">RAEFORM</span>
-      <span class="pre-tagline">Business Support Services</span>
-    </div>
-    <div class="pre-bar-wrap"><div class="pre-bar"></div></div>
-  </div>
-</div>
-<script>
-(function(){
-  const pre = document.getElementById('preloader');
-  if (!pre) return;
-  const minTime = 2600, start = Date.now();
-  function dismiss() {
-    const delay = Math.max(0, minTime - (Date.now() - start));
-    setTimeout(() => { pre.classList.add('done'); setTimeout(() => pre.remove(), 1100); }, delay);
-  }
-  document.readyState === 'complete' ? dismiss() : window.addEventListener('load', dismiss);
-})();
-</script>
-
 <div id="cur"></div>
 <div id="cur-r"></div>
 
-<!-- NAV -->
 <nav id="nav">
   <a class="logo" href="index.html" aria-label="RAEFORM Home"><img src="logo.svg" alt="RAEFORM"></a>
   <div class="nav-links">
@@ -993,47 +1025,100 @@ async function loadBlogData() {
   }
 }
 
+function getPostImage(post, width = 1200) {
+  if (!post) return '';
+
+  if (post.mainImage && RAEFORM.imageUrl) {
+    return RAEFORM.imageUrl(post.mainImage, { w: width, q: 85 });
+  }
+
+  if (post.coverRef && RAEFORM.imageUrl) {
+    return RAEFORM.imageUrl(post.coverRef, { w: width, q: 85 });
+  }
+
+  return post.mainImageUrl || post.coverUrl || '';
+}
+
+function renderLocalFeaturedCard(post) {
+  const cover = getPostImage(post, 1400);
+  const firstCat = post.categories?.[0];
+  const tags = firstCat && RAEFORM.renderCardTag ? RAEFORM.renderCardTag(firstCat) : '';
+  const date = RAEFORM.formatDate ? RAEFORM.formatDate(post.publishedAt) : '';
+  const reading = post.readingTime || '';
+
+  return `
+    <a class="blog-hero-card" href="blog-item.html?slug=${encodeURIComponent(post.slug)}">
+      <div class="blog-hero-card-bg" style="background-image:url('${cover}')"></div>
+      <div class="blog-hero-card-over">
+        <div class="blog-card-featured-badge">Featured Read</div>
+        <h2 class="blog-hero-card-title">${RAEFORM.escapeHtml(post.title)}</h2>
+        <div class="blog-hero-card-meta">
+          ${tags}
+          <span class="blog-card-date">${date}</span>
+          ${reading ? `<span class="blog-card-read">${RAEFORM.escapeHtml(reading)}</span>` : ''}
+          <span class="blog-card-arr">↗</span>
+        </div>
+      </div>
+    </a>`;
+}
+
+function renderLocalSideCard(post, index) {
+  const cover = getPostImage(post, 900);
+  const firstCat = post.categories?.[0];
+  const tag = firstCat && RAEFORM.renderCardTag ? RAEFORM.renderCardTag(firstCat) : '';
+  const reading = post.readingTime || '';
+
+  return `
+    <a class="blog-side-card" href="blog-item.html?slug=${encodeURIComponent(post.slug)}">
+      <div class="blog-side-card-bg" style="background-image:url('${cover}')"></div>
+      <div class="blog-side-card-content">
+        <div class="blog-side-card-num">${String(index + 2).padStart(2, '0')}</div>
+        <div class="blog-side-card-title">${RAEFORM.escapeHtml(post.title)}</div>
+        <div class="blog-side-card-foot">
+          ${tag}
+          ${reading ? `<span class="blog-card-read">${RAEFORM.escapeHtml(reading)}</span>` : ''}
+        </div>
+      </div>
+    </a>`;
+}
+  
 function renderLayout(posts) {
   if (!posts || posts.length === 0) return;
 
-  // Find featured post
-  let featuredPost = posts.find(p => p.isFeatured === true);
-  let remainingPosts = [...posts];
-  
-  if (featuredPost) {
-    remainingPosts = posts.filter(p => p._id !== featuredPost._id);
-  } else if (posts.length > 0) {
-    featuredPost = posts[0];
-    remainingPosts = posts.slice(1);
-  }
+function isPostFeatured(post) {
+  return post.featured === true || post.isFeatured === true;
+}
 
-  const sidePosts = remainingPosts.slice(0, 3);
-  const secondaryPosts = remainingPosts.slice(3, 9);
+function renderLayout(posts) {
+  if (!posts || posts.length === 0) return;
 
-  // Render Featured Row
+  const featuredPost = posts.find(isPostFeatured);
+  const latestPosts = posts.filter(post => !isPostFeatured(post));
+
+  // Render Featured Row: ONLY the featured post
   const featuredRow = document.getElementById('featured-row');
-  if (featuredRow && featuredPost && RAEFORM.renderFeaturedCard) {
-    const heroHtml = RAEFORM.renderFeaturedCard(featuredPost);
-    const sideHtml = sidePosts.length > 0 
-      ? sidePosts.map((post, i) => RAEFORM.renderSideCard(post, i)).join('')
-      : '<div style="padding:2rem;color:var(--muted2);text-align:center">No more posts</div>';
-    featuredRow.innerHTML = `${heroHtml}<div class="blog-side-stack">${sideHtml}</div>`;
-  }
-
-  // Render Secondary Grid
-  const secondaryGrid = document.getElementById('secondary-grid');
-  if (secondaryGrid && RAEFORM.renderStandardCard) {
-    if (secondaryPosts.length === 0) {
-      secondaryGrid.innerHTML = '<div class="blog-empty"><span>📖</span><p>You\'ve caught up!</p></div>';
+  if (featuredRow) {
+    if (featuredPost && RAEFORM.renderFeaturedCard) {
+      featuredRow.innerHTML = RAEFORM.renderFeaturedCard(featuredPost);
     } else {
-      secondaryGrid.innerHTML = secondaryPosts.map((post, i) => RAEFORM.renderStandardCard(post, i)).join('');
+      featuredRow.innerHTML = '<div class="blog-empty"><span>✦</span><p>No featured post yet.</p></div>';
     }
   }
 
-  // Render Sidebar
+  // Render Latest Articles: ONLY non-featured posts
+  const secondaryGrid = document.getElementById('secondary-grid');
+  if (secondaryGrid && RAEFORM.renderStandardCard) {
+    if (latestPosts.length === 0) {
+      secondaryGrid.innerHTML = '<div class="blog-empty"><span>📖</span><p>No latest articles yet.</p></div>';
+    } else {
+      secondaryGrid.innerHTML = latestPosts.map((post, i) => RAEFORM.renderStandardCard(post, i)).join('');
+    }
+  }
+
+  // Render Sidebar latest: non-featured posts only
   const sidebarRecent = document.getElementById('sidebar-recent');
   if (sidebarRecent && RAEFORM.escapeHtml && RAEFORM.formatDate) {
-    sidebarRecent.innerHTML = posts.slice(0, 4).map(post => `
+    sidebarRecent.innerHTML = latestPosts.slice(0, 4).map(post => `
       <a class="sidebar-recent-item" href="blog-item.html?slug=${encodeURIComponent(post.slug)}">
         <div class="sidebar-recent-title">${RAEFORM.escapeHtml(post.title)}</div>
         <div class="sidebar-recent-date">${RAEFORM.formatDate(post.publishedAt)}</div>
@@ -1043,7 +1128,7 @@ function renderLayout(posts) {
 
   bindHover();
 }
-
+  
 async function filterPosts(category, btn) {
   activeFilter = category;
   
