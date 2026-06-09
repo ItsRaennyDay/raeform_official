@@ -620,7 +620,10 @@
   margin-bottom: 1rem;
 }
 .blog-load-more { text-align: center; margin-top: 2.5rem; }
-
+.blog-load-more button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
 /* RESPONSIVE */
 @media(max-width: 1100px) {
   .blog-body { grid-template-columns: 1fr; padding-top: 3rem; }
@@ -944,7 +947,6 @@
    GLOBAL UI FUNCTIONS
    ============================================ */
 
-// Cursor
 const cur = document.getElementById('cur');
 const ring = document.getElementById('cur-r');
 let mx = 0, my = 0, rx = 0, ry = 0;
@@ -975,7 +977,6 @@ function bindHover() {
   });
 }
 
-// Nav
 let mobOpen = false;
 
 function toggleMob() {
@@ -1010,7 +1011,6 @@ function reveal() {
 
 setTimeout(reveal, 200);
 
-// Ticker
 const tickerWords = ['Branding', 'Operations', 'Web Development', 'Business Tips', 'Mindset', 'Nonprofit Strategy'];
 const ti = document.getElementById('ticker-inner');
 
@@ -1018,12 +1018,11 @@ if (ti) {
   [...tickerWords, ...tickerWords].forEach((w, i) => {
     const d = document.createElement('div');
     d.className = 'blog-ticker-item';
-    d.innerHTML = w + (i < tickerWords.length * 2 - 1 ? '<span>✦</span>' : '');
+    d.innerHTML = w + (i < tickerWords.length * 2 - 1 ? '<span>*</span>' : '');
     ti.appendChild(d);
   });
 }
 
-// Popups
 function openPop(id) {
   document.getElementById(id)?.classList.add('on');
 }
@@ -1046,28 +1045,35 @@ document.addEventListener('keydown', e => {
 
 function toast(msg) {
   const t = document.getElementById('toast');
+  if (!t) return;
   document.getElementById('t-msg').textContent = msg;
   t.classList.add('on');
   setTimeout(() => t.classList.remove('on'), 4500);
 }
 
 function subscribeNl() {
-  const email = document.getElementById('nl-email')?.value.trim();
+  const input = document.getElementById('nl-email');
+  const email = input?.value.trim();
+
   if (!email || !email.includes('@')) {
     toast('Please enter a valid email');
     return;
   }
 
   toast('Thanks for subscribing!');
-  document.getElementById('nl-email').value = '';
+  input.value = '';
 }
 
 /* ============================================
    MAIN BLOG LOGIC
    ============================================ */
 
+let masterPostsCache = [];
 let allPostsCache = [];
 let activeFilter = 'all';
+let visibleCount = 6;
+
+const POSTS_PER_LOAD = 6;
 
 function esc(str) {
   if (window.RAEFORM?.escapeHtml) return RAEFORM.escapeHtml(str || '');
@@ -1081,6 +1087,17 @@ function esc(str) {
 
 function isPostFeatured(post) {
   return post.featured === true || post.isFeatured === true;
+}
+
+function getCategorySlug(category) {
+  if (!category) return '';
+  if (typeof category.slug === 'string') return category.slug;
+  return category.slug?.current || '';
+}
+
+function postMatchesCategory(post, category) {
+  if (category === 'all') return true;
+  return (post.categories || []).some(cat => getCategorySlug(cat) === category);
 }
 
 function getPostImage(post, width = 1200) {
@@ -1120,7 +1137,7 @@ function renderFeaturedCard(post) {
           ${renderTag(post)}
           <span class="blog-card-date">${date}</span>
           ${reading ? `<span class="blog-card-read">${esc(reading)}</span>` : ''}
-          <span class="blog-card-arr">↗</span>
+          <span class="blog-card-arr">-&gt;</span>
         </div>
       </div>
     </a>`;
@@ -1142,9 +1159,50 @@ function renderStandardCard(post, index) {
       <div class="blog-standard-card-foot">
         ${renderTag(post)}
         <span class="blog-card-date">${date}</span>
-        <span class="blog-standard-card-arr">↗</span>
+        <span class="blog-standard-card-arr">-&gt;</span>
       </div>
     </a>`;
+}
+
+function ensureLoadMoreButton() {
+  let wrap = document.getElementById('blog-load-more-wrap');
+
+  if (!wrap) {
+    wrap = document.createElement('div');
+    wrap.id = 'blog-load-more-wrap';
+    wrap.className = 'blog-load-more';
+    wrap.innerHTML = `
+      <button class="btn-p" id="blog-load-more-btn" type="button" onclick="loadMorePosts()">
+        Load more -&gt;
+      </button>
+    `;
+
+    const secondaryGrid = document.getElementById('secondary-grid');
+    if (secondaryGrid) {
+      secondaryGrid.insertAdjacentElement('afterend', wrap);
+    }
+  }
+
+  return wrap;
+}
+
+function updateLoadMoreButton(totalLatestPosts) {
+  const wrap = ensureLoadMoreButton();
+  const btn = document.getElementById('blog-load-more-btn');
+  if (!btn) return;
+
+  const hasMore = visibleCount < totalLatestPosts;
+
+  wrap.style.display = totalLatestPosts > POSTS_PER_LOAD ? 'block' : 'none';
+  btn.disabled = !hasMore;
+  btn.style.opacity = hasMore ? '1' : '.45';
+  btn.style.cursor = hasMore ? 'pointer' : 'not-allowed';
+  btn.textContent = hasMore ? 'Load more ->' : 'No more articles';
+}
+
+function loadMorePosts() {
+  visibleCount += POSTS_PER_LOAD;
+  renderLayout(allPostsCache);
 }
 
 async function loadBlogData() {
@@ -1155,12 +1213,14 @@ async function loadBlogData() {
   }
 
   try {
-    const categoryParam = activeFilter === 'all' ? null : activeFilter;
-    allPostsCache = await RAEFORM.getAllPosts(categoryParam);
+    masterPostsCache = await RAEFORM.getAllPosts(null);
+    allPostsCache = masterPostsCache;
+    visibleCount = POSTS_PER_LOAD;
 
-    if (!allPostsCache || allPostsCache.length === 0) {
-      document.getElementById('featured-row').innerHTML = '<div class="blog-empty"><span>✦</span><p>No posts found.</p></div>';
+    if (!masterPostsCache || masterPostsCache.length === 0) {
+      document.getElementById('featured-row').innerHTML = '<div class="blog-empty"><span>*</span><p>No posts found.</p></div>';
       document.getElementById('secondary-grid').innerHTML = '';
+      updateLoadMoreButton(0);
       return;
     }
 
@@ -1172,26 +1232,32 @@ async function loadBlogData() {
 }
 
 function renderLayout(posts) {
-  if (!posts || posts.length === 0) return;
+  if (!posts || posts.length === 0) {
+    document.getElementById('featured-row').innerHTML = '<div class="blog-empty"><span>*</span><p>No posts found.</p></div>';
+    document.getElementById('secondary-grid').innerHTML = '';
+    updateLoadMoreButton(0);
+    return;
+  }
 
   const featuredPost = posts.find(isPostFeatured);
   const latestPosts = posts.filter(post => !isPostFeatured(post));
+  const visibleLatestPosts = latestPosts.slice(0, visibleCount);
 
   const featuredRow = document.getElementById('featured-row');
   if (featuredRow) {
     if (featuredPost) {
       featuredRow.innerHTML = renderFeaturedCard(featuredPost);
     } else {
-      featuredRow.innerHTML = '<div class="blog-empty"><span>✦</span><p>No featured post yet.</p></div>';
+      featuredRow.innerHTML = '<div class="blog-empty"><span>*</span><p>No featured post for this topic.</p></div>';
     }
   }
 
   const secondaryGrid = document.getElementById('secondary-grid');
   if (secondaryGrid) {
     if (latestPosts.length === 0) {
-      secondaryGrid.innerHTML = '<div class="blog-empty"><span>✦</span><p>No latest articles yet.</p></div>';
+      secondaryGrid.innerHTML = '<div class="blog-empty"><span>*</span><p>No latest articles for this topic.</p></div>';
     } else {
-      secondaryGrid.innerHTML = latestPosts.map((post, i) => renderStandardCard(post, i)).join('');
+      secondaryGrid.innerHTML = visibleLatestPosts.map((post, i) => renderStandardCard(post, i)).join('');
     }
   }
 
@@ -1205,43 +1271,28 @@ function renderLayout(posts) {
     `).join('');
   }
 
+  updateLoadMoreButton(latestPosts.length);
   bindHover();
   reveal();
 }
 
-async function filterPosts(category, btn) {
+function filterPosts(category, btn) {
   activeFilter = category;
+  visibleCount = POSTS_PER_LOAD;
 
   document.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
 
   toast(`Showing: ${category === 'all' ? 'All articles' : category}`);
 
-  const featuredRow = document.getElementById('featured-row');
-  const secondaryGrid = document.getElementById('secondary-grid');
-
-  if (featuredRow) {
-    featuredRow.innerHTML = '<div class="skeleton-pulse" style="aspect-ratio:16/10"></div>';
-  }
-
-  if (secondaryGrid) {
-    secondaryGrid.innerHTML = '<div class="skeleton-pulse" style="min-height:280px"></div><div class="skeleton-pulse" style="min-height:280px"></div><div class="skeleton-pulse" style="min-height:280px"></div>';
-  }
-
-  try {
-    const categoryParam = category === 'all' ? null : category;
-    allPostsCache = await RAEFORM.getAllPosts(categoryParam);
-    renderLayout(allPostsCache);
-  } catch (err) {
-    console.error('[FILTER] Error:', err);
-  }
+  allPostsCache = masterPostsCache.filter(post => postMatchesCategory(post, category));
+  renderLayout(allPostsCache);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   loadBlogData();
 });
 </script>
-
 
 </body>
 </html>
