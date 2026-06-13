@@ -1,3 +1,28 @@
+# Git
 **/.git
+**/.gitignore
+
+# Dependencies (HUGE folders - this is the main problem)
+**/node_modules
+
+# CodeSpaces / Editor files
+**/.github
+**/.devcontainer
+**/.vscode
+
+# Sanity Studio (backend CMS - not needed for your public website)
+**/studio
+
+# Config and dev files (not needed by visitors)
+package.json
+package-lock.json
+wrangler.toml
+wrangler.jsonc
+README.md
+eslint.config.mjs
+sanity.cli.js
+sanity.config.js
+
+# Secrets
 **/.env
 **/.htaccess
