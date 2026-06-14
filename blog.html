@@ -1102,19 +1102,15 @@ function postMatchesCategory(post, category) {
 
 function getPostImage(post, width = 1200) {
   if (!post) return '';
-
-  if (RAEFORM.imageUrl) {
-    if (post.mainImage) {
-      const url = RAEFORM.imageUrl(post.mainImage, { w: width, q: 85 });
-      if (url) return url;
-    }
-    if (post.coverRef) {
-      const url = RAEFORM.imageUrl(post.coverRef, { w: width, q: 85 });
-      if (url) return url;
+  if (post.coverUrl) return post.coverUrl;
+  if (post.coverRef?.asset?._ref) {
+    const [, id, dims, fmt] = post.coverRef.asset._ref.split('-');
+    if (id && dims && fmt) {
+      return `https://cdn.sanity.io/images/y5g5f0dm/production/${id}-${dims}.${fmt}?w=${width}&q=85&fm=webp`;
     }
   }
 
-  return post.mainImageUrl || post.coverUrl || '';
+  return post.mainImageUrl || '';
 }
 
 function renderTag(post) {
