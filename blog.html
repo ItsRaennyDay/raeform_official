@@ -1103,12 +1103,15 @@ function postMatchesCategory(post, category) {
 function getPostImage(post, width = 1200) {
   if (!post) return '';
 
-  if (post.mainImage && RAEFORM.imageUrl) {
-    return RAEFORM.imageUrl(post.mainImage, { w: width, q: 85 });
-  }
-
-  if (post.coverRef && RAEFORM.imageUrl) {
-    return RAEFORM.imageUrl(post.coverRef, { w: width, q: 85 });
+  if (RAEFORM.imageUrl) {
+    if (post.mainImage) {
+      const url = RAEFORM.imageUrl(post.mainImage, { w: width, q: 85 });
+      if (url) return url;
+    }
+    if (post.coverRef) {
+      const url = RAEFORM.imageUrl(post.coverRef, { w: width, q: 85 });
+      if (url) return url;
+    }
   }
 
   return post.mainImageUrl || post.coverUrl || '';
